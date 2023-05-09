@@ -2,9 +2,7 @@
 '''task2'''
 
 def matrix_shape(matrix):
-    shape = []
-    while type(matrix) is list:
-        shape.append(len(matrix))
-        matrix = matrix[0]
-    shape.append(len(matrix))
-    return shape
+    try:
+        return [len(matrix)] + matrix_shape(matrix[0])
+    except Exception:
+        return [len(matrix)]
