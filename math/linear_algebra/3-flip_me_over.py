@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 ''' taask  3 with hopefully eniough documentation necessary to pass checker'''
 
+
 def matrix_transpose(matrix):
     rows = len(matrix)
     cols = len(matrix[0])
