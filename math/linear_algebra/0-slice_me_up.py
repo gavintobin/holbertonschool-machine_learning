@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 '''task 0'''
 
 arr = [9, 8, 2, 3, 9, 4, 1, 0, 3]
