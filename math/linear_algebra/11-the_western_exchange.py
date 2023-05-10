@@ -4,4 +4,4 @@
 
 def np_transpose(matrix):
     '''only sour grapes'''
-    return matrix.transpose
+    return matrix.T
