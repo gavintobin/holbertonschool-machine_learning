@@ -2,7 +2,7 @@
 ''' function to add two matrixes'''
 
 
-def add_matrices2d(mat1, mat2):
+def add_matrices2D(mat1, mat2):
     for i in range(len(mat1)):
         for j in range(len(mat1[0])):
             sum = []
