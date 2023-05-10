@@ -10,7 +10,6 @@ def mat_mul(mat1, mat2):
             '''col it'''
             for k in range(len(mat2)):
                 '''it row 2nd mat'''
-                res[i][j] = mat1[i][k] * mat2[k][j]
-            for r in res:
-                return r
+                resu[i][j] = mat1[i][k] * mat2[k][j]
+                return resu
             
