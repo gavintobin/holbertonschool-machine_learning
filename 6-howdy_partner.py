@@ -4,6 +4,6 @@ import numpy as np
 
 
 def cat_arrays(arr1, arr2):
-    """kitty cat"""
+    """kitty meo meow"""
     cat = np.concatenate((arr1 + arr2))
     return cat
