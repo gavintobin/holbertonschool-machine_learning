@@ -1,4 +1,3 @@
-alexa@ubuntu-xenial:linear_algebra$ cat 9-let_the_butcher_slice_it.py 
 #!/usr/bin/env python3
 import numpy as np
 matrix = np.array([[1, 2, 3, 4, 5, 6], [7, 8, 9, 10, 11, 12],
