@@ -5,4 +5,5 @@ import numpy as np
 
 def np_cat(mat1, mat2, axis=0):
     '''funky boy'''
-    np.concatenate((mat1, mat2), axis=o)
+    new = np.concatenate((mat1, mat2), axis=0)
+    return new
