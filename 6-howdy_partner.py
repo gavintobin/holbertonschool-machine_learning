@@ -3,6 +3,6 @@
 
 
 def cat_arrays(arr1, arr2):
-    """kitty cat"""
+    """kitty """
     cat = arr1 + arr2
     return cat
