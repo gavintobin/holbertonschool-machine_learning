@@ -2,8 +2,8 @@
 ''' doc for cozy boy'''
 
 
-    def cat_matrices2D(mat1, mat2, axis=0):
-        if axis == 0:
+def cat_matrices2D(mat1, mat2, axis=0):
+    if axis == 0:
             if len(mat1[0]) != len(mat2[0]):
                 return None
             else:
@@ -14,4 +14,5 @@
             else:
                 arr3 = [x + x2 for x, x2 in zip(mat1, mat2)]
         return arr3
+        
 
