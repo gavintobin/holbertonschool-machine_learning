@@ -3,6 +3,7 @@
 
 
 def matrix_shape(matrix):
+    '''shapey boy'''
     try:
         return [len(matrix)] + matrix_shape(matrix[0])
     except Exception:
