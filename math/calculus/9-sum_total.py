@@ -4,11 +4,6 @@
 
 def summation_i_squared(n):
     """sigma sum"""
-    i = 1
-    x = 1
-    if x <= n:
-        i += x ** 2
-        x += 1
-        print(x)
-    else:
+    if (n < 1):
         return
+    return sum(map(lambda n: n * n, range(1, n + 1)))
