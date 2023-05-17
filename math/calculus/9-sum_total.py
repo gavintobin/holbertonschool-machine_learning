@@ -13,4 +13,3 @@ def summation_i_squared(n):
     else:
         return
 
-
