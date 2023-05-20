@@ -22,7 +22,7 @@ class Poisson:
 
 
     def pmf(self, k):
-    '''calculate value of the cdf for given number of successess'''
+        '''calculate value of the cdf for given number of successess'''
 
         def factorial(self, n):
             """helper func since cant yoompooort modules"""
