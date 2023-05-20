@@ -9,7 +9,7 @@ class Poisson:
     def __init__(self, data=None, lambtha=1.):
         """innit"""
         self.lambtha = float(lambtha)
-        if data  is None:
+        if data is None:
             if lambtha <= 0:
                 raise ValueError('lambtha must be a positive value')
         if data is not None:
@@ -23,6 +23,4 @@ class Poisson:
 
 '''def cdf(self, k):
     """calculatew value of the cdf for given number of successess"""
-    if type(k) != int:'''
-     
-        
+    if type(k) != int:
