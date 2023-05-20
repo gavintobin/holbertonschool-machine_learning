@@ -25,7 +25,7 @@ class Poisson:
     '''calculate value of the cdf for given number of successess'''
 
         def factorial(self, n):
-            """helper func since ant import modules"""
+            """helper func since cant yoompooort modules"""
             if n == 0:
                 return 1
             fact = 1
