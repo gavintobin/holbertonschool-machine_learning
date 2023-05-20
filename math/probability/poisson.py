@@ -35,7 +35,7 @@ class Poisson:
         if type(k) != int:
             self.k = int(k)
 
-        if k < 0 or k > len(self):
+        if k < 0 or k > len(self.data):
             return 0
 
         pmf_value = (self.lambtha ** k) * (e ** -self.lambtha) / self.factorial(k)
