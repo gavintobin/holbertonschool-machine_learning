@@ -34,7 +34,7 @@ class Poisson:
             return fact
 
         if type(k) != int:
-        self.k = int(k)
+            self.k = int(k)
 
         if k < 0 or k > len(self.data):
             return 0
