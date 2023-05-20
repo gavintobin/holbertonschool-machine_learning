@@ -3,6 +3,7 @@
 pi = 3.1415926536
 e = 2.7182818285
 
+
 class Poisson:
     '''poisson class'''
     def __init__(self, data=None, lambtha=1.):
@@ -10,12 +11,12 @@ class Poisson:
         self.lambtha = float(lambtha)
         if data  is None:
             if lambtha <= 0:
-                raise ValueError('data must be a positive value')
+                raise ValueError('lambtha must be a positive value')
         if data is not None:
-            if len(data) < 2:
-                raise ValueError('data must contain multiple values')
             if type(data) != list:
                 raise TypeError('data must be a list')
+            if len(data) < 2:
+                raise ValueError('data must contain multiple values')
             else:
                 self.lambtha = sum(data) / len(data)
 
