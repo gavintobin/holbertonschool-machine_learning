@@ -20,7 +20,6 @@ class Poisson:
             else:
                 self.lambtha = sum(data) / len(data)
 
-
     def pmf(self, k):
         '''calculate value of the cdf for given number of successess'''
 
@@ -36,7 +35,7 @@ class Poisson:
         if type(k) != int:
             self.k = int(k)
 
-        if k < 0 or k > len(self.data):
+        if k < 0 or k > len(self):
             return 0
 
         pmf_value = (self.lambtha ** k) * (e ** -self.lambtha) / self.factorial(k)
