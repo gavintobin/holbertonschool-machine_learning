@@ -22,5 +22,5 @@ class Poisson:
 
 
 '''def cdf(self, k):
-    """calculatew value of the cdf for given number of successess"""
-    if type(k) != int:
+    """calculatew value of the cdf for given number of successess
+    if type(k) != int:'''
