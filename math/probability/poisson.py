@@ -21,6 +21,23 @@ class Poisson:
                 self.lambtha = sum(data) / len(data)
 
 
-'''def cdf(self, k):
-    """calculatew value of the cdf for given number of successess
-    if type(k) != int:'''
+    def pmf(self, k):
+    '''calculate value of the cdf for given number of successess'''
+
+        def factorial(self, n):
+            """helper func since ant import modules"""
+            if n == 0:
+                return 1
+            fact = 1
+            for i in range(1, n + 1):
+                fact += i
+            return fact
+
+        if type(k) != int:
+        self.k = int(k)
+
+        if k < 0 or k > len(self.data):
+            return 0
+
+        pmf_value = (self.lambtha ** k) * (e ** -self.lambtha) / self.factorial(k)
+        return pmf_value
