@@ -45,3 +45,27 @@ class Poisson:
         pmf_numer = (e ** (self.lambtha * -1)) * (self.lambtha ** self.k)
         pmf_denom = factorial(self.k)
         return pmf_numer / pmf_denom
+
+    def cdf(self, k):
+        '''calculates value using cdf formula'''
+
+        def factorial(n):
+            """helper func since cant yoompooort modules"""
+            if n == 0:
+                return 1
+            fact = 1
+            for i in range(1, n + 1):
+                fact *= i
+            return fact
+
+        if type(k) != int:
+            self.k = int(k)
+
+        else:
+            self.k = int(k)
+
+        if k < 0:
+            return 0
+
+        cdf_val = sum(self.pmf(i) for i in range(k + 1))
+        return cdf_val
