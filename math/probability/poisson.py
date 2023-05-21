@@ -33,12 +33,15 @@ class Poisson:
                 fact *= i
             return fact
 
-        
-        self.k = int(k)
+        if type(k) != int:
+            self.k = int(k)
+
+        else:
+            self.k = int(k)
 
         if k < 0:
             return 0
 
-        pmf_value = (e ** (self.lambtha * -1)) * (self.lambtha ** self.k) / factorial(self.k)
-        return pmf_value
-
+        pmf_numer = (e ** (self.lambtha * -1)) * (self.lambtha ** self.k)
+        pmf_denom = factorial(self.k)
+        return pmf_numer / pmf_denom
