@@ -3,6 +3,7 @@
 
 
 class Exponential:
+    """expo class"""
     def __init__(self, data=None, lambtha=1.):
         """initialization"""
         self. lambtha = float(lambtha)
