@@ -69,3 +69,4 @@ class Poisson:
 
         cdf_val = sum(self.pmf(i) for i in range(k + 1))
         return cdf_val
+
