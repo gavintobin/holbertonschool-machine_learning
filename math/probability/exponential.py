@@ -26,4 +26,4 @@ class Exponential:
         if x < 0:
             return 0
         else:
-            return (self.lambtha * e) ** -(self.lambtha * x)
+            return (self.lambtha * e ** ((self.lambtha * -1) * x))
