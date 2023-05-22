@@ -11,7 +11,7 @@ class Normal:
         self.stddev = float(stddev)
         if data is None:
             if stddev <= 0:
-                raise ValueError('stddev must be a positive integer')
+                raise ValueError('stddev must be a positive value')
         if data is not None:
             if type(data) != list:
                 raise TypeError('data must be a list')
@@ -21,4 +21,4 @@ class Normal:
             diff = 0
             for i in data:
                 diff += (i - self.mean) ** 2
-            self.stddev = ((diff / len(data) ** .5))
+            self.stddev = ((diff / len(data)) ** .5)
