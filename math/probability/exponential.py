@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 '''exponential'''
+pi = 3.1415926536
+e = 2.7182818285
 
 
 class Exponential:
@@ -18,3 +20,10 @@ class Exponential:
                 raise ValueError('data must contain multiple values')
 
             self.lambtha = 1. / (sum(data) / len(data))
+
+    def pdf(self, x):
+        """expo pdf caluclation"""
+        if x < 0:
+            return 0
+        else:
+            return (self.lambtha * e) ** -(self.lambtha * x)
