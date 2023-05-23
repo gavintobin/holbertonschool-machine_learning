@@ -38,3 +38,18 @@ class Normal:
         val = 1 / (self.stddev * ((2 * pi) ** 0.5))
         val2 = -0.5 * ((x - self.mean) / self.stddev) ** 2
         return (val * e ** val2)
+
+    def cdf(self, x):
+        '''calculates cdf value for x'''
+        val = 0.5 * (1/ (2 * pi ** .5))
+        val2 = - (self.mean ** 2) / 2
+        return val * self.integral_to_x(x) * e ** val2
+
+
+    def integral_to_x(self, x, num_intervals=1000):
+        delta_x = x / num_intervals
+        sum_value = 0.0
+        for i in range(num_intervals):
+            xi = i * delta_x
+            sum_value += delta_x * xi
+        return sum_value
