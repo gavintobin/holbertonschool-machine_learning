@@ -22,3 +22,13 @@ class Normal:
             for i in data:
                 diff += (i - self.mean) ** 2
             self.stddev = ((diff / len(data)) ** .5)
+
+    def z_score(self, x):
+        """calculates z score"""
+        zee = (x - self.mean) / self.stddev
+        return zee
+
+    def x_value(self, z):
+        """calculates x val based off z score"""
+        val = (self.stddev * z) + self.mean
+        return val
