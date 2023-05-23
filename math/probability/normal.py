@@ -32,3 +32,9 @@ class Normal:
         """calculates x val based off z score"""
         val = (self.stddev * z) + self.mean
         return val
+
+    def pdf(self, x):
+        """calculates value of pdf for x val"""
+        val = 1 / (self.stddev * ((2 * pi) ** 0.5))
+        val2 = -0.5 * ((x - self.mean) / self.stddev) ** 2
+        return (val * e ** val2)
