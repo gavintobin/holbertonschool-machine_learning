@@ -41,15 +41,15 @@ class Normal:
 
     def cdf(self, x):
         '''calculates cdf value for x'''
-        val = 0.5 * (1/ (2 * pi ** .5))
-        val2 = - (self.mean ** 2) / 2
-        return val * self.integral_to_x(x) * e ** val2
-
+        z = self.z_score(x)
+        return 0.5 * (1 + self.integral_to_x(z / 2 ** .5))
 
     def integral_to_x(self, x, num_intervals=1000):
-        delta_x = x / num_intervals
-        sum_value = 0.0
-        for i in range(num_intervals):
-            xi = i * delta_x
-            sum_value += delta_x * xi
-        return sum_value
+        """helper func"""
+        val1 = 2 / (pi ** .5)
+        th = -(x ** 3) / 3
+        fi = (x ** 5) / 10
+        se = -(x ** 7) / 42
+        ni = (x ** 9) / 216
+        ex = (x + th + fi + se + ni)
+        return val1 * ex
