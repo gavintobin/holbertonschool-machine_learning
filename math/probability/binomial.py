@@ -56,5 +56,9 @@ class Binomial:
     def cdf(self, k):
         """cdf formula"""
         self.k = int(k)
-        if self.k < 0:
+        if self.k < 0 or self.k > self.n:
             return 0
+        x = 0
+        for i in range(0, k + 1):
+            x += sum(self.pmf(i))
+            return x
