@@ -14,7 +14,7 @@ class Binomial:
         if data is None:
             if self.n <= 0:
                 raise ValueError('n must be a positive value')
-            if self.p < 0 or > 1:
+            if self.p <= 0 or >= 1:
                 raise ValueError('p msut be greater than 0 or less than 1')
         if data is not None:
             if type(data) != list:
