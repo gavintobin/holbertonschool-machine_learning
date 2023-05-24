@@ -36,22 +36,23 @@ class Binomial:
         """pmf formula"""
         def factorial(n):
             """helper func since cant yoompooort modules"""
-            if n == 0:
-                return 1
-            fact = 1
-            for i in range(1, n + 1):
-                fact *= i
-            return fact
 
-        self.k = int(k)
+        k = int(k)
+
         if k < 0:
             return 0
-        koe = factorial(int(self.n)) / (factorial(int(k)) *
-                                        factorial(int(self.n) - int(k)))
-        last = (1-self.p) ** (self.n - k)
-        mid = self.p ** k
-        res = koe * mid * last
-        return res
+
+        c = (self.factorial(k) * self.factorial(self.n - k))
+        a = (self.factorial(self.n) / c)
+
+        return (a * (self.p ** k) * ((1 - self.p) ** (self.n - k)))
+
+    def factorial(self, k):
+        """factorial helper function"""
+        result = 1
+        for i in range(1, k+1):
+            result *= i
+        return result
 
     def cdf(self, k):
         """cdf formula"""
