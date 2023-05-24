@@ -58,11 +58,7 @@ class Poisson:
                 fact *= i
             return fact
 
-        if type(k) != int:
-            self.k = int(k)
-
-        else:
-            self.k = int(k)
+        k = int(k)
 
         if k < 0:
             return 0
