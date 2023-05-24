@@ -31,3 +31,30 @@ class Binomial:
             n1 = (sum(data) / p1) / len(data)
             self.n = int(round(n1))
             self.p = float(mean/self.n)
+
+    def pmf(self, k):
+        """pmf formula"""
+        def factorial(n):
+            """helper func since cant yoompooort modules"""
+            if n == 0:
+                return 1
+            fact = 1
+            for i in range(1, n + 1):
+                fact *= i
+            return fact
+
+        self.k = int(k)
+        if k < 0:
+            return 0
+        koe = factorial(int(self.n)) / (factorial(int(k)) *
+                                        factorial(int(self.n) - int(k)))
+        last = (1-self.p) ** (self.n - k)
+        mid = self.p ** k
+        res = koe * mid * last
+        return res
+
+    def cdf(self, k):
+        """cdf formula"""
+        self.k = int(k)
+        if self.k < 0:
+            return 0
