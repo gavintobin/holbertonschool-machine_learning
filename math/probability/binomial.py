@@ -19,7 +19,7 @@ class Binomial:
         if data is not None:
             if type(data) != list:
                 raise TypeError('data must be a list')
-            if data < 2:
+            if len(data) < 2:
                 raise ValueError('data must contain multiple values')
             mean = sum(data) / len(data)
             variance = 0
