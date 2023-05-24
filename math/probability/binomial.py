@@ -62,4 +62,4 @@ class Binomial:
         x = 0
         for i in range(0, k + 1):
             x += (self.pmf(i))
-            return x
+        return x
