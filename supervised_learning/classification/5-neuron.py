@@ -18,7 +18,7 @@ class Neuron:
 
     def gradient_descent(self, X, Y, A, alpha=0.05):
         """calcs gd"""
-        m = X.shape[1]
+        m = Y.shape[1]
         self.forward_prop(X)
         dZ = self.__A - Y
         dW = (1/m) * np.dot(dZ, X.T)
