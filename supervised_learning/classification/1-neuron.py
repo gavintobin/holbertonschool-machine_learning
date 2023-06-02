@@ -14,13 +14,15 @@ class Neuron:
             raise TypeError('nx must be an integer')
         if nx < 1:
             raise ValueError('nx must be a positive integer')
-  
-    def get_weight(self):
-        '''gets weight'''
-        return self.__W
 
-    def get_bias(self):
-        return self.__b
+        def get_weight(self):
+            '''gets weight'''
+            return self.__W
 
-    def get_actout(self):
-        return self.__A
+        def get_bias(self):
+            '''gets bias'''
+            return self.__b
+
+        def get_actout(self):
+            '''gets a out'''
+            return self.__A
