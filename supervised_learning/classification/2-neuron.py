@@ -15,6 +15,12 @@ class Neuron:
             raise ValueError('nx must be a positive integer')
         else:
             self.__W = np.random.randn(1, nx)
+    def forward_prop(self, X):
+        '''forward prop function'''
+        
+        def sig(x):
+            '''sigmoid helper func'''
+            return 1/(1 + np.exp(-x))
 
     @property
     def W(self):
