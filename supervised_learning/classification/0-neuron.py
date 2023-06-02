@@ -9,7 +9,7 @@ class Neuron:
         '''innit'''
         self.A = 0
         self.b = 0
-        self.w = np.random.randn(1, nx)
+        self.W = np.random.randn(1, nx)
         if type(nx) != int:
             raise TypeError('nx must be an integer')
         if nx < 1:
