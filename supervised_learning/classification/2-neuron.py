@@ -18,9 +18,8 @@ class Neuron:
 
     def forward_prop(self, X):
         '''forward prop function'''
-        self.__A = np.matmul(self.__W, X) + self.__b
-        self.__A = self.sig(self.__A)
-        return self.sig(self.__A)
+        self.__A = self.sig(np.matmul(self.__W, X) + self.__b)
+        return (self.__A)
 
     def sig(self, x):
         '''sigmoid helper func'''
