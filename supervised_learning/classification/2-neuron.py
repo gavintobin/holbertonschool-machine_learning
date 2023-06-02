@@ -20,13 +20,10 @@ class Neuron:
         '''forward prop function'''
         self.__A = np.matmul(self.__W, X) + self.__b
         return self.sig(self.__A)
-    
 
-    def sig(x):
+    def sig(self, x):
         '''sigmoid helper func'''
         return 1/(1 + np.exp(-x))
-
-    
 
     @property
     def W(self):
