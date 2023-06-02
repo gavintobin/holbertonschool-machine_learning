@@ -19,12 +19,11 @@ class Neuron:
     def gradient_descent(self, X, Y, A, alpha=0.05):
         """calcs gd"""
         m = Y.shape[1]
-        self.forward_prop(X)
         dZ = A - Y
         dW = (1/m) * np.dot(dZ, X.T)
-        db = (1/m) * np.sum(dZ, axis=1, keepdims=True)
-        self.__W = self.__W - alpha * dW
-        self.__b = self.__b - alpha * db
+        db = (1/m) * np.sum(dZ)
+        self.__W -= alpha * dW
+        self.__b -= alpha * db
 
     def cost(self, Y, A):
         '''calculates cost of model using logistic regression'''
