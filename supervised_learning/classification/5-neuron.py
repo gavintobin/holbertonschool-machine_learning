@@ -20,7 +20,7 @@ class Neuron:
         """calcs gd"""
         m = Y.shape[1]
         self.forward_prop(X)
-        dZ = self.__A - Y
+        dZ = A - Y
         dW = (1/m) * np.dot(dZ, X.T)
         db = (1/m) * np.sum(dZ, axis=1, keepdims=True)
         self.__W = self.__W - alpha * dW
