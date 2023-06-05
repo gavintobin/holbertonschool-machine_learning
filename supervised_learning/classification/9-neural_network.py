@@ -21,3 +21,36 @@ class NeuralNetwork:
         self.__W2 = np.random.randn(1, nodes)
         self.__b2 = 0
         self.__A2 = 0
+
+
+    
+    @property
+    def W1(self):
+        '''gets weight'''
+        return self.__W1
+
+    @property
+    def b1(self):
+        '''gets bias'''
+        return self.__b1
+
+    @property
+    def A1(self):
+        '''gets a out'''
+        return self.__A1
+    
+    @property
+    def W2(self):
+        '''gets weight'''
+        return self.__W2
+
+    @property
+    def b2(self):
+        '''gets bias'''
+        return self.__b2
+
+    @property
+    def A2(self):
+        '''gets a out'''
+        return self.__A2
+    
