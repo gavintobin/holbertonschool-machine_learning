@@ -20,3 +20,4 @@ class DeepNeuralNetwork:
             else:
                 self.weights['W' + str(i + 1)] = np.random.randn(layers[i], layers[i-1]) * np.sqrt(2 / layers[i-1])
             self.weights['b' + str(i + 1)] = np.zeros((layers[i], 1))
+            nx = layers[i]
