@@ -38,13 +38,11 @@ class NeuralNetwork:
         if step <= 0 or step > iterations:
             raise ValueError('step must be positive and <= iterations')
 
-        cstval = []
-
-        for i in range(iterations + 1):
+        for _ in range(iterations + 1):
             self.__A1, self.__A2 = self.forward_prop(X)
             self.gradient_descent(X, Y, self.__A1, self.__A2, alpha)
-            eval = self.evaluate(X, Y)
-            return eval
+        eval = self.evaluate(X, Y)
+        return eval
 
     def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
         """calcs gd"""
