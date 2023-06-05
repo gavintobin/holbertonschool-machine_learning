@@ -22,6 +22,12 @@ class NeuralNetwork:
         self.__b2 = 0
         self.__A2 = 0
 
+    def cost(self, Y, A):
+        '''calculates cost of model using logistic regression'''
+        m = Y.shape[1]
+        cost = -(1/m) * np.sum(Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A))
+        return cost
+
     def forward_prop(self, X):
         '''forward prop function'''
         self.__A1 = self.sig(np.matmul(self.__W1, X) + self.__b1)
