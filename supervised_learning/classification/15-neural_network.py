@@ -2,6 +2,7 @@
 '''single layer network'''
 
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 class NeuralNetwork:
@@ -35,14 +36,26 @@ class NeuralNetwork:
             raise ValueError('alpha must be positive')
         if type(step) is not int:
             raise TypeError('step must be an integer')
+        if type(step) is not int:
+            raise TypeError('step must be an integer')
         if step <= 0 or step > iterations:
             raise ValueError('step must be positive and <= iterations')
-
-        for _ in range(iterations):
+        cstval = []
+        for i in range(0, iterations + 1):
             self.__A1, self.__A2 = self.forward_prop(X)
             self.gradient_descent(X, Y, self.__A1, self.__A2, alpha)
-        eval = self.evaluate(X, Y)
-        return eval
+            if verbose is True and i % step == 0:
+                cst = self.cost(Y, self.__A1, self.__A2)
+                cstval.append(cst)
+                print('cost after {} interations: {}'.format(i, cst))
+            if graph == True and i % step == 0:
+                it_ax = range(0, iterations + 1, step)
+                plt.plot(it_ax, cstval, 'b-')
+                plt.xlabel('Iteration')
+                plt.ylabel('Cost')
+                plt.title('Training Cost')
+                plt.show()
+
     
 
     def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
