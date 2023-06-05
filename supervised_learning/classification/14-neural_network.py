@@ -41,7 +41,7 @@ class NeuralNetwork:
         cstval = []
 
         for i in range(iterations + 1):
-            self.__A1. self.__A2 = self.forward_prop(X)
+            self.__A1, self.__A2 = self.forward_prop(X)
             self.gradient_descent(X, Y, self.__A1, self.__A2, alpha)
             eval = self.evaluate(X, Y)
             return eval
