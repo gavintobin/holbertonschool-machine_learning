@@ -38,7 +38,7 @@ class NeuralNetwork:
         if step <= 0 or step > iterations:
             raise ValueError('step must be positive and <= iterations')
 
-        for _ in range(iterations + 1):
+        for _ in range(iterations):
             self.__A1, self.__A2 = self.forward_prop(X)
             self.gradient_descent(X, Y, self.__A1, self.__A2, alpha)
         eval = self.evaluate(X, Y)
