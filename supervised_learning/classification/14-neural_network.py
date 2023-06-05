@@ -53,7 +53,7 @@ class NeuralNetwork:
 
         dZ1 = np.matmul(self.__W2.T, dZ2) * (A1 * (1 - A1))
         dW1 = (1/m) * np.matmul(dZ1, X.T)
-        db1 = (1/m) * np.sum(dZ1, axis=True, keepdims=True)
+        db1 = (1/m) * np.sum(dZ1, axis=1, keepdims=True)
         self.__W1 -= alpha * dW1
         self.__b1 -= alpha * db1
         self.__W2 -= alpha * dW2
