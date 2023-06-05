@@ -31,7 +31,7 @@ class NeuralNetwork:
         self.__W2 -= alpha * dW2
         self.__b2 -= alpha * db2
         m = Y.shape[1]
-        dZ1 = A1 - Y
+        dZ1 = np.dot(self.__W2.T, dZ2) * (1-np.power(A1, 2))
         dW1 = (1/m) * np.dot(dZ1, X.T)
         db1 = (1/m) * np.sum(dZ1)
         self.__W1 -= alpha * dW1
