@@ -37,6 +37,8 @@ class NeuralNetwork:
         db1 = (1/m) * np.sum(dZ1)
         self.__W1 -= alpha * dW1
         self.__b1 -= alpha * db1
+        self.__W2 -= alpha * dW2
+        self.__b2 = alpha * db2
 
     def evaluate(self, X, Y):
         '''evaluates the predictions'''
