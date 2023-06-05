@@ -67,17 +67,17 @@ class Neuron:
 
         cstval = []
 
-        for i in range(iterations):
+        for i in range(iterations + 1):
             propped = self.forward_prop(X)
             self.gradient_descent(X, Y, propped, alpha)
 
-        if verbose is True and i % step == 0:
-            cst = self.cost(Y, self.__A)
-            cstval.append(cst)
-            print('cost after {} interations: {}'.format(i, cst))
+            if verbose is True and i % step == 0:
+                cst = self.cost(Y, self.__A)
+                cstval.append(cst)
+                print('cost after {} interations: {}'.format(i, cst))
 
         if graph:
-            it_ax = range(0, iterations, step)
+            it_ax = range(0, iterations + 1, step)
             plt.plot(it_ax, cstval, 'b-')
             plt.xlabel('Iteration')
             plt.ylabel('Cost')
