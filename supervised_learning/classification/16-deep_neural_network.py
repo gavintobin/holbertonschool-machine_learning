@@ -2,7 +2,6 @@
 """deep neural network w binary classif."""
 import numpy as np
 
-
 class DeepNeuralNetwork:
     '''dnn class'''
     def __init__(self, nx, layers):
@@ -15,11 +14,12 @@ class DeepNeuralNetwork:
         self.L = len(layers)
         self.cache = {}
         self.weights = {}
-        for i, layer_size in enumerate(layers):
+        for i in range(self.L):
+            if type(layers[i]) is not int or layers[i] <= 0:
+                raise TypeError("layers must be a list of positive integers")
             if i == 0:
-                input_size = nx
+                self.weights['W' + str(i + 1)] = np.random.randn(layers[i], nx) * np.sqrt(2 / nx)
             else:
-                input_size = layers[i-1]
-                w = np.random.randn(layer_size, input_size) * np.sqrt(2 / input_size)
-                self.weights['W{}'.format(i + 1)] = w
-                self.weights['b'.format(i + 1)] = np.zeros((layer_size, 1))
+                self.weights['W' + str(i + 1)] = np.random.randn(layers[i], layers[i-1]) * np.sqrt(2 / layers[i-1])
+            self.weights['b' + str(i + 1)] = np.zeros((layers[i], 1))
+
