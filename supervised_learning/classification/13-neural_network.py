@@ -26,7 +26,7 @@ class NeuralNetwork:
         """calcs gd"""
         m = Y.shape[1]
         dZ2 = A2 - Y
-        dW2 = (1/m) * np.dot(dZ2, X.T)
+        dW2 = (1/m) * np.dot(dZ2, A1.T)
         db2 = (1/m) * np.sum(dZ2)
         self.__W2 -= alpha * dW2
         self.__b2 -= alpha * db2
