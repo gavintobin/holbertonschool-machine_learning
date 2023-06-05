@@ -45,7 +45,6 @@ class NeuralNetwork:
             self.gradient_descent(X, Y, self.__A1, self.__A2, alpha)
             eval = self.evaluate(X, Y)
             return eval
-                
 
     def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
         """calcs gd"""
