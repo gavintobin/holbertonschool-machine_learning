@@ -43,6 +43,7 @@ class DeepNeuralNetwork:
             A = self.sig(Z)
             self.__cache['A' + str(i)] = A
         return (A, self.__cache)
+
     @property
     def L(self):
         """layer getter"""
