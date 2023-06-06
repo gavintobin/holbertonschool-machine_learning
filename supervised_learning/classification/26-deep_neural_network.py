@@ -29,7 +29,7 @@ class DeepNeuralNetwork:
                 self.__weights['W' + str(i + 1)] = w
             self.__weights['b' + str(i + 1)] = np.zeros((layers[i], 1))
 
-     def train(self, X, Y, iterations=5000, alpha=0.05,
+    def train(self, X, Y, iterations=5000, alpha=0.05,
               verbose=True, graph=True, step=100):
         """
         Lets train our neural network.
