@@ -56,6 +56,7 @@ class DeepNeuralNetwork:
 
             if l > 1:
                 dZ = dA * (A_prev * (1 - A_prev))
+
     def cost(self, Y, A):
         '''calculates cost of model using logistic regression'''
         m = Y.shape[1]
