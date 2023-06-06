@@ -44,24 +44,50 @@ class DeepNeuralNetwork:
             raise TypeError('step must be an integer')
         if step <= 0 or step > iterations:
             raise ValueError('step must be positive and <= iterations')
-        step_plot = {}
-        for i in range(iterations):
-            self.forward_prop(X)
-            self.gradient_descent(Y, self.__cache, alpha)
-            if verbose is True and i % step == 0:
-                print("Cost after {} iterations: {}".format(
-                    i, self.cost(Y, self.__cache["A{}".format(self.__L)])))
-            if i % step == 0:
-                step_plot[i] = self.cost(Y, self.__cache["A{}"
-                                                         .format(self.__L)])
+        def train(self, X, Y, iterations=5000, alpha=0.05,
+              verbose=True, graph=True, step=100):
+        """
+        Lets train our neural network.
+        X is the input data
+        Y is the correctly labeled data for the input data
+        iterations is how many times we're going to train
+        alpha is our learning rate
+        """
+        if type(iterations) is not int:
+            raise TypeError("iterations must be an integer")
+        if iterations <= 0:
+            raise ValueError("iterations must be a positive integer")
+        if type(alpha) is not float:
+            raise TypeError("alpha must be a float")
+        if alpha <= 0:
+            raise ValueError("alpha must be positive")
 
-        if graph is True:
-            plt.plot(step_plot.keys(), step_plot.values())
-            plt.xlabel("iteration")
-            plt.ylabel("cost")
-            plt.title("Training Cost")
+        graphx = []
+        graphy = []
+        for i in range(0, iterations):
+            A, cache = self.forward_prop(X)
+            self.gradient_descent(Y, self.__cache, alpha)
+            if verbose:
+                if i == 0 or i % step == 0:
+                    print("Cost after {} iterations: {}"
+                          .format(i, self.cost(Y, A)))
+            if graph:
+                if i == 0 or i % step == 0:
+                    current_cost = self.cost(Y, A)
+                    graphy.append(current_cost)
+                    graphx.append(i)
+                plt.plot(graphx, graphy)
+                plt.title("Training Cost")
+                plt.xlabel("iteration")
+                plt.ylabel("cost")
+            if verbose or graph:
+                if type(step) is not int:
+                    raise TypeError("step must be in integer")
+                if step <= 0 or step > iterations:
+                    raise ValueError("step must be positive and <= iterations")
+        if graph:
             plt.show()
-        return self.evaluate(X, Y)
+        return (self.evaluate(X, Y))
 
     def evaluate(self, X, Y):
         '''evaluates the predictions'''
