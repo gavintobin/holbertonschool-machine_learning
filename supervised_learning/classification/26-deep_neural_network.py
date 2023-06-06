@@ -29,22 +29,7 @@ class DeepNeuralNetwork:
                 self.__weights['W' + str(i + 1)] = w
             self.__weights['b' + str(i + 1)] = np.zeros((layers[i], 1))
 
-    def train(self, X, Y, iterations=5000, alpha=0.05,
-              verbose=True, graph=True, step=100):
-        '''trains neuron'''
-        if type(iterations) is not int:
-            raise TypeError('iterations must be an integer')
-        if iterations <= 0:
-            raise ValueError('iterations must be a positive integer')
-        if type(alpha) is not float:
-            raise TypeError('alpha must be a float')
-        if alpha <= 0:
-            raise ValueError('alpha must be positive')
-        if type(step) is not int:
-            raise TypeError('step must be an integer')
-        if step <= 0 or step > iterations:
-            raise ValueError('step must be positive and <= iterations')
-        def train(self, X, Y, iterations=5000, alpha=0.05,
+     def train(self, X, Y, iterations=5000, alpha=0.05,
               verbose=True, graph=True, step=100):
         """
         Lets train our neural network.
