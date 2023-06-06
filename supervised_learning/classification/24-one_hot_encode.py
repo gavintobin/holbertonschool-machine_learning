@@ -8,7 +8,7 @@ def one_hot_encode(Y, classes):
         return None
     m = Y.shape[0]
     for i in range(m):
-        one_hot = np.zeros((classes, len(Y)))
-        one_hot[Y, np.arange(len(Y))] = 1
+        one_hot = np.zeros((classes, m))
+        one_hot[Y, Y[i]] = 1
 
     return one_hot
