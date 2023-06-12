@@ -4,7 +4,7 @@
 import tensorflow as tf
 
 
-def create_trian_op(loss, alpha):
+def create_train_op(loss, alpha):
     '''love it'''
     opty = tf.train.GradientDescentOptimizer(alpha).minimize(loss)
     return opty
