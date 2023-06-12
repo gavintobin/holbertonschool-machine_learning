@@ -11,47 +11,35 @@ forward_prop = __import__('2-forward_prop').forward_prop
 
 def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations, alpha, iterations, save_path="/tmp/model.ckpt"):
     '''trians model'''
-    tf.reset_default_graph()
-    
-    x = tf.placeholder(tf.float32, shape=(None, X_train.shape[1]), name='x')
-    y = tf.placeholder(tf.float32, shape=(None, Y_train.shape[1]), name='y')
-    
-    prev = x
-    for size, activation in zip(layer_sizes, activations):
-        initializer = tf.contrib.layers.variance_scaling_initializer(mode="FAN_AVG")
-        layer = tf.layers.Dense(size, activation=activation, kernel_initializer=initializer, name="layer")
-        prev = layer(prev)
-    y_pred = prev
-    
-    loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y, logits=y_pred))
-    correct_predictions = tf.equal(tf.argmax(y_pred, axis=1), tf.argmax(y, axis=1))
-    accuracy = tf.reduce_mean(tf.cast(correct_predictions, tf.float32))
-    
-    optimizer = tf.train.GradientDescentOptimizer(learning_rate=alpha)
-    train_op = optimizer.minimize(loss)
-    
-    tf.add_to_collection('placeholders', x)
-    tf.add_to_collection('placeholders', y)
-    tf.add_to_collection('tensors', y_pred)
-    tf.add_to_collection('tensors', loss)
-    tf.add_to_collection('tensors', accuracy)
-    tf.add_to_collection('operations', train_op)
-    
+    x, y = create_placeholders(X_train.shape[1], Y_train.shape[1])
+    y_pred = forward_prop(x, layer_sizes, activations)
+    loss = calculate_loss(y, y_pred)
+    accuracy = calculate_accuracy(y, y_pred)
+    train_op = create_train_op(loss, alpha)
+    tf.add_to_collection('x', x)
+    tf.add_to_collection('y', y)
+    tf.add_to_collection('y_pred', y_pred)
+    tf.add_to_collection('loss', loss)
+    tf.add_to_collection('accuracy', accuracy)
+    tf.add_to_collection('train_op', train_op)
+
+    init = tf.global_variables_initializer()
+    sess = tf.Session()
+    sess.run(init)
+    for i in range(iterations + 1):
+        if i % 100 == 0 or i == iterations:
+            train_cost, train_acc = sess.run((loss, accuracy),
+                                             feed_dict={x: X_train,
+                                                        y: Y_train})
+            val_cost, val_acc = sess.run((loss, accuracy),
+                                         feed_dict={x: X_valid,
+                                                    y: Y_valid})
+            print("After {} iterations:".format(i))
+            print("\tTraining Cost: {}".format(train_cost))
+            print("\tTraining Accuracy: {}".format(train_acc))
+            print("\tValidation Cost: {}".format(val_cost))
+            print("\tValidation Accuracy: {}".format(val_acc))
+        if i < iterations:
+            sess.run(train_op, feed_dict={x: X_train, y: Y_train})
     saver = tf.train.Saver()
-
-    with tf.Session() as sess:
-        sess.run(tf.global_variables_initializer())
-
-        for i in range(iterations + 1):
-            _, train_cost, train_accuracy = sess.run([train_op, loss, accuracy], feed_dict={x: X_train, y: Y_train})
-            if i % 100 == 0 or i == 0 or i == iterations:
-                valid_cost, valid_accuracy = sess.run([loss, accuracy], feed_dict={x: X_valid, y: Y_valid})
-                print(f"After {i} iterations:")
-                print(f"\tTraining Cost: {train_cost}")
-                print(f"\tTraining Accuracy: {train_accuracy}")
-                print(f"\tValidation Cost: {valid_cost}")
-                print(f"\tValidation Accuracy: {valid_accuracy}")
-
-        saver.save(sess, save_path)
-
-    return save_path
+    return saver.save(sess, save_path)
