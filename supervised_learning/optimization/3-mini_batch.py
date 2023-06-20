@@ -42,13 +42,13 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32, epochs=5
                     }
                     sesh.run((train), feed_dict=batch_dict)
 
-                    if (j + 1) % 100 == 0 and j != 0:
+                if (j + 1) % 100 == 0 and j != 0:
 
-                        batch_cost = loss.eval(batch_dict)
-                        batch_accuracy = accuracy.eval(batch_dict)
-                        print("\tStep {}:".format(j + 1))
-                        print("\t\tCost: {}".format(batch_cost))
-                        print("\t\tAccuracy: {}".format(batch_accuracy))
+                    batch_cost = loss.eval(batch_dict)
+                    batch_accuracy = accuracy.eval(batch_dict)
+                    print("\tStep {}:".format(j + 1))
+                    print("\t\tCost: {}".format(batch_cost))
+                    print("\t\tAccuracy: {}".format(batch_accuracy))
 
         save_path = saver.save(sesh, save_path)
 
