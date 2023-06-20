@@ -8,4 +8,4 @@ def shuffle_data(X, Y):
     '''shuffles dp in 2 matrixes in same way'''
     shuffledx = np.random.permutation(X)
     shuffledy = np.random.permutation(Y)
-    return shuffledx, shuffledy
+    return X[shuffledx], Y[shuffledy]
