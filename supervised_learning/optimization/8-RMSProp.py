@@ -6,4 +6,4 @@ import tensorflow as tf
 
 def create_RMSProp_op(loss, alpha, beta2, epsilon):
     '''rms optimo'''
-    return tf.train.RMSpropOptimizer(alpha, beta2, epsilon).minimize(loss)
+    return tf.train.RMSPropOptimizer(alpha, beta2, epsilon).minimize(loss)
