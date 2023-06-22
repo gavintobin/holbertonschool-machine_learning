@@ -15,4 +15,4 @@ def create_batch_norm_layer(prev, n, activation):
 
     eps = 1 * (10 ** -8)
     normz = tf.nn.batch_normalization(layers, mean, var, beta, gamma, eps)
-    return normz
+    return activation(normz)
