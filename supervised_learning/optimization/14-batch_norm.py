@@ -8,7 +8,7 @@ def create_batch_norm_layer(prev, n, activation):
     kerninit = tf.contrib.layers.variance_scaling_initializer(mode="FAN_AVG")
     layers = tf.layers.Dense(prev, n, kernal_initalizer=kerninit)
 
-    var, mean = tf.nn.moments(layers, 0)
+    mean, var = tf.nn.moments(layers, 0)
 
     gamma = tf.Variable(tf.ones[n])
     beta = tf.Variable(tf.zeros[n])
