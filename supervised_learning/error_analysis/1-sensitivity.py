@@ -2,7 +2,7 @@
 '''task 2'''
 import numpy as np
 
-def sesnsitivity(confusion):
+def sensitivity(confusion):
     '''calcs sens of each class'''
     classes = confusion.shape[0]
     sensitivity_values = np.zeros(classes, dtype=np.float32)
