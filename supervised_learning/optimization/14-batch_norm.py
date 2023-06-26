@@ -6,7 +6,7 @@ import tensorflow as tf
 def create_batch_norm_layer(prev, n, activation):
     '''same but in tf'''
     init = tf.contrib.layers.variance_scaling_initializer(mode="FAN_AVG")
-    base = tf.layers.dense(prev, n, init)
+    base = tf.layers.dense(prev, n, kenerl_initializer=init)
 
     mean, var = tf.nn.moments(base, 0)
 
