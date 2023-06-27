@@ -7,6 +7,6 @@ def sensitivity(confusion):
     '''calcs sens of each class'''
     true = np.diag(confusion)
     actual = np.sum(confusion, axis=1)
-    sens= true / actual
-    
+    sens = true / actual
+
     return sens
