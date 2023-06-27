@@ -8,3 +8,4 @@ def precision(confusion):
     truepos = np.sum(confusion, axis=0)
     falsepos = np.sum(confusion, axis=1)
     score = truepos / (falsepos + truepos)
+    return score
