@@ -5,6 +5,8 @@ import numpy as np
 
 def sensitivity(confusion):
     '''calcs sens of each class'''
-    tpr = np.diag(confusion)
-    total  =np.sum(confusion)
-    proba = tpr / total
+    true = np.diag(confusion)
+    actual = np.sum(confusion, axis=0)
+    sens= true / actual
+    
+    return sens
