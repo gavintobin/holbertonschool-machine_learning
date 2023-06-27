@@ -8,7 +8,8 @@ def specificity(confusion):
     TP = np.diag (confusion)
     FP = confusion.sum (axis=0) - TP
     FN = confusion.sum (axis=1) - TP
-    TN = confusion.values.sum () - (FP + FN + TP)
+    TNV = confusion.values() - (FP + FN + TP)
+    TN = sum(TNV)
     spec = TN / (TN + FP)
 
     return spec
