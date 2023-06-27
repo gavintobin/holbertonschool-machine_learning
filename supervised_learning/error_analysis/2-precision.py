@@ -8,5 +8,5 @@ def precision(confusion):
     '''calcs sens of each class'''
     true = np.diag(confusion)
     false = np.sum(confusion, axis=0)
-    ppv = true / (true + false)
+    ppv = true / false
     return ppv
