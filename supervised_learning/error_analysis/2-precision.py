@@ -6,7 +6,7 @@ import numpy as np
 
 def precision(confusion):
     '''calcs sens of each class'''
-    classes = confusion.shape[0] + confusion.shape[1]
+    classes = confusion.shape[0]
     true = np.diag(confusion)
     false = []
     for i in range(classes):
