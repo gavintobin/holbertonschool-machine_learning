@@ -7,9 +7,9 @@ def dropout_forward_prop(X, weights, L, keep_prob):
     '''does fp using dropout'''
     cache = {}
     cache['A0'] = X
-    A_prev = cache['A' + str(i - 1)]
     
     for i in range(1, L + 1):
+        A_prev = cache['A' + str(i - 1)]
         W = weights['W' + str(i)]
         b = weights['b' + str(i)]
         Z = np.matmul(W, A_prev) + b
