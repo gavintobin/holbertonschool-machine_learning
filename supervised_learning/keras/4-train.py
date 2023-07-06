@@ -3,4 +3,7 @@
 import tensorflow.keras as K
 
 
-def train_model(network, dat, labels, batch_size, epochs)
+def train_model(network, dat, labels, batch_size, epochs,verbose=True,
+                shuffles=False):
+    '''train da model'''
+    model = K.
