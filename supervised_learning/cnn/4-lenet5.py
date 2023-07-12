@@ -14,7 +14,7 @@ def lenet5(x, y):
     first_pool = tf.layers.max_pooling2d(first_conv, pool_size=(2, 2),
                                          strides=(2, 2))
     sec_conv = tf.layers.conv2d(first_pool, filters=16,
-                               kernel_size=(5,5), padding='valid', 
+                               kernel_size=(5, 5), padding='valid', 
                                activation=tf.nn.relu, 
                                kernel_initializer=he_init)
     sec_pool = tf.layers.max_pooling2d(sec_conv, pool_size=(2, 2),
