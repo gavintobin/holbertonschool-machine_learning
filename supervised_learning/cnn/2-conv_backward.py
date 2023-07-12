@@ -6,7 +6,7 @@ import numpy as np
 def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
     '''backprops over hidden layers'''
     m, h_new, w_new, c_new = dZ.shape
-    h_prev, w_prev, c_prev = A_prev.shape
+    m, h_prev, w_prev, c_prev = A_prev.shape
     kh, kw, _, _ = W.shape
     sh, sw = stride
 
