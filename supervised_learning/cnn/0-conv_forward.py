@@ -26,7 +26,7 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
         for j in range(w_new):
             for k in range(c_new):
                 i_beg, i_end = i * sh, i * sh + kw
-                j_beg, j_end = j * sw, j * jw + kw
+                j_beg, j_end = j * sw, j * sw + kw
                 aslice = paddeda_prev[:, i_beg:i_end, j_beg:j_end, :]
                 z[:, i, j, k] = np.sum(aslice * W[:, :, :, k],
                                        axis=(1, 2, 3)) + b[:, :, :, k]
