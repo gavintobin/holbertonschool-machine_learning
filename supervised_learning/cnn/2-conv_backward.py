@@ -11,7 +11,7 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
     sh, sw = stride
 
     if padding == 'same':
-        ph = ((h_prev -1) * sh + kh - h_prev) // 2
+        ph = ((h_prev - 1) * sh + kh - h_prev) // 2
         pw = ((w_prev - 1) * sw + kw - w_prev) // 2
     elif padding == 'valid':
         ph = 0
