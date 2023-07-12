@@ -25,7 +25,7 @@ def lenet5(x, y):
                                 kernel_initializer=he_init)
     secfull = tf.layers.dense(firstfull, units=84, activation=tf.nn.relu,
                               kernel_initalizer=he_init)
-    logits = tf.layers.Dense(secfull, units=10, kernel_initializer=he_init)
+    logits = tf.layers.dense(secfull, units=10, kernel_initializer=he_init)
     output = tf.nn.softmax(logits)
     loss = tf.losses.softmax_cross_entropy(onehot_labels=y,
                                            logits=logits)
