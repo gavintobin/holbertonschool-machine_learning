@@ -20,7 +20,7 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
 
     paddeda_prev = np.pad(A_prev, ((0, 0), (ph, ph),
                                    (pw, pw), (0, 0)), mode='constant')
-    z = np.zeroes((m, h_new, w_new, c_new))
+    z = np.zeros((m, h_new, w_new, c_new))
 
     for i in range(h_new):
         for j in range(w_new):
