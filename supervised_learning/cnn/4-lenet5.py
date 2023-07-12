@@ -13,7 +13,7 @@ def lenet5(x, y):
                                   kernel_initializer=he_init)
     first_pool = tf.layers.max_pooling2d(first_conv, pool_size=(2, 2),
                                          strides=(2, 2))
-    sec_conv = tf.layers.cov2d(first_pool, filters=16,
+    sec_conv = tf.layers.conv2d(first_pool, filters=16,
                                kernel_size=(5,5), padding='valid', 
                                activation=tf.nn.relu, 
                                kernel_initializer=he_init)
@@ -29,8 +29,8 @@ def lenet5(x, y):
     output = tf.nn.softmax(logits)
     loss = tf.losses.softmax_cross_entropy(onehot_labels=y,
                                            logits=logits)
-    optimizer = tf.train.AdamOptimizer
-    trainop = optimizer.moinimize(loss)
+    optimizer = tf.train.AdamOptimizer()
+    trainop = optimizer.minimize(loss)
 
     corpred = tf.equal(tf.argmax(output, 1), tf.argmax(y, 1))
     accuracy = tf.reduce_mean(tf.cast(corpred, tf.float32))
