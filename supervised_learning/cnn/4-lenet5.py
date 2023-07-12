@@ -7,7 +7,6 @@ def lenet5(x, y):
     '''builds modded fersion of lenet5 architechure using tf'''
     he_init = tf.contrib.layers.variance_scaling_initializer()
 
-    # Convolutional layer 1
     firstconv = tf.layers.conv2d(x, filters=6, kernel_size=(
         5, 5), padding='same', activation=tf.nn.relu,
         kernel_initializer=he_init)
@@ -31,20 +30,16 @@ def lenet5(x, y):
     secfull = tf.layers.dense(firstfull, units=84, activation=tf.nn.relu,
                           kernel_initializer=he_init)
 
-    # Output softmax layer
     logits = tf.layers.dense(secfull, units=10,
                              kernel_initializer=he_init)
     output = tf.nn.softmax(logits)
 
-    # Loss
     loss = tf.losses.softmax_cross_entropy(onehot_labels=y,
                                            logits=logits)
 
-    # Optimizer
     optimizer = tf.train.AdamOptimizer()
     trainop = optimizer.minimize(loss)
 
-    # Accuracy
     correct_prediction = tf.equal(tf.argmax(output, 1), tf.argmax(y, 1))
     accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
