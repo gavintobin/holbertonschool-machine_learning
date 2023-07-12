@@ -21,9 +21,9 @@ def lenet5(x, y):
                                        strides=(2, 2))
     flat = tf.layers.flatten(sec_pool)
 
-    firstfull = tf.layers.Dense(flat, units=120, activation=tf.nn.relu,
+    firstfull = tf.layers.dense(flat, units=120, activation=tf.nn.relu,
                                 kernel_initializer=he_init)
-    secfull = tf.layers.Dense(firstfull, units=84, activation=tf.nn.relu,
+    secfull = tf.layers.dense(firstfull, units=84, activation=tf.nn.relu,
                               kernel_initalizer=he_init)
     logits = tf.layers.Dense(secfull, units=10, kernel_initializer=he_init)
     output = tf.nn.softmax(logits)
