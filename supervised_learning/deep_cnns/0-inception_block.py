@@ -20,3 +20,9 @@ def inception_block(A_prev, filters):
                               strides=(1, 1), padding='same')(A_prev)
     pool_1x1 = K.layers.Conv2d(filters=FPP, activation='relu')(pool)
 
+    output = K.layers.concatenate([conv_1by,
+                                   conv_3x3,
+                                   conv_5x5,
+                                   pool_1x1], axis=-1)
+
+    return output
