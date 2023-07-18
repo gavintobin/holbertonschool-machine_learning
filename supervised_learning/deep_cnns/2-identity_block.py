@@ -33,6 +33,6 @@ def identity_block(A_prev, filters):
 
     third_batchnorm = K.layers.BatchNormalization(axis=3)(sec_1by)
 
-    layer = K.layers.Add()([sec_batchnorm, A_prev])
+    layer = K.layers.Add()([third_batchnorm, A_prev])
     activated = K.layers.ReLU()(layer)
     return activated
