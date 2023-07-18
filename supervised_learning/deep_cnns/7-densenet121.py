@@ -10,43 +10,57 @@ def densenet121(growth_rate=32, compression=1.0):
     input = K.Input(shape=(224, 224, 3))
     init = K.initializers.he_normal()
 
-    firstbatch = K.layers.BatchNormalization(axis=3)(input)
-    firstrelu = K.layers.Activation('relu')(firstbatch)
-    firstconv = K.layers.Conv2D(filters=64,
-                             kernel_size=(7, 7),
-                             strides=2,
-                             padding='same',
-                             kernel_initializer=init
-                             )(firstrelu)
-    pool = K.layers.MaxPooling2D(pool_size=(3, 3),
-                                       strides=2,
-                                       padding='same'
-                                       )(firstconv)
+    X = K.layers.BatchNormalization(axis=3)(input)
+    X = K.layers.Activation('relu')(X)
+    X = K.layers.Conv2D(filters=(growth_rate * 2),
+                        kernel_size=(7, 7),
+                        strides=2,
+                        padding='same',
+                        kernel_initializer=init)(X)
+    X = K.layers.MaxPooling2D((3, 3),
+                              strides=2,
+                              padding='same')(X)
 
-    firstdb, nb_filters = dense_block(X=pool,nb_filters=64,
-                                      growth_rate=growth_rate,
-                                      layers=6)
-    firsttb, nb_filters = transition_layer(X=firstdb,
-                                           nb_filters=nb_filters,
-                                           compression=compression)
-    secdb, nb_filters = dense_block(X=firsttb, nb_filters=nb_filters,
-                                    growth_rate=growth_rate,layers=12)
-    sectb, nb_filters = transition_layer(X=secdb, nb_filters=nb_filters,
-                                         compression=compression)
-    thirddb, nb_filters = dense_block(X=sectb, nb_filters=nb_filters,
-                                      growth_rate=growth_rate,layers=24)
-    thirdtb, nb_filters = transition_layer(X=thirddb,
-                                           nb_filters=nb_filters,
-                                           compression=compression)
-    fouthdb, nb_filters = dense_block(X=thirdtb, nb_filters=nb_filters,
-                                      growth_rate=growth_rate,
-                                      layers=16)
+    X, nb_filters = dense_block(X,
+                                (2 * growth_rate),
+                                growth_rate,
+                                6)
 
-    global_average = K.layers.AveragePooling2D(pool_size=(7, 7),
-                                               strides=1,
-                                               )(fouthdb)
+    X, nb_filters = transition_layer(X,
+                                     nb_filters,
+                                     compression)
 
-    softmax = K.layers.Dense(units=1000,activation='softmax',
-                             kernel_initializer=init)(global_average)
+    X, nb_filters = dense_block(X,
+                                nb_filters,
+                                growth_rate,
+                                12)
 
-    return K.Model(inputs=input, outputs=softmax)
+    X, nb_filters = transition_layer(X,
+                                     nb_filters,
+                                     compression)
+
+    X, nb_filters = dense_block(X,
+                                nb_filters,
+                                growth_rate,
+                                24)
+
+    X, nb_filters = transition_layer(X,
+                                     nb_filters,
+                                     compression)
+
+    X, nb_filters = dense_block(X,
+                                nb_filters,
+                                growth_rate,
+                                16)
+
+    X = K.layers.AveragePooling2D(pool_size=(7, 7),
+                                  strides=1,
+                                  padding='valid')(X)
+
+    outputs = K.layers.Dense(units=1000,
+                             activation='softmax',
+                             kernel_initializer=init)(X)
+
+    model = K.Model(inputs=input, outputs=outputs)
+
+    return model
