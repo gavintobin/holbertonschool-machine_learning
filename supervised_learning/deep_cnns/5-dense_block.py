@@ -8,9 +8,8 @@ def dense_block(X, nb_filters, growth_rate, layers):
 
     init = K.initializers.he_normal()
 
-    concatenation = X
     for i in range(layers):
-        firstbatch = K.layers.BatchNormalization(axis=3)(concatenation)
+        firstbatch = K.layers.BatchNormalization(axis=3)(X)
         firstrelu = K.layers.ReLU()(firstbatch)
         firstconv = K.layers.Conv2D(filters=(4 * growth_rate),
                                     kernel_size=(1, 1),
@@ -23,7 +22,7 @@ def dense_block(X, nb_filters, growth_rate, layers):
                                  kernel_size=(3, 3),
                                  padding='same',
                                  kernel_initializer=init)(secrelu)
-        concatenation = K.layers.Concatenate()([concatenation, seconv])
+        concatenation = K.layers.Concatenate()([X, seconv])
         nb_filters = nb_filters + growth_rate
 
     return (concatenation, nb_filters)
