@@ -47,5 +47,5 @@ def resnet50():
 
     softmax = K.layers.Dense(units=1000, activation=softmax)(pool)
 
-    model = K.Model(inputs=input, outputs=softmax)
-    return model
+    return  K.Model(inputs=input, outputs=softmax)
+    
