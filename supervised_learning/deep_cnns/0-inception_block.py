@@ -19,3 +19,4 @@ def inception_block(A_prev, filters):
     pool = K.layers.MaxPool2d(pool_size=(3, 3),
                               strides=(1, 1), padding='same')(A_prev)
     pool_1x1 = K.layers.Conv2d(filters=FPP, activation='relu')(pool)
+f
