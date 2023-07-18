@@ -11,11 +11,13 @@ def inception_block(A_prev, filters):
     conv_1byb4 = K.layers.Conv2D(filters=F3R, kernel_size=(1, 1),
                                  activation='relu')(A_prev)
     conv_3x3 = K.layers.Conv2D(filters=F3, kernel_size=(3, 3),
-                               activation='relu')(conv_1byb4)
+                               activation='relu',
+                               padding='same')(conv_1byb4)
     conv_5x5b4 = K.layers.Conv2D(filters=F5R, kernel_size=(1, 1),
                                  activation='relu')(A_prev)
     conv_5x5 = K.layers.Conv2D(filters=F5, kernel_size=(5, 5),
-                               activation='relu')(conv_5x5b4)
+                               activation='relu',
+                               padding='same')(conv_5x5b4)
     pool = K.layers.MaxPool2D(pool_size=(3, 3),
                               strides=(1, 1), padding='same')(A_prev)
     pool_1x1 = K.layers.Conv2D(filters=FPP, activation='relu')(pool)
