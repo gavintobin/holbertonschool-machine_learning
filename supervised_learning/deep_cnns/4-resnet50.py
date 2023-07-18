@@ -45,7 +45,7 @@ def resnet50():
     pool = K.layers.AveragePooling2D(pool_size=(7, 7), strides=1,
                                      padding='valid')(thirdconv5)
 
-    softmax = K.layers.Dense(units=1000, activation=softmax)(pool)
+    softmax = K.layers.Dense(units=1000, activation='softmax')(pool)
 
     return  K.Model(inputs=input, outputs=softmax)
     
