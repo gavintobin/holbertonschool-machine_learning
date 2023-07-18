@@ -10,7 +10,7 @@ def projection_block(A_prev, filters, s=2):
 
     first_1by =  K.layers.Conv2D(filters=F11,
                                 kernel_size=(1, 1),
-                                strides=1,
+                                strides=s,
                                 padding='same',
                                 kernel_initializer=init
                                 )(A_prev)
