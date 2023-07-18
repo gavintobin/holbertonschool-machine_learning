@@ -13,7 +13,7 @@ def inception_network():
                                   strides=2,
                                   padding='same',
                                   activation='relu'
-                                  )(inputs)
+                                  )(input)
 
     MaxPool3by_2 = K.layers.MaxPooling2D(pool_size=(3, 3),
                                           strides=2,
