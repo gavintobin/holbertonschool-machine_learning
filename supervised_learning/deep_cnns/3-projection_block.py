@@ -37,7 +37,7 @@ def projection_block(A_prev, filters, s=2):
                                        kernel_size=(1, 1),
                                        strides=s,
                                        padding='same',
-                                       kernel_initializer=init)(A_prev)
+                                       kernel_initializer=init)(first_relu)
     
     batchnorm_short = K.layers.BatchNormalization(axis=3)(first1by_short)
 
