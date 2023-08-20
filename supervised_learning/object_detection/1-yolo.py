@@ -21,6 +21,7 @@ class Yolo():
         return classes
 
     def process_outputs(self, outputs, image_size):
+        '''process output'''
         boxes = []
         box_confidences = []
         box_class_probs = []
@@ -56,9 +57,10 @@ class Yolo():
                         y2 = y1 + box_h_rel * image_size[0]
 
                         # Append box info to lists
-                        boxes.append([x1, y1, x2, y2])
-                        box_confidences.append(box_confidence)
-                        box_class_probs.append(box_info[5:])
+                        boxes.append(np.array([[x1, y1, x2, y2]]))
+                        box_confidences.append(np.array([[box_confidence]]))
+                        box_class_probs.append(np.array([box_info[5:]]))
+
 
         return boxes, box_confidences, box_class_probs
 
