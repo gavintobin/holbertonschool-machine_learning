@@ -21,13 +21,12 @@ class Yolo():
         return classes
 
     def process_outputs(self, outputs, image_size):
-        '''process  image output output'''
         boxes = []
         box_confidences = []
         box_class_probs = []
 
         for output in outputs:
-        # Extract dimensions from output
+            # Extract dimensions from output
             grid_height, grid_width, anchor_boxes, _ = output.shape
 
             # Process each anchor box
@@ -39,6 +38,10 @@ class Yolo():
                         # Extract box coordinates and confidence
                         box_x, box_y, box_w, box_h = box_info[:4]
                         box_confidence = box_info[4]
+
+                        # Apply sigmoid activation to box_x, box_y
+                        box_x = self.sigmoid(box_x)
+                        box_y = self.sigmoid(box_y)
 
                         # Calculate box coordinates relative to original image
                         box_x_rel = (col + box_x) / grid_width
@@ -57,4 +60,10 @@ class Yolo():
                         box_confidences.append(box_confidence)
                         box_class_probs.append(box_info[5:])
 
-            return boxes, box_confidences, box_class_probs
+        return boxes, box_confidences, box_class_probs
+
+    def sigmoid(self, x):
+        """
+        Sigmoid Function
+        """
+        return (1 / (1 + np.exp(-x)))
