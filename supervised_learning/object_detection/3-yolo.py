@@ -1,27 +1,116 @@
 #!/usr/bin/env python3
-'''task 1'''
-from tensorflow import keras as K
+"""
+Imports
+"""
 import numpy as np
+import tensorflow.keras as K
 
 
-class Yolo():
-    '''yolo class'''
-    def __init__(self, model_path, classes_path, class_t, nms_t, anchors):
-        '''innit '''
+class Yolo:
+    """
+    Yolo Class
+    """
+    def __init__(self, model_path, classes_path,
+                 class_t, nms_t, anchors):
+        """
+        Class Constructor
+        """
         self.model = K.models.load_model(model_path)
-        self.class_names = self.load_classes(classes_path)
+
+        with open(classes_path) as file:
+            class_names = file.read()
+
+        self.class_names = class_names.replace("\n", "|").split("|")[:-1]
         self.class_t = class_t
         self.nms_t = nms_t
         self.anchors = anchors
 
-    def load_classes(self, path):
-        '''helper func to load classes'''
-        with open(path, 'r') as f:
-            classes = f.read().splitlines()
-        return classes
+    def non_max_suppression(self, filtered_boxes, box_classes, box_scores):
+        """
+        Non-Max Suppression
+        """
+        selected_boxes = []
+        selected_classes = []
+        selected_scores = []
+
+        for c in set(box_classes):
+            i = np.where(box_classes == c)
+            cls_boxes = filtered_boxes[i]
+            cls_box_scores = box_scores[i]
+
+            while len(cls_boxes) > 0:
+                max_idx = np.argmax(cls_box_scores)
+                selected_boxes.append(cls_boxes[max_idx])
+                selected_classes.append(c)
+                selected_scores.append(cls_box_scores[max_idx])
+
+                cls_boxes = np.delete(cls_boxes, max_idx, axis=0)
+                cls_box_scores = np.delete(cls_box_scores, max_idx, axis=0)
+
+                if len(cls_boxes) == 0:
+                    break
+
+                iou = self.calculate_iou(selected_boxes[-1], cls_boxes)
+                mask = iou < self.nms_t
+
+                cls_boxes = cls_boxes[mask]
+                cls_box_scores = cls_box_scores[mask]
+
+        selected_boxes = np.array(selected_boxes)
+        selected_classes = np.array(selected_classes)
+        selected_scores = np.array(selected_scores)
+
+        return selected_boxes, selected_classes, selected_scores
+
+    def calculate_iou(self, box, boxes):
+        """
+        Intersection over union
+        """
+        x1 = np.maximum(box[0], boxes[:, 0])
+        y1 = np.maximum(box[1], boxes[:, 1])
+        x2 = np.minimum(box[2], boxes[:, 2])
+        y2 = np.minimum(box[3], boxes[:, 3])
+
+        intersect = np.maximum(0, x2 - x1) * np.maximum(0, y2 - y1)
+
+        area = (box[2] - box[0]) * (box[3] - box[1])
+        boxes_area = (boxes[:, 2] - boxes[:, 0]) * (boxes[:, 3] - boxes[:, 1])
+
+        return intersect / (area + boxes_area - intersect)
+
+    def filter_boxes(self, boxes, box_confidences, box_class_probs):
+        """
+        Filter Boxes
+        """
+        filtered_boxes = []
+        box_classes = []
+        box_scores = []
+
+        for box in range(len(boxes)):
+            box_classes.append(np.argmax(box_class_probs[box]
+                                         * box_confidences[box],
+                                         axis=-1).reshape(-1))
+            box_scores.append(np.max(box_class_probs[box]
+                                     * box_confidences[box],
+                                     axis=-1).reshape(-1))
+
+        box_classes_con = np.concatenate(box_classes)
+        box_scores_con = np.concatenate(box_scores)
+        mask = box_scores_con >= self.class_t
+
+        filtered_boxes = np.concatenate(
+            [box.reshape(-1, 4) for box in boxes], axis=0)
+        filtered_boxes = filtered_boxes[mask]
+
+        box_classes = box_classes_con[mask]
+        box_scores = box_scores_con[mask]
+
+        return filtered_boxes, box_classes, box_scores
 
     def process_outputs(self, outputs, image_size):
-        '''process output'''
+        """
+        Process Outputs
+        """
         boxes, box_confidences, box_class_probs = [], [], []
         image_height, image_width = image_size
 
@@ -46,8 +135,8 @@ class Yolo():
                         bh = ph * np.exp(th)
                         bx /= grid_width
                         by /= grid_height
-                        bw /= self.model.input.shape[1].value
-                        bh /= self.model.input.shape[2].value
+                        bw /= self.model.input.shape[1]
+                        bh /= self.model.input.shape[2]
                         x1 = (bx - (bw / 2)) * image_width
                         y1 = (by - (bh / 2)) * image_height
                         x2 = (bx + (bw / 2)) * image_width
@@ -56,76 +145,8 @@ class Yolo():
 
         return boxes, box_confidences, box_class_probs
 
-    def filter_boxes(self, boxes, box_confidences, box_class_probs):
-        '''filter boxes'''
-        filtered_boxes, box_classes, box_scores = [], [], []
-
-        for box, confidence, class_probs in zip(boxes, box_confidences, box_class_probs):
-            # Calculate box scores by multiplying box_confidence and class probabilities
-            scores = confidence * class_probs
-
-            # Find indices of class predictions that exceed class threshold
-            class_indices = np.argmax(scores, axis=-1)
-            class_scores = np.max(scores, axis=-1)
-
-            # Filter out boxes with scores below box threshold
-            mask = class_scores >= self.class_t
-            filtered_boxes.extend(box[mask])
-            box_classes.extend(class_indices[mask])
-            box_scores.extend(class_scores[mask])
-
-        filtered_boxes = np.array(filtered_boxes)
-        box_classes = np.array(box_classes)
-
-        box_scores = np.array(box_scores)
-
-        return filtered_boxes, box_classes, box_scores
-    def compute_iou(self, box1, box2):
-        """finds overlapping"""
-        x1 = np.maximum(box1[0], box2[:, 0])
-        y1 = np.maximum(box1[1], box2[:, 1])
-        x2 = np.minimum(box1[2], box2[:, 2])
-        y2 = np.minimum(box1[3], box2[:, 3])
-
-        intersection_area = np.maximum(0, x2 - x1) * np.maximum(0, y2 - y1)
-        box1_area = (box1[2] - box1[0]) * (box1[3] - box1[1])
-        box2_area = (box2[:, 2] - box2[:, 0]) * (box2[:, 3] - box2[:, 1])
-
-        iou = intersection_area / (box1_area + box2_area - intersection_area)
-        return iou
-
-    def non_max_suppression(self, filtered_boxes, box_classes, box_scores):
-        '''nms'''
-        sorted_indices = np.argsort(box_scores)[::-1]
-        box_predictions = []
-        predicted_box_classes = []
-        predicted_box_scores = []
-
-        while len(sorted_indices) > 0:
-            # Get the index of the box with the highest score
-            max_score_index = sorted_indices[0]
-
-            # Append the corresponding box, class, and score to the final lists
-            box_predictions.append(filtered_boxes[max_score_index])
-            predicted_box_classes.append(box_classes[max_score_index])
-            predicted_box_scores.append(box_scores[max_score_index])
-
-            # Compute IoU for the current box with all other boxes
-            iou = self.compute_iou(filtered_boxes[max_score_index],
-                                   filtered_boxes[sorted_indices[1:]])
-
-            # Find indices of boxes with IoU less than NMS threshold
-            overlapping_indices = np.where(iou <= self.nms_t)[0]
-
-            # Update the sorted_indices list by removing overlapping boxes
-            sorted_indices = sorted_indices[overlapping_indices + 1]
-
-        return np.array(box_predictions), np.array(
-            predicted_box_classes), np.array(predicted_box_scores)
-
     def sigmoid(self, x):
         """
         Sigmoid Function
         """
         return (1 / (1 + np.exp(-x)))
-
