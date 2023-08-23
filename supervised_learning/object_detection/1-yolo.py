@@ -22,45 +22,37 @@ class Yolo():
 
     def process_outputs(self, outputs, image_size):
         '''process output'''
-        boxes = []
-        box_confidences = []
-        box_class_probs = []
+        boxes, box_confidences, box_class_probs = [], [], []
+        image_height, image_width = image_size
 
-        for output in outputs:
-            # Extract dimensions from output
-            grid_height, grid_width, anchor_boxes, _ = output.shape
+        for output in range(len(outputs)):
+            boxes.append(outputs[output][..., :4])
+            box_confidences.append(self.sigmoid(outputs[output][..., 4:5]))
+            box_class_probs.append(self.sigmoid(outputs[output][..., 5:]))
 
-            # Process each anchor box
-            for row in range(grid_height):
-                for col in range(grid_width):
-                    for box in range(anchor_boxes):
-                        box_info = output[row, col, box, :]
+        for output in range(len(boxes)):
+            grid_height = outputs[output].shape[0]
+            grid_width = outputs[output].shape[1]
+            anchors = outputs[output].shape[2]
 
-                        # Extract box coordinates and confidence
-                        box_x, box_y, box_w, box_h = box_info[:4]
-                        box_confidence = box_info[4]
-
-                        # Apply sigmoid activation to box_x, box_y
-                        box_x = self.sigmoid(box_x)
-                        box_y = self.sigmoid(box_y)
-
-                        # Calculate box coordinates relative to original image
-                        box_x_rel = (col + box_x) / grid_width
-                        box_y_rel = (row + box_y) / grid_height
-                        box_w_rel = self.anchors[box][0] * np.exp(box_w) / image_size[1]
-                        box_h_rel = self.anchors[box][1] * np.exp(box_h) / image_size[0]
-
-                        # Calculate box boundaries
-                        x1 = (box_x_rel - (box_w_rel / 2)) * image_size[1]
-                        y1 = (box_y_rel - (box_h_rel / 2)) * image_size[0]
-                        x2 = (box_x_rel + (box_w_rel / 2)) * image_size[1]
-                        y2 = (box_y_rel + (box_h_rel / 2)) * image_size[0]
-
-                        # Append box info to lists
-                        boxes.append(np.array([[x1, y1, x2, y2]]))
-                        box_confidences.append(np.array([[box_confidence]]))
-                        box_class_probs.append(np.array([box_info[5:]]))
-
+            for cy in range(grid_height):
+                for cx in range(grid_width):
+                    for b in range(anchors):
+                        tx, ty, tw, th = boxes[output][cy, cx, b]
+                        pw, ph = self.anchors[output][b]
+                        bx = (self.sigmoid(tx)) + cx
+                        by = (self.sigmoid(ty)) + cy
+                        bw = pw * np.exp(tw)
+                        bh = ph * np.exp(th)
+                        bx /= grid_width
+                        by /= grid_height
+                        bw /= self.model.input.shape[1].value
+                        bh /= self.model.input.shape[2].value
+                        x1 = (bx - (bw / 2)) * image_width
+                        y1 = (by - (bh / 2)) * image_height
+                        x2 = (bx + (bw / 2)) * image_width
+                        y2 = (by + (bh / 2)) * image_height
+                        boxes[output][cy, cx, b] = [x1, y1, x2, y2]
 
         return boxes, box_confidences, box_class_probs
 
