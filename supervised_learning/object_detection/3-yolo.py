@@ -104,7 +104,7 @@ class Yolo():
             highest_score_idx = sorted_indices[0]
             selected_indices.append(highest_score_idx)
 
-            ious = self.calculate_iou(filtered_boxes[highest_score_idx], filtered_boxes[sorted_indices[1:]])
+            ious = self.compute_iou(filtered_boxes[highest_score_idx], filtered_boxes[sorted_indices[1:]])
             filtered_indices = np.where(ious <= self.nms_t)[0]
             sorted_indices = sorted_indices[filtered_indices + 1]
 
