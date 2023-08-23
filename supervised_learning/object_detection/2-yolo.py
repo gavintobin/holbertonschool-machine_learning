@@ -47,8 +47,8 @@ class Yolo():
                         bh = ph * np.exp(th)
                         bx /= grid_width
                         by /= grid_height
-                        bw /= self.model.input.shape[1].value
-                        bh /= self.model.input.shape[2].value
+                        bw /= self.model.input.shape[1]
+                        bh /= self.model.input.shape[2]
                         x1 = (bx - (bw / 2)) * image_width
                         y1 = (by - (bh / 2)) * image_height
                         x2 = (bx + (bw / 2)) * image_width
@@ -57,30 +57,30 @@ class Yolo():
 
         return boxes, box_confidences, box_class_probs
 
-       def filter_boxes(self, boxes, box_confidences, box_class_probs):
-            '''filter boxes'''
-            filtered_boxes, box_classes, box_scores = [], [], []
+    def filter_boxes(self, boxes, box_confidences, box_class_probs):
+        filtered_boxes = []
+        box_classes = []
+        box_scores = []
 
-            for box, confidence, class_probs in zip(boxes, box_confidences, box_class_probs):
-                # Calculate box scores by multiplying box_confidence and class probabilities
-                scores = confidence * class_probs
+        for box, confidence, class_probs in zip(boxes, box_confidences, box_class_probs):
+            # Calculate box scores by multiplying box_confidence and class probabilities
+            scores = confidence * class_probs
 
-                # Find indices of class predictions that exceed class threshold
-                class_indices = np.argmax(scores, axis=-1)
-                class_scores = np.max(scores, axis=-1)
+            # Find indices of class predictions that exceed class threshold
+            class_indices = np.argmax(scores, axis=-1)
+            class_scores = np.max(scores, axis=-1)
 
-                # Filter out boxes with scores below box threshold
-                mask = class_scores >= self.class_threshold
-                filtered_boxes.extend(box[mask])
-                box_classes.extend(class_indices[mask])
-                box_scores.extend(class_scores[mask])
+            # Filter out boxes with scores below box threshold
+            mask = class_scores >= self.class_threshold
+            filtered_boxes.extend(box[mask])
+            box_classes.extend(class_indices[mask])
+            box_scores.extend(class_scores[mask])
 
-            filtered_boxes = np.array(filtered_boxes)
-            box_classes = np.array(box_classes)
+        filtered_boxes = np.array(filtered_boxes)
+        box_classes = np.array(box_classes)
+        box_scores = np.array(box_scores)
 
-            box_scores = np.array(box_scores)
-
-            return filtered_boxes, box_classes, box_scores
+        return filtered_boxes, box_classes, box_scores
 
 
 
