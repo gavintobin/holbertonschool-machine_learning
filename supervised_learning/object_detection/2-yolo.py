@@ -58,9 +58,8 @@ class Yolo():
         return boxes, box_confidences, box_class_probs
 
     def filter_boxes(self, boxes, box_confidences, box_class_probs):
-        filtered_boxes = []
-        box_classes = []
-        box_scores = []
+        '''filter boxes'''
+        filtered_boxes, box_classes, box_scores = [], [], []
 
         for box, confidence, class_probs in zip(boxes, box_confidences, box_class_probs):
             # Calculate box scores by multiplying box_confidence and class probabilities
@@ -71,13 +70,14 @@ class Yolo():
             class_scores = np.max(scores, axis=-1)
 
             # Filter out boxes with scores below box threshold
-            mask = class_scores >= self.class_threshold
+            mask = class_scores >= self.class_t
             filtered_boxes.extend(box[mask])
             box_classes.extend(class_indices[mask])
             box_scores.extend(class_scores[mask])
 
         filtered_boxes = np.array(filtered_boxes)
         box_classes = np.array(box_classes)
+
         box_scores = np.array(box_scores)
 
         return filtered_boxes, box_classes, box_scores
