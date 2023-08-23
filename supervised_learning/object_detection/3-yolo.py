@@ -82,27 +82,36 @@ class Yolo():
         return filtered_boxes, box_classes, box_scores
 
     def non_max_suppression(self, filtered_boxes, box_classes, box_scores):
+        '''non max suppression'''
         sorted_indices = np.argsort(box_scores)[::-1]
-        selected_indices = []
         box_predictions = []
         predicted_box_classes = []
         predicted_box_scores = []
 
-        while sorted_indices.size > 0:
-            highest_score_idx = sorted_indices[0]
-            selected_indices.append(highest_score_idx)
+        while len(sorted_indices) > 0:
+            # Get the index of the box with the highest score
+            max_score_index = sorted_indices[0]
 
-            ious = self.calculate_iou(filtered_boxes[highest_score_idx], filtered_boxes[sorted_indices[1:]])
-            filtered_indices = np.where(ious <= self.nms_t)[0]
-            sorted_indices = sorted_indices[filtered_indices + 1]
+            # Append the corresponding box, class, and score to the final lists
+            box_predictions.append(filtered_boxes[max_score_index])
+            predicted_box_classes.append(box_classes[max_score_index])
+            predicted_box_scores.append(box_scores[max_score_index])
 
-        box_predictions = filtered_boxes[selected_indices]
-        predicted_box_classes = box_classes[selected_indices]
-        predicted_box_scores = box_scores[selected_indices]
+            # Compute IoU for the current box with all other boxes
+            iou = self.compute_iou(filtered_boxes[max_score_index],
+                                   filtered_boxes[sorted_indices[1:]])
 
-        return box_predictions, predicted_box_classes, predicted_box_scores
+            # Find indices of boxes with IoU less than NMS threshold
+            overlapping_indices = np.where(iou <= self.nms_t)[0]
+
+            # Update the sorted_indices list by removing overlapping boxes
+            sorted_indices = sorted_indices[overlapping_indices + 1]
+
+        return np.array(box_predictions), np.array(
+            predicted_box_classes), np.array(predicted_box_scores)
 
     def calculate_iou(self, box1, boxes):
+        'find overlaping area'
         x1 = np.maximum(box1[0], boxes[:, 0])
         y1 = np.maximum(box1[1], boxes[:, 1])
         x2 = np.minimum(box1[2], boxes[:, 2])
