@@ -99,7 +99,7 @@ class Yolo():
         for i in range(len(filtered_boxes)):
             ious = self.calculate_iou(filtered_boxes[i], filtered_boxes[selected_indices])
             if not np.any(ious > self.nms_threshold):
-            selected_indices.append(i)
+                selected_indices.append(i)
 
         box_predictions = filtered_boxes[selected_indices]
         predicted_box_classes = box_classes[selected_indices]
