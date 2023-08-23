@@ -81,7 +81,36 @@ class Yolo():
 
         return filtered_boxes, box_classes, box_scores
 
+    def non_max_suppression(self, filtered_boxes, box_classes, box_scores):
+        sorted_indices = np.argsort(box_scores)[::-1]
+        selected_indices = []
 
+        while sorted_indices.size > 0:
+            highest_score_idx = sorted_indices[0]
+            selected_indices.append(highest_score_idx)
+
+            ious = self.calculate_iou(filtered_boxes[highest_score_idx], filtered_boxes[sorted_indices[1:]])
+            filtered_indices = np.where(ious <= self.nms_t)[0]
+            sorted_indices = sorted_indices[filtered_indices + 1]
+
+        box_predictions = filtered_boxes[selected_indices]
+        predicted_box_classes = box_classes[selected_indices]
+        predicted_box_scores = box_scores[selected_indices]
+
+        return box_predictions, predicted_box_classes, predicted_box_scores
+
+    def calculate_iou(self, box1, boxes):
+        x1 = np.maximum(box1[0], boxes[:, 0])
+        y1 = np.maximum(box1[1], boxes[:, 1])
+        x2 = np.minimum(box1[2], boxes[:, 2])
+        y2 = np.minimum(box1[3], boxes[:, 3])
+
+        intersection_area = np.maximum(x2 - x1, 0) * np.maximum(y2 - y1, 0)
+        box1_area = (box1[2] - box1[0]) * (box1[3] - box1[1])
+        boxes_area = (boxes[:, 2] - boxes[:, 0]) * (boxes[:, 3] - boxes[:, 1])
+
+        iou = intersection_area / (box1_area + boxes_area - intersection_area)
+        return iou
 
     def sigmoid(self, x):
         """
