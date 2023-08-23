@@ -51,10 +51,10 @@ class Yolo():
                         box_h_rel = self.anchors[box][1] * np.exp(box_h) / image_size[0]
 
                         # Calculate box boundaries
-                        x1 = (box_x_rel - box_w_rel / 2) * image_size[1]
-                        y1 = (box_y_rel - box_h_rel / 2) * image_size[0]
-                        x2 = x1 + box_w_rel * image_size[1]
-                        y2 = y1 + box_h_rel * image_size[0]
+                        x1 = (box_x_rel - (box_w_rel / 2)) * image_size[1]
+                        y1 = (box_y_rel - (box_h_rel / 2)) * image_size[0]
+                        x2 = (box_x_rel + (box_w_rel / 2)) * image_size[1]
+                        y2 = (box_y_rel + (box_h_rel / 2)) * image_size[0]
 
                         # Append box info to lists
                         boxes.append(np.array([[x1, y1, x2, y2]]))
