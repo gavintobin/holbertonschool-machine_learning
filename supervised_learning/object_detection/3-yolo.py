@@ -98,7 +98,7 @@ class Yolo():
             predicted_box_scores.append(box_scores[max_score_index])
 
             # Compute IoU for the current box with all other boxes
-            iou = self.compute_iou(filtered_boxes[max_score_index],
+            iou = self.calculate_iou(filtered_boxes[max_score_index],
                                    filtered_boxes[sorted_indices[1:]])
 
             # Find indices of boxes with IoU less than NMS threshold
@@ -117,7 +117,7 @@ class Yolo():
         x2 = np.minimum(box1[2], boxes[:, 2])
         y2 = np.minimum(box1[3], boxes[:, 3])
 
-        intersection_area = np.maximum(x2 - x1, 0) * np.maximum(y2 - y1, 0)
+        intersection_area = np.maximum(0, x2 - x1) * np.maximum(0, y2 - y1)
         box1_area = (box1[2] - box1[0]) * (box1[3] - box1[1])
         boxes_area = (boxes[:, 2] - boxes[:, 0]) * (boxes[:, 3] - boxes[:, 1])
 
