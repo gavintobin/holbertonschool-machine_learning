@@ -95,33 +95,24 @@ class Yolo():
         return iou
 
     def non_max_suppression(self, filtered_boxes, box_classes, box_scores):
-        '''nms'''
-        sorted_indices = np.argsort(box_scores)[::-1]
-        box_predictions = []
-        predicted_box_classes = []
-        predicted_box_scores = []
+        combined_scores = box_scores * np.max(box_class_probs, axis=-1)
 
-        while len(sorted_indices) > 0:
-            # Get the index of the box with the highest score
-            max_score_index = sorted_indices[0]
+        sorted_indices = np.argsort(combined_scores)[::-1]
+        selected_indices = []
 
-            # Append the corresponding box, class, and score to the final lists
-            box_predictions.append(filtered_boxes[max_score_index])
-            predicted_box_classes.append(box_classes[max_score_index])
-            predicted_box_scores.append(box_scores[max_score_index])
+        while sorted_indices.size > 0:
+            highest_score_idx = sorted_indices[0]
+            selected_indices.append(highest_score_idx)
 
-            # Compute IoU for the current box with all other boxes
-            iou = self.compute_iou(filtered_boxes[max_score_index],
-                                   filtered_boxes[sorted_indices[1:]])
+            ious = self.calculate_iou(filtered_boxes[highest_score_idx], filtered_boxes[sorted_indices[1:]])
+            filtered_indices = np.where(ious <= self.nms_threshold)[0]
+            sorted_indices = sorted_indices[filtered_indices + 1]
 
-            # Find indices of boxes with IoU less than NMS threshold
-            overlapping_indices = np.where(iou <= self.nms_t)[0]
+        box_predictions = filtered_boxes[selected_indices]
+        predicted_box_classes = box_classes[selected_indices]
+        predicted_box_scores = box_scores[selected_indices]
 
-            # Update the sorted_indices list by removing overlapping boxes
-            sorted_indices = sorted_indices[overlapping_indices + 1]
-
-        return np.array(box_predictions), np.array(
-            predicted_box_classes), np.array(predicted_box_scores)
+        return box_predictions, predicted_box_classes, predicted_box_scores
 
     def sigmoid(self, x):
         """
