@@ -95,7 +95,7 @@ class Yolo():
         return iou
 
     def non_max_suppression(self, filtered_boxes, box_classes, box_scores):
-        combined_scores = box_scores * np.max(box_class_probs, axis=-1)
+        combined_scores = box_scores * np.max(box_classes, axis=-1)
 
         sorted_indices = np.argsort(combined_scores)[::-1]
         selected_indices = []
@@ -105,7 +105,7 @@ class Yolo():
             selected_indices.append(highest_score_idx)
 
             ious = self.calculate_iou(filtered_boxes[highest_score_idx], filtered_boxes[sorted_indices[1:]])
-            filtered_indices = np.where(ious <= self.nms_threshold)[0]
+            filtered_indices = np.where(ious <= self.nms_t)[0]
             sorted_indices = sorted_indices[filtered_indices + 1]
 
         box_predictions = filtered_boxes[selected_indices]
