@@ -94,7 +94,7 @@ class Yolo():
         iou = intersection_area / (box1_area + box2_area - intersection_area)
         return iou
 
-    def non_max_suppresssion(self, filtered_boxes, box_classes, box_scores):
+    def non_max_suppression(self, filtered_boxes, box_classes, box_scores):
         '''nms'''
         sorted_indices = np.argsort(box_scores)[::-1]
         box_predictions = []
