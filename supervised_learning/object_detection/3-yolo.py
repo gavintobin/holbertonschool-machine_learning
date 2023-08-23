@@ -95,17 +95,33 @@ class Yolo():
         return iou
 
     def non_max_suppression(self, filtered_boxes, box_classes, box_scores):
-        selected_indices = []
-        for i in range(len(filtered_boxes)):
-            ious = self.calculate_iou(filtered_boxes[i], filtered_boxes[selected_indices])
-            if not np.any(ious > self.nms_threshold):
-                selected_indices.append(i)
+        '''nms'''
+        sorted_indices = np.argsort(box_scores)[::-1]
+        box_predictions = []
+        predicted_box_classes = []
+        predicted_box_scores = []
 
-        box_predictions = filtered_boxes[selected_indices]
-        predicted_box_classes = box_classes[selected_indices]
-        predicted_box_scores = box_scores[selected_indices]
+        while len(sorted_indices) > 0:
+            # Get the index of the box with the highest score
+            max_score_index = sorted_indices[0]
 
-        return box_predictions, predicted_box_classes, predicted_box_scores
+            # Append the corresponding box, class, and score to the final lists
+            box_predictions.append(filtered_boxes[max_score_index])
+            predicted_box_classes.append(box_classes[max_score_index])
+            predicted_box_scores.append(box_scores[max_score_index])
+
+            # Compute IoU for the current box with all other boxes
+            iou = self.compute_iou(filtered_boxes[max_score_index],
+                                   filtered_boxes[sorted_indices[1:]])
+
+            # Find indices of boxes with IoU less than NMS threshold
+            overlapping_indices = np.where(iou <= self.nms_t)[0]
+
+            # Update the sorted_indices list by removing overlapping boxes
+            sorted_indices = sorted_indices[overlapping_indices + 1]
+
+        return np.array(box_predictions), np.array(
+            predicted_box_classes), np.array(predicted_box_scores)
 
     def sigmoid(self, x):
         """
