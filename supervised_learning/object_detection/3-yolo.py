@@ -84,6 +84,9 @@ class Yolo():
     def non_max_suppression(self, filtered_boxes, box_classes, box_scores):
         sorted_indices = np.argsort(box_scores)[::-1]
         selected_indices = []
+        box_predictions = []
+        predicted_box_classes = []
+        predicted_box_scores = []
 
         while sorted_indices.size > 0:
             highest_score_idx = sorted_indices[0]
