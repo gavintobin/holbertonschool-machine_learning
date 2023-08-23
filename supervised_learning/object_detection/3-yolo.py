@@ -80,9 +80,22 @@ class Yolo():
         box_scores = np.array(box_scores)
 
         return filtered_boxes, box_classes, box_scores
+    def compute_iou(self, box1, box2):
+        """finds overlapping"""
+        x1 = np.maximum(box1[0], box2[:, 0])
+        y1 = np.maximum(box1[1], box2[:, 1])
+        x2 = np.minimum(box1[2], box2[:, 2])
+        y2 = np.minimum(box1[3], box2[:, 3])
+
+        intersection_area = np.maximum(0, x2 - x1) * np.maximum(0, y2 - y1)
+        box1_area = (box1[2] - box1[0]) * (box1[3] - box1[1])
+        box2_area = (box2[:, 2] - box2[:, 0]) * (box2[:, 3] - box2[:, 1])
+
+        iou = intersection_area / (box1_area + box2_area - intersection_area)
+        return iou
 
     def non_max_suppression(self, filtered_boxes, box_classes, box_scores):
-        '''non max suppression'''
+        '''nms'''
         sorted_indices = np.argsort(box_scores)[::-1]
         box_predictions = []
         predicted_box_classes = []
@@ -98,7 +111,7 @@ class Yolo():
             predicted_box_scores.append(box_scores[max_score_index])
 
             # Compute IoU for the current box with all other boxes
-            iou = self.calculate_iou(filtered_boxes[max_score_index],
+            iou = self.compute_iou(filtered_boxes[max_score_index],
                                    filtered_boxes[sorted_indices[1:]])
 
             # Find indices of boxes with IoU less than NMS threshold
@@ -109,20 +122,6 @@ class Yolo():
 
         return np.array(box_predictions), np.array(
             predicted_box_classes), np.array(predicted_box_scores)
-
-    def calculate_iou(self, box1, boxes):
-        'find overlaping area'
-        x1 = np.maximum(box1[0], boxes[:, 0])
-        y1 = np.maximum(box1[1], boxes[:, 1])
-        x2 = np.minimum(box1[2], boxes[:, 2])
-        y2 = np.minimum(box1[3], boxes[:, 3])
-
-        intersection_area = np.maximum(0, x2 - x1) * np.maximum(0, y2 - y1)
-        box1_area = (box1[2] - box1[0]) * (box1[3] - box1[1])
-        boxes_area = (boxes[:, 2] - boxes[:, 0]) * (boxes[:, 3] - boxes[:, 1])
-
-        iou = intersection_area / (box1_area + boxes_area - intersection_area)
-        return iou
 
     def sigmoid(self, x):
         """
