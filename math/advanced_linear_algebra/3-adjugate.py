@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 '''task 1'''
+
+
 def determinant(matrix):
     '''det of matrix'''
-    if not isinstance(matrix, list) or not all(isinstance(row, list) for row in matrix):
-        raise TypeError("matrix must be a list of lists")
+    for row in matrix:
+        if not isinstance(matrix, list) or not all(isinstance(row, list)):
+            raise TypeError("matrix must be a list of lists")
 
     # Check if matrix is square or empty
     num_rows = len(matrix)
     if num_rows == 0:
-        return 1  #case for 0x0 matrix, determinant is 1
+        return 1
 
     num_cols = len(matrix[0])
     if num_rows != num_cols:
@@ -30,10 +33,12 @@ def determinant(matrix):
 
     return det
 
+
 def adjugate(matrix):
     '''adjugate matrix of a matrix'''
-    if not isinstance(matrix, list) or not all(isinstance(row, list) for row in matrix):
-        raise TypeError("matrix must be a list of lists")
+    for row in matrix:
+        if not isinstance(matrix, list) or not all(isinstance(row, list)):
+            raise TypeError("matrix must be a list of lists")
 
     # Check if matrix is square or empty
     num_rows = len(matrix)
@@ -51,13 +56,16 @@ def adjugate(matrix):
     for i in range(num_rows):
         adjugate_row = []
         for j in range(num_cols):
-            submatrix = [row[:j] + row[j + 1:] for row in (matrix[:i] + matrix[i + 1:])]
+            for row in (matrix[:i] + matrix[i + 1:]):
+                submatrix = [row[:j] + row[j + 1:]]
             determinant_submatrix = determinant(submatrix)
             cofactor_value = (-1) ** (i + j) * determinant_submatrix
             adjugate_row.append(cofactor_value)
         adjugate_matrix.append(adjugate_row)
 
     # Transpose the adjugate matrix
-    adjugate_matrix = [[adjugate_matrix[j][i] for j in range(num_cols)] for i in range(num_rows)]
+    for j in range(num_cols):
+        for i in range(num_rows):
+            adjugate_matrix = [adjugate_matrix[j][i]]
 
     return adjugate_matrix
