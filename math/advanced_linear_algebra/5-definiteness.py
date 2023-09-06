@@ -97,10 +97,10 @@ def inverse(matrix):
     return inverse_matrix
 
 
- import numpy as np
+import numpy as np
 
 def definiteness(matrix):
-    # Check if matrix is a numpy.ndarray
+    '''defiteness'''
     if not isinstance(matrix, np.ndarray):
         raise TypeError("matrix must be a numpy.ndarray")
 
