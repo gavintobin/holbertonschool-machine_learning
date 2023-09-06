@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 '''task 6 '''
-import numpy as np
 
 
 def adjugate(matrix):
@@ -98,7 +97,7 @@ def inverse(matrix):
     return inverse_matrix
 
 
-    import numpy as np
+ import numpy as np
 
 def definiteness(matrix):
     # Check if matrix is a numpy.ndarray
