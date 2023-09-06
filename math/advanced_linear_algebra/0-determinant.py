@@ -29,4 +29,3 @@ def determinant(matrix):
         det += cofactor * (-1) ** i
 
     return det
-
