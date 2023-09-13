@@ -29,6 +29,7 @@ def mean_cov(X):
 
     return mean, cov
 
+
 def correlation(C):
     '''calcs coreelation msatrix'''
     if C.ndim != 2 or C.shape[0] != C.shape[1]:
