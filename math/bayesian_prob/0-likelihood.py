@@ -3,7 +3,7 @@
 import numpy as np
 
 
-def intersection(x, n, P, ):
+def likelihood(x, n, P):
     # Check if n is a positive integer
     if not isinstance(n, int) or n <= 0:
         raise ValueError("n must be a positive integer")
