@@ -29,6 +29,11 @@ def intersection(x, n, P, Pr):
     if not np.isclose(sum(Pr), 1):
         raise ValueError('Pr must sum to 1')
 
-    intersection_values = P * Pr
 
+    fact = np.math.factorial
+    #calulates binomial coeefficient
+    bico = fact(n) / (fact(x) * fact(n - x))
+    succprob = (P ** x)
+    failprob = ((1 - P) ** (n - x))
+    intersection_values = Pr * bico * succprob * failprob
     return intersection_values
