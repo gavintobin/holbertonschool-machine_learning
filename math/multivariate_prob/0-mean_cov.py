@@ -4,20 +4,31 @@
 
 def mean_cov(X):
     '''cals mean and vovariance of dataset'''
-    if  X is  not type(list):
-        raise TypeError('X must be a 2D numpy.ndarray')
-    if n < 2:
-        raise ValueError('X must contain multiple data points')
-    n = len(X)
-    d = len(X[0])
-    means = [0] * d
-    for i in range(n):
-        column_sum = 0
-        for j in range(d):
-            column_sum += X[j][i]
-        means[i] = column_sum / d
+    import numpy as np
 
-    for i in range(X[i][j]):
-        covar = column_sum / (n-1)
-    return means, covar
+def mean_cov(X):
+    # Check if X is a 2D numpy.ndarray
+    if not isinstance(X, np.ndarray) or X.ndim != 2:
+        raise TypeError("X must be a 2D numpy.ndarray")
+
+    # Get the shape of the array
+    n, d = X.shape
+
+    # Check if there are multiple data points
+    if n < 2:
+        raise ValueError("X must contain multiple data points")
+
+    # Calculate the mean
+    mean = np.mean(X, axis=0, keepdims=True)
+
+    # Calculate the covariance matrix
+    cov = np.zeros((d, d))
+    for i in range(n):
+        deviation = X[i:i+1, :] - mean
+        cov += np.dot(deviation.T, deviation)
+
+    cov /= (n - 1)
+
+    return mean, cov
+
 
