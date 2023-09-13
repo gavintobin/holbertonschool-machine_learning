@@ -3,7 +3,7 @@
 import numpy as np
 
 
-def likelihood(x, n, P):
+def intersection(x, n, P, Pr):
     # Check if n is a positive integer
     if not isinstance(n, int) or n <= 0:
         raise ValueError("n must be a positive integer")
@@ -23,8 +23,12 @@ def likelihood(x, n, P):
     if any(p < 0 or p > 1 for p in P):
         raise ValueError("All values in P must be in the range [0, 1]")
 
-    # Calculate the likelihood for each probability in P
-     # Calculate the likelihood for each probability in P
-    likelihoods = np.array([(np.math.factorial(n) / (np.math.factorial(x) * np.math.factorial(n - x))) * (p ** x) * ((1 - p) ** (n - x)) for p in P])
+    if np.any(Pr < 0) or np.any(Pr > 1):
+        raise ValueError('All values in Pr must be in the range [0, 1]')
 
-    return likelihoods
+    if not np.isclose(sum(Pr), 1):
+        raise ValueError('Pr must sum to 1')
+
+    intersection_values = P * Pr
+
+    return intersection_values
