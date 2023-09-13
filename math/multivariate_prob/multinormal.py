@@ -3,8 +3,6 @@
 import numpy as np
 
 
-import numpy as np
-
 class MultiNormal:
     def __init__(self, data):
         # Check if data is a 2D numpy.ndarray
@@ -25,6 +23,7 @@ class MultiNormal:
         self.cov = self.calculate_covariance(data)
 
     def calculate_covariance(self, data):
+        '''calc koe'''
         d, n = data.shape
         cov = np.zeros((d, d))
 
@@ -33,7 +32,7 @@ class MultiNormal:
                 # Calculate the covariance between dimensions i and j
                 xi = data[i, :]
                 xj = data[j, :]
-                cov[i, j] = np.dot(xi - self.mean[i], xj - self.mean[j]) / (n - 1)
+                nn = (n - 1)
+                cov[i, j] = np.dot(xi - self.mean[i], xj - self.mean[j]) / nn
 
         return cov
-
