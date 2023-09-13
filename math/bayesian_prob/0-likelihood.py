@@ -55,10 +55,3 @@ def likelihood(x, n, P):
 
     return likelihoods
 
-# Example usage:
-n = 10
-x = 3
-P = np.array([0.1, 0.2, 0.3, 0.4])
-result = likelihood(x, n, P)
-print(result)
-
