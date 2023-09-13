@@ -1,6 +1,10 @@
+
+#!/usr/bin/env python3
 import numpy as np
 
+
 def marginal(x, n, P, Pr):
+    '''marginal'''
     # Check if n is a positive integer
     if not isinstance(n, int) or n <= 0:
         raise ValueError("n must be a positive integer")
