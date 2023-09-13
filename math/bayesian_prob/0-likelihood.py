@@ -28,7 +28,3 @@ def likelihood(x, n, P):
     likelihoods = np.array([(np.math.factorial(n) / (np.math.factorial(x) * np.math.factorial(n - x))) * (p ** x) * ((1 - p) ** (n - x)) for p in P])
 
     return likelihoods
-
-
-    return likelihoods
-
