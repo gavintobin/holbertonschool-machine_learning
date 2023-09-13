@@ -1,12 +1,9 @@
 #!/usr/bin/env python3
 '''task 1'''
-
-
-def mean_cov(X):
-    '''cals mean and vovariance of dataset'''
-    import numpy as np
+import numpy as np
 
 def mean_cov(X):
+    '''calc mean and covar '''
     # Check if X is a 2D numpy.ndarray
     if not isinstance(X, np.ndarray) or X.ndim != 2:
         raise TypeError("X must be a 2D numpy.ndarray")
@@ -30,5 +27,4 @@ def mean_cov(X):
     cov /= (n - 1)
 
     return mean, cov
-
 
