@@ -2,6 +2,7 @@
 '''task 1'''
 import numpy as np
 
+
 def mean_cov(X):
     '''calc mean and covar '''
     # Check if X is a 2D numpy.ndarray
@@ -27,4 +28,3 @@ def mean_cov(X):
     cov /= (n - 1)
 
     return mean, cov
-
