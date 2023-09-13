@@ -4,6 +4,7 @@ import numpy as np
 
 
 class MultiNormal:
+    '''multi class'''
     def __init__(self, data):
         # Check if data is a 2D numpy.ndarray
         if not isinstance(data, np.ndarray) or data.ndim != 2:
