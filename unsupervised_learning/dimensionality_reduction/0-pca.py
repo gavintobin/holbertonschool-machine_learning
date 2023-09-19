@@ -13,7 +13,7 @@ def pca(X, var=0.95):
 
     evall, evect = np.linalg.eigh(covarmat)
     #sort them in desc order
-    
+
     indicessorted = np.argsort(evall)[ : :-1]
     evalls = evalls[indicessorted]
     evect = evect[:, indicessorted]
@@ -26,7 +26,7 @@ def pca(X, var=0.95):
     cumivar = np.cumsum(varratio)
     keep = np.argmax(cumivar >= var) + 1
 
-    #most important components
+    #most important features
     mostimp = evect[:, :keep]
     #weights mat
 
