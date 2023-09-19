@@ -8,19 +8,19 @@ def pca(X, var=0.95):
     n, d = X.shape
 
     #conv. mat to covar mat
-    covarmat = cov(X)
+    covarmat = np.cov(X)
     #compute evalsk and evectss
 
     evall, evect = np.linalg.eigh(covarmat)
     #sort them in desc order
 
     indicessorted = np.argsort(evall)[ : :-1]
-    evalls = evalls[indicessorted]
+    evall = evall[indicessorted]
     evect = evect[:, indicessorted]
 
     #calc explained var
-    vari = np.sum(evalls)
-    varratio = evalls / vari
+    vari = np.sum(evall)
+    varratio = evall / vari
 
     #determine which to keep
     cumivar = np.cumsum(varratio)
@@ -28,14 +28,12 @@ def pca(X, var=0.95):
 
     #most important features
     mostimp = evect[:, :keep]
-    #weights mat
 
-    W = mostimp
-    return W
+    return mostimp
 
 
-def cov(x):
-    '''covariance helper func'''
+'''def cov(x):
+    covariance helper func
     n, d = x.shape
     mean = np.mean(x, axis=0)  # Calculate the mean along each dimension
 
@@ -45,5 +43,4 @@ def cov(x):
     # Compute the covariance matrix
     cov_matrix = np.dot(centered_data.T, centered_data) / (n - 1)
 
-    return cov_matrix
-
+    return cov_matrix'''
