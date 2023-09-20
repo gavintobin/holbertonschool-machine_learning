@@ -7,10 +7,11 @@ def pca(X, var=0.95):
     #perform svd
     u, s, vt = np.linalg.svd(X, full_matrices=False)
     # cvr and evr
-    evr = np.cumsum(s**2) / np.sum(s**2)
+    explained_variance_ratio = s / np.sum(s)
+    cumulative_variance_ratio = np.cumsum(explained_variance_ratio)
 
     # which ones to keep
-    num_components_to_keep = np.argmax(evr >= var) + 1
+    num_components_to_keep = np.argmax(cumulative_variance_ratio >= var)
 
     # Reduce dimensions and get w matrix
     W = vt[:num_components_to_keep + 1].T
