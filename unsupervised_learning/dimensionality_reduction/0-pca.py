@@ -2,34 +2,28 @@
 '''task 1'''
 import numpy as np
 
-
 def pca(X, var=0.95):
     ''' performs PCA on dataset'''
-    n, d = X.shape
+    centeredata = X
 
-    #conv. mat to covar mat
-    covarmat = np.cov(X)
-    #compute evalsk and evectss
+    # Step 2: Compute SVD
+    _, S, Vt = np.linalg.svd(centeredata, full_matrices=False)
 
-    evall, evect = np.linalg.eigh(covarmat)
-    #sort them in desc order
+    # Step 3: Calculate explained variance
+    explained_variance_ratio = (S ** 2) / np.sum(S ** 2)
 
-    indicessorted = np.argsort(evall)[ : :-1]
-    evall = evall[indicessorted]
-    evect = evect[:, indicessorted]
+    # Step 4: Determine the number of components to keep
+    cumulative_variance = np.cumsum(explained_variance_ratio)
+    num_components_to_keep = np.argmax(cumulative_variance >= var) + 1
 
-    #calc explained var
-    vari = np.sum(evall)
-    varratio = evall / vari
+    # Step 5: Select the top principal components
+    top_singular_vectors = Vt[:num_components_to_keep]
 
-    #determine which to keep
-    cumivar = np.cumsum(varratio)
-    keep = np.argmax(cumivar >= var) + 1
+    # Step 6: Create the weights matrix W
+    W = top_singular_vectors.T  # Transpose to get (d, nd)
 
-    #most important features
-    mostimp = evect[:, :keep]
 
-    return mostimp
+    return W
 
 
 '''def cov(x):
