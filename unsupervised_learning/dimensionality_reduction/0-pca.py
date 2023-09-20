@@ -6,13 +6,13 @@ def pca(X, var=0.95):
     ''' performs PCA on dataset'''
     #perform svd
     u, s, vt = np.linalg.svd(X, full_matrices=False)
-    explained_variance_ratio = s / np.sum(s)
-    cumulative_variance_ratio = np.cumsum(explained_variance_ratio)
+    # cvr and evr
+    evr = np.cumsum(s**2) / np.sum(s**2)
 
     # which ones to keep
-    num_components_to_keep = np.argmax(cumulative_variance_ratio >= var) + 1
+    num_components_to_keep = np.argmax(evr >= var) + 1
 
     # Reduce dimensions and get w matrix
-    W = u[:, :num_components_to_keep]
+    W = vt[:, :num_components_to_keep + 1].T
 
     return W
