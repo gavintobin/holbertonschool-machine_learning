@@ -2,9 +2,10 @@
 '''task 1'''
 import numpy as np
 
+
 def pca(X, var=0.95):
     ''' performs PCA on dataset'''
-    #perform svd
+    # perform svd
     u, s, vt = np.linalg.svd(X, full_matrices=False)
     # cvr and evr
     explained_variance_ratio = s / np.sum(s)
