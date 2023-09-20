@@ -13,6 +13,6 @@ def pca(X, var=0.95):
     num_components_to_keep = np.argmax(evr >= var) + 1
 
     # Reduce dimensions and get w matrix
-    W = vt[:, :num_components_to_keep + 1].T
+    W = vt[:num_components_to_keep + 1].T
 
     return W
