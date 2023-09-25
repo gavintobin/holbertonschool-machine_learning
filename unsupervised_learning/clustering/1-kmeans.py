@@ -30,8 +30,7 @@ def kmeans(X, k, iterations=1000):
 
         # Handle clusters with no data points by reinitializing their centroids
         empty_clusters = np.isnan(new_C).any(axis=1)
-        if empty_clusters.any():
-            new_C[empty_clusters] = initialize(X, empty_clusters.sum())
+        new_C[empty_clusters] = initialize(X, empty_clusters.sum())
             #checks for convergence
         if np.all(centroids == new_C):
             return C, clss
