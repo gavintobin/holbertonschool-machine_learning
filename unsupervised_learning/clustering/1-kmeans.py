@@ -9,6 +9,7 @@ def initialize(X, k):
     #define minimum an maximum
     min = np.min(X, axis=0)
     max = np.max(X, axis=0)
+
     #choose random spot for centroid
     centroids = np.random.uniform(low=min, high=max, size=(k, X.shape[1]))
     return centroids
@@ -19,7 +20,7 @@ def kmeans(X, k, iterations=1000):
 
     for _ in range(iterations):
         #  figure out  distance between data points and centroids
-        distances = np.linalg.norm(X[:, np.newaxis, :] - centroids, axis=2)
+        distances = np.linalg.norm(X[:, np.newaxis] - centroids, axis=2)
 
         # Assign each data point to the cluster with the closest centroid
         clss = np.argmin(distances, axis=1)
@@ -28,7 +29,7 @@ def kmeans(X, k, iterations=1000):
         new_C = np.array(X.mean(axis=0))
 
         # Handle clusters with no data points by reinitializing their centroids
-        empty_clusters = np.isnan(new_C).any(axis=1)
+        empty_clusters = np.isnan(new_C).any(axis=0)
         new_C[empty_clusters] = initialize(X, empty_clusters.sum())
             #checks for convergence
         if np.all(centroids == new_C):
