@@ -6,6 +6,7 @@ import numpy as np
 
 def initialize(X, k):
     '''initializes centroid or  centr of cluster'''
+    n, d = X.shape
     if k <= 0 or k > X.shape[0]:
         return None
 
