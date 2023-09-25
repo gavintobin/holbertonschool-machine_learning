@@ -5,12 +5,10 @@ import numpy as np
 
 def initialize(X, k):
     '''initializes centroid or  centr of cluster'''
-    if k <= 0 or k > X.shape[0]:
-        return None
-
+    #define minimum an maximum
     min = np.min(X, axis=0)
     max = np.max(X, axis=0)
-
+    #choose random spot for centroid
     centroids = np.random.uniform(low=min, high=max, size=(k, X.shape[1]))
     return centroids
 
