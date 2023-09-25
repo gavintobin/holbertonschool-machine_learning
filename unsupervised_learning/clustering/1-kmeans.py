@@ -5,6 +5,7 @@ import numpy as np
 
 def initialize(X, k):
     '''initializes centroid or  centr of cluster'''
+
     #define minimum an maximum
     min = np.min(X, axis=0)
     max = np.max(X, axis=0)
@@ -24,7 +25,7 @@ def kmeans(X, k, iterations=1000):
         clss = np.argmin(distances, axis=1)
 
         # Update cluster centroids based on the mean of assigned data points
-        new_C = np.array([X[clss == i].mean(axis=0) for i in range(k)])
+        new_C = np.array(X.mean(axis=0))
 
         # Handle clusters with no data points by reinitializing their centroids
         empty_clusters = np.isnan(new_C).any(axis=1)
