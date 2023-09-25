@@ -16,24 +16,25 @@ def initialize(X, k):
 
 def kmeans(X, k, iterations=1000):
     '''performs k mean'''
-    if k <= 0 or k > X.shape[0]:
-        return None
-    n, d = X.shape
     centroids = initialize(X, k)
-    #calc distances between data ppoints and cluster centroid
+
     for _ in range(iterations):
-        distances = np.linalg.norm(X[:, np.newaxis, :] - centoids, axis=2)
+        #  figure out  distance between data points and centroids
+        distances = np.linalg.norm(X[:, np.newaxis, :] - centroids, axis=2)
 
-        clss = np.argmin(X, axis=1)
-    #updated centroids based off mean
-        for clss in range(k):
-            updated = np.array(X.mean(axis=0))
-        empty = np.isnan(updated).any(axis=1)
-        if empty.any():
-            updated[empty] = initialize(X, empty.sum())
-        if np.all(centroids = updated):
-            return centroids, clss
+        # Assign each data point to the cluster with the closest centroid
+        clss = np.argmin(distances, axis=1)
 
-        centroids = C
-        C = updated
-        return C, clss
+        # Update cluster centroids based on the mean of assigned data points
+        new_C = np.array([X[clss == i].mean(axis=0) for i in range(k)])
+
+        # Handle clusters with no data points by reinitializing their centroids
+        empty_clusters = np.isnan(new_C).any(axis=1)
+        if empty_clusters.any():
+            new_C[empty_clusters] = initialize(X, empty_clusters.sum())
+            #checks for convergence
+        if np.all(centroids == new_C):
+            return C, clss
+        C = new_C
+
+    return C, clss
