@@ -15,7 +15,7 @@ def initialize(X, k):
     return centroids
 
 def kmeans(X, k, iterations=1000):
-    '''per k mean'''
+    '''perfos k mean'''
     centroids = initialize(X, k)
 
     for _ in range(iterations):
@@ -26,11 +26,7 @@ def kmeans(X, k, iterations=1000):
         clss = np.argmin(distances, axis=1)
 
         # Update cluster centroids based on the mean of assigned data points
-        new_C = np.array([
-            X[clss == i].mean(axis=0) if np.sum(
-                clss == i) > 0 else initialize(
-                    X, 1)[0] for i in range(k)])
-
+        new_C = np.array([X[clss == i].mean(axis=0) for i in range(k)])
 
         # Handle clusters  no data points by reinitializing their centroids
         empty_clusters = np.isnan(new_C).any(axis=1)
