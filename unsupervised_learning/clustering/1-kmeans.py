@@ -32,7 +32,7 @@ def kmeans(X, k, iterations=1000):
         empty_clusters = np.isnan(new_C).any(axis=1)
         if np.any(empty_clusters):
             new_C[empty_clusters] = initialize(X, empty_clusters.sum())
-            #checks for convergence
+            #checks  convergence
         if np.all(centroids == new_C):
             return new_C, clss
         centroids = new_C
