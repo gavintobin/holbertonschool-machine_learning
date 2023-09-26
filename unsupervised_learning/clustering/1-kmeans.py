@@ -15,7 +15,7 @@ def initialize(X, k):
     return centroids
 
 def kmeans(X, k, iterations=1000):
-    '''performs k mean'''
+    '''per k mean'''
     centroids = initialize(X, k)
 
     for _ in range(iterations):
