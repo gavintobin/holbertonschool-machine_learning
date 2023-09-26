@@ -26,14 +26,15 @@ def kmeans(X, k, iterations=1000):
         clss = np.argmin(distances, axis=1)
 
         # Update cluster centroids based on the mean of assigned data points
-        new_C = np.array(X.mean(axis=0))
+        new_C = np.array([X[clss == i].mean(axis=0) for i in range(k)])
 
         # Handle clusters with no data points by reinitializing their centroids
-        empty_clusters = np.isnan(new_C).any(axis=0)
-        new_C[empty_clusters] = initialize(X, empty_clusters.sum())
+        empty_clusters = np.isnan(new_C).any(axis=1)
+        if np.any(empty_clusters):
+            new_C[empty_clusters] = initialize(X, empty_clusters.sum())
             #checks for convergence
         if np.all(centroids == new_C):
-            return C, clss
-        C = new_C
+            return new_C, clss
+        centroids = new_C
 
-    return C, clss
+    return centroids, clss
