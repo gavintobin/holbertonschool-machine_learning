@@ -8,12 +8,13 @@ def variance(X, C):
     if X.shape[1] != C.shape[1]:
         return None
 
+    n, d = X.shape
     k = C.shape[0]
+
     distances = np.linalg.norm(X[:, np.newaxis] - C, axis=2)**2
+
     clss = np.argmin(distances, axis=1)
-    var = 0.0
-    for i in range(k):
-        cluster_points = X[clss == i]
-        cluster_center = C[i]
-        var += np.sum(np.linalg.norm(cluster_points - cluster_center, axis=1)**2)
+
+    var = np.sum(distances[np.arange(n), clss])
+
     return var
