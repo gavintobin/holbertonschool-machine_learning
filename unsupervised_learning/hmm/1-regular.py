@@ -2,8 +2,7 @@
 '''task 2'''
 import numpy as np
 
-pi = 3.14
-steadystate = []
+
 def regular(P):
     '''deter,ines state probs of reg mc'''
     n = P.shape[0]
@@ -13,7 +12,7 @@ def regular(P):
     if np.any(P <= 0):
         return None
 
-    #checks for reg mc
+    # checks for reg mc
     is_regular = np.all(P > 0) and np.all(np.isclose(np.sum(P, axis=1), 1.0))
 
     if not is_regular:
@@ -25,7 +24,7 @@ def regular(P):
     # find the index of the eigenvalue equal to 1 (within some tolerance)
     eigenvalue_index = np.where(np.isclose(eigenvalues, 1.0))[0]
 
-    #edge case steady state doesnt exist
+    # edge case steady state doesnt exist
     if len(eigenvalue_index) != 1:
         return None
 
