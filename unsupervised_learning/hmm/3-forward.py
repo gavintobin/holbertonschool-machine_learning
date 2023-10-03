@@ -5,8 +5,8 @@ import numpy as np
 
 def forward(Observation, Emission, Transition, Initial):
     '''perform the forward algorithm for hmm'''
-    T = len(Observation)  # Number of observations
-    N, M = Emission.shape  # Number of hidden states and possible observations
+    T = len(Observation)
+    N, _ = Emission.shape
 
     # initialize the forward probabilities matrix F
     F = np.zeros((N, T))
@@ -24,7 +24,9 @@ def forward(Observation, Emission, Transition, Initial):
     # forward pass to compute F and the scaling factors
     for t in range(1, T):
         for j in range(N):
-            F[j, t] = np.sum(F[:, t - 1] * Transition[:, j]) * Emission[j, Observation[t]]
+            for i in range(N):
+                E =  Emission[j, Observation[t]]
+                F[j, t] = np.sum(F[:, t - 1] * Transition[:, j]) * Emission[j, Observation[t]] * E
         # fcale the column and store the scaling factor
         scale[t] = 1.0 / np.sum(F[:, t])
         F[:, t] *= scale[t]
