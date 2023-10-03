@@ -25,8 +25,8 @@ def forward(Observation, Emission, Transition, Initial):
     for t in range(1, T):
         for j in range(N):
             for i in range(N):
-                E =  Emission[j, Observation[t]]
-                F[j, t] = np.sum(F[:, t - 1] * Transition[:, j]) * Emission[j, Observation[t]] * E
+                E = Emission[j, Observation[t]]
+                F[j, t] = np.sum(F[:, t - 1] * Transition[:, j]) * E
         # fcale the column and store the scaling factor
         scale[t] = 1.0 / np.sum(F[:, t])
         F[:, t] *= scale[t]
