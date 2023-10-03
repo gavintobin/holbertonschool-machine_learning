@@ -7,8 +7,10 @@ def markov_chain(P, s, t=1):
     '''determines probability  of a markof chain being in particular state'''
     n = P.shape[0]
 
+    if P.shape != (n, n) or s.shape != (1, n) or t < 0:
+        return None
 
-    if P.shape != (n, n) or s.shape != (1, n) or not isinstance(t, int) or t < 0:
+    if not isinstance(t, int):
         return None
 
     ptrans = np.linalg.matrix_power(P, t)
