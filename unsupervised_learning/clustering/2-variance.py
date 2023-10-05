@@ -12,14 +12,11 @@ def variance(X, C):
 
     if len(X.shape) != 2 or len(C.shape) != 2:
         return None
-        
-    n, d = X.shape
-    k = C.shape[0]
 
-    distances = np.linalg.norm(X[:, np.newaxis] - C, axis=2)**2
+    distances = np.linalg.norm(X[:, np.newaxis] - C ** 2, axis=2)
 
     clss = np.argmin(distances, axis=1)
 
-    var = np.sum(distances[np.arange(n), clss])
+    var = np.sum(distances[np.arange(len(X)), clss])
 
     return var
