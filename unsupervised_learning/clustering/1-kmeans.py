@@ -38,8 +38,8 @@ def kmeans(X, k, iterations=1000):
         # Update cluster centroids based on the mean of assigned data points
         new_C = np.array([X[clss == i].mean(axis=0) for i in range(k)])
 
-        # Handle clusters  no data points by reinitializing their centroids
-        empty_clusters = np.isnan(new_C).any(axis=1)
+        # Handle clusters  no data points by reinitializing their centroid
+        empty_clusters = initialize(X, 1)
         if np.any(empty_clusters):
             new_C[empty_clusters] = initialize(X, empty_clusters.sum())
             #checks  convergence
