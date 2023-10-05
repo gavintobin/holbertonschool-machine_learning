@@ -5,7 +5,7 @@ import numpy as np
 
 def variance(X, C):
     '''total intra cluster variance of datas set'''
-    if type(X) is not np.ndarray or type(C) is not np.array:
+    if type(X) is not np.ndarray or type(C) is not np.ndarray:
         return None
 
     if len(X.shape) != 2 or len(C.shape) != 2:
