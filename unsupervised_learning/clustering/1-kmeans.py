@@ -47,4 +47,10 @@ def kmeans(X, k, iterations=1000):
             return new_C, clss
         centroids = new_C
 
+        #  figure out  distance between data points and centroids
+        distances = np.linalg.norm(X[:, np.newaxis] - centroids, axis=2)
+    
+        # Assign each data point to the cluster  the closest centroid
+        clss = np.argmin(distances, axis=1)
+
     return centroids, clss
