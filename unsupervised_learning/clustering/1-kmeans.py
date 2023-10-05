@@ -20,13 +20,13 @@ def kmeans(X, k, iterations=1000):
     '''perfos k mean'''
     centroids = initialize(X, k)
 
+    #  figure out  distance between data points and centroids
+    distances = np.linalg.norm(X[:, np.newaxis] - centroids, axis=2)
+
+    # Assign each data point to the cluster  the closest centroid
+    clss = np.argmin(distances, axis=1)
+
     for _ in range(iterations):
-        #  figure out  distance between data points and centroids
-        distances = np.linalg.norm(X[:, np.newaxis] - centroids, axis=2)
-
-        # Assign each data point to the cluster  the closest centroid
-        clss = np.argmin(distances, axis=1)
-
         # Update cluster centroids based on the mean of assigned data points
         new_C = np.array([X[clss == i].mean(axis=0) for i in range(k)])
 
