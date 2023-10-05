@@ -6,7 +6,7 @@ import numpy as np
 def pca(X, ndim):
     '''pca pt 2'''
     mean_centered_data = np.mean(X, axis=0)
-    
+
     # do SVD
     U, S, Vt = np.linalg.svd(X - mean_centered_data)
 
