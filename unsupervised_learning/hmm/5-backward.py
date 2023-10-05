@@ -6,7 +6,7 @@ import numpy as np
 def backward(Observation, Emission, Transition, Initial):
     '''perform the forward algorithm for hmm'''
     T = len(Observation)
-    N, _ = Emission.shape
+    N, M = Emission.shape
 
     if T == 0 or N == 0 or M == 0:
         return None, None
