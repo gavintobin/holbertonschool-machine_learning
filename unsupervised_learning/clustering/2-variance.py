@@ -14,7 +14,7 @@ def variance(X, C):
     if X.shape[1] != C.shape[1]:
         return None
 
-    distances = np.sum(X[:, np.newaxis] - C ** 2, axis=2)
+    distances = np.sum((X[:, np.newaxis] - C) ** 2, axis=2)
 
     clss = np.argmin(distances, axis=1)
 
