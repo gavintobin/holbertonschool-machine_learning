@@ -5,6 +5,8 @@ import numpy as np
 
 def initialize(X, k):
     '''initializes centroid or  centr of cluster'''
+    if type(X) is not np.ndarray:
+        return None
     if k <= 0 or k > X.shape[0]:
         return None
 
