@@ -36,13 +36,7 @@ def kmeans(X, k, iterations=1000):
 
     for _ in range(iterations):
         # Update cluster centroids based on the mean of assigned data points
-        new_C = []
-        for i in range(k):
-            try:
-                new_C.append([X[clss == i].mean(axis=0))
-            except:
-                new_C.append(initialize(X,1))[0][0])
-        new_C = np.array(new_C)
+        new_C = np.array([X[clss == i].mean(axis=0) if len(X[clss == i])>0 else initialize(X,1) for i in range(k)])
 
         # Handle clusters  no data points by reinitializing their centroid
         empty_clusters = np.any(np.isnan(new_C))
