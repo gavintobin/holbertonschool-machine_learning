@@ -3,7 +3,7 @@
 import numpy as np
 
 
-def forward(Observation, Emission, Transition, Initial):
+def backward(Observation, Emission, Transition, Initial):
     '''perform the forward algorithm for hmm'''
     T = len(Observation)
     N, _ = Emission.shape
