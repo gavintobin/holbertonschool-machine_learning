@@ -18,6 +18,14 @@ def initialize(X, k):
 
 def kmeans(X, k, iterations=1000):
     '''perfos k mean'''
+    if type(X) is not np.ndarray or len(X.shape) != 2:
+        return None, None
+
+    if type(iterations) is not int or iterations <= 0:
+        return None, None
+
+    if type(k) is not int or X.shape[0] <= k or k ,= 0:
+        return None, None
     centroids = initialize(X, k)
 
     #  figure out  distance between data points and centroids
