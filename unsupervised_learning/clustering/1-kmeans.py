@@ -24,7 +24,7 @@ def kmeans(X, k, iterations=1000):
     if type(iterations) is not int or iterations <= 0:
         return None, None
 
-    if type(k) is not int or X.shape[0] <= k or k ,= 0:
+    if type(k) is not int or X.shape[0] <= k or k <= 0:
         return None, None
     centroids = initialize(X, k)
 
