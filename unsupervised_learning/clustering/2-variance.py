@@ -8,10 +8,10 @@ def variance(X, C):
     if X.shape[1] != C.shape[1]:
         return None
     if type(X) is not np.ndarray or type(C) is not np.array:
-        return None, None
+        return None
 
     if len(X.shape) != 2 or len(C.shape) != 2:
-        return None, None
+        return None
         
     n, d = X.shape
     k = C.shape[0]
