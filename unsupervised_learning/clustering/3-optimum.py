@@ -22,7 +22,7 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
         vars.append(variance(X, C))
         results.append((C, distances))
 
-     for var in vars:
+    for var in vars:
         d_vars.append(vars[0] - var)
     
     return results, dvars
