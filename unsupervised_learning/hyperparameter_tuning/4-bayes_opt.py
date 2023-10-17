@@ -6,8 +6,10 @@ GP = __import__('2-gp').GaussianProcess
 
 
 class BayesianOptimization:
+    '''bayes opt class'''
     def __init__(self, f, X_init, Y_init, bounds, ac_samples,
                  l=1, sigma_f=1, xsi=0.01, minimize=True):
+        '''innit funca'''
         self.f = f
         self.gp = GP(X_init, Y_init, l, sigma_f)
         self.X_s = np.linspace(bounds[0], bounds[1],
@@ -16,6 +18,7 @@ class BayesianOptimization:
         self.minimize = minimize
 
     def acquisition(self):
+        '''acquisition func'''
         mu, sigma = self.gp.predict(self.X_s)
 
         if self.minimize:
