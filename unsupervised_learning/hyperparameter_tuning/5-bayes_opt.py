@@ -28,8 +28,9 @@ class BayesianOptimization:
             mu_sample_opt = np.max(self.gp.Y)
             imp = mu - mu_sample_opt - self.xsi
 
-        Z = imp / (sigma + 1e-8)
-        EI = imp * (norm.cdf(Z) + 1e-8) + sigma * norm.pdf(Z)
+        with np.errstate(divide='ignore'):
+            Z = imp / sigma
+            EI = imp * norm.cdf(Z) + sigma * norm.pdf(Z)
 
         X_next = self.X_s[np.argmax(EI)]
 
