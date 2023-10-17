@@ -53,4 +53,6 @@ class BayesianOptimization:
             if Y_opt is None or Y_next < Y_opt:
                 X_opt, Y_opt = X_next, Y_next
 
+        self.gp.X = self.gp.X[:-1]
+
         return X_opt, Y_opt
