@@ -42,7 +42,6 @@ class BayesianOptimization:
         for i in range(iterations):
             X_next, _ = self.acquisition()
             # Convert X_next from a 2D array to a 1D array
-            X_next = X_next[0]
 
             if X_next in self.gp.X:
                 # If the next point has already been sampled, stop early
