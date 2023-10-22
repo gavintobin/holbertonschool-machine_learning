@@ -1,4 +1,4 @@
-#!/usr/bin/envpython3
+#!/usr/bin/env python3
 '''task 2'''
 import tensorflow.keras as keras
 
