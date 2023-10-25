@@ -42,7 +42,7 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
 
     # Variational Autoencoder
     autoencoder_inputs = keras.layers.Input(shape=(input_dims,))
-    encoded, z_mean, z_log_var = encoder(autoencoder_inputs)
+    encoded, zmean, zlogvar = encoder(autoencoder_inputs)
     decoded = decoder(encoded)
     auto = keras.models.Model(autoencoder_inputs, decoded)
 
