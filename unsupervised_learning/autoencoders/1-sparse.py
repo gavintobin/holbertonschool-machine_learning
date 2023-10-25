@@ -6,7 +6,7 @@ import tensorflow.keras as keras
 def autoencoder(input_dims, hidden_layers, latent_dims, lambtha):
     '''creats sparse auto encoder'''
     x = keras.Input(shape=(input_dims,))
-    xhat = inputs
+    xhat = x
 
     for i in hidden_layers:
         xhat = keras.layers.Dense(i, activation='relu')(xhat)
