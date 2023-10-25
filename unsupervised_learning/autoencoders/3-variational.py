@@ -6,10 +6,8 @@ import tensorflow.keras as K
 
 def autoencoder(input_dims, hidden_layers, latent_dims):
     '''creates variational autoencoder'''
-     def sampling(args):
-        """
-        sampling
-        """
+    def sampling(args):
+        '''sampling helper func'''
         zmean, zlogvar = args
         shp = keras.backend.shape(zmean)
         epsilon = keras.backend.random_normal(shape=shp)
@@ -22,9 +20,9 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
         x = keras.layers.Dense(i, activation='relu')(x)
 
     zmean = keras.layers.Dense(latent_dims, activation=None,
-                                name="zmean")(x)
+                               name="zmean")(x)
     zlogvar = keras.layers.Dense(latent_dims, activation=None,
-                                   name="zlogvar")(x)
+                                 name="zlogvar")(x)
 
     z = keras.layers.Lambda(sampling, output_shape=(latent_dims,),
                             name="z")([zmean, zlogvar])
