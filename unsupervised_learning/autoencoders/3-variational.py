@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 '''tadsk 3'''
 import tensorflow as tf
-import tensorflow.keras as K
+import tensorflow.keras as keras
 
 
 def autoencoder(input_dims, hidden_layers, latent_dims):
