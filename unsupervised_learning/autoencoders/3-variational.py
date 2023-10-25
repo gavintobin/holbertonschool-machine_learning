@@ -11,7 +11,7 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
         zmean, zlogvar = args
         shp = keras.backend.shape(zmean)
         epsilon = keras.backend.random_normal(shape=shp)
-        return z_mean + keras.backend.exp(0.5 * zlogvar) * epsilon
+        return zmean + keras.backend.exp(0.5 * zlogvar) * epsilon
 
     x = keras.Input(shape=(input_dims,))
     xhat = x
