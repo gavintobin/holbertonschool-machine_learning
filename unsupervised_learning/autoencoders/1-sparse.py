@@ -16,7 +16,7 @@ def autoencoder(input_dims, hidden_layers, latent_dims, lambtha):
     lat = keras.layers.Dense(latent_dims, activation='relu',
                              activity_regularizer=la)(xhat)
 
-    encoder = keras.model.Model(x, lat)
+    encoder = keras.models.Model(x, lat)
 
     decin = keras.Input(shape=(lat,))
     decout = decin
