@@ -19,7 +19,7 @@ def autoencoder(input_dims, filters, latent_dims):
         xhat = keras.layers.MaxPooling2D((2, 2),
                                          padding='same')(xhat)
 
-    encoder = keras.models.Model(input_img, xhat)
+    encoder = keras.models.Model(x, xhat)
 
     # Decoder
     latin = keras.Input(shape=latent_dims)
@@ -45,7 +45,7 @@ def autoencoder(input_dims, filters, latent_dims):
                             activation='sigmoid',
                             padding='same')(y)
 
-    decoder = keras.models.Model(latent_input, y)
+    decoder = keras.models.Model(latin, y)
 
     # Autoencoder
     autoencoder_inputs = keras.Input(shape=input_dims)
