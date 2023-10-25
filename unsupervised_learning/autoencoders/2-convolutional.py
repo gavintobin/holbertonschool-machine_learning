@@ -7,14 +7,14 @@ def autoencoder(input_dims, filters, latent_dims):
     '''creates convo autoencoder'''
     # Encoder
     x = keras.Input(shape=input_dims)
-    x = xhat
+    xhat = x
 
     # Conv layers
     for i in filters:
         xhat = keras.layers.Conv2D(i,
                                    (3, 3),
                                    activation='relu',
-                                   padding='same')(xhat)
+                                   padding='same')(x)
 
         xhat = keras.layers.MaxPooling2D((2, 2),
                                          padding='same')(xhat)
