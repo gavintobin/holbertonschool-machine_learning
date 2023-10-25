@@ -17,17 +17,17 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
     xhat = x
 
     for i in hidden_layers:
-        x = keras.layers.Dense(i, activation='relu')(x)
+        x = keras.layers.Dense(i, activation='relu')(xhat)
 
     zmean = keras.layers.Dense(latent_dims, activation=None,
-                               name="zmean")(x)
+                               name="zmean")(xhat)
     zlogvar = keras.layers.Dense(latent_dims, activation=None,
-                                 name="zlogvar")(x)
+                                 name="zlogvar")(xhat)
 
     z = keras.layers.Lambda(sampling, output_shape=(latent_dims,),
                             name="z")([zmean, zlogvar])
 
-    encoder = keras.models.Model(x, [z, zmean, zlogvar])
+    encoder = keras.models.Model(xhat, [z, zmean, zlogvar])
 
     # Decoder
     latin = keras.layers.Input(shape=(latent_dims,))
