@@ -11,7 +11,7 @@ def autoencoder(input_dims, hidden_layers, latent_dims, lambtha):
     for i in hidden_layers:
         xhat = keras.layers.Dense(i, activation='relu')(xhat)
 
-    la = keras.regulizers.l1(lambtha)
+    la = keras.regularizers.l1(lambtha)
 
     lat = keras.layers.Dense(latent_dims, activation='relu',
                              activity_regularizer=la)(xhat)
