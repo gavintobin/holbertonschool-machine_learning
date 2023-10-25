@@ -4,38 +4,30 @@ import tensorflow.keras as keras
 
 
 def autoencoder(input_dims, hidden_layers, latent_dims, lambtha):
-    '''creats sparse auto encoder'''
-    x = keras.Input(shape=(input_dims,))
-    xhat = x
+    # Encoder
+    encoder_inputs = keras.Input(shape=(input_dims,))
+    x = encoder_inputs
+    for units in hidden_layers:
+        x = keras.layers.Dense(units, activation='relu', activity_regularizer=keras.regularizers.l1(lambtha))(x)
+    encoder_outputs = keras.layers.Dense(latent_dims, activation='relu', activity_regularizer=keras.regularizers.l1(lambtha))(x)
 
-    for i in hidden_layers:
-        xhat = keras.layers.Dense(i, activation='relu')(xhat)
+    encoder = keras.models.Model(encoder_inputs, encoder_outputs, name='encoder')
 
-    la = keras.regularizers.l1(lambtha)
+    # Decoder
+    latent_inputs = keras.Input(shape=(latent_dims,))
+    x = latent_inputs
+    for units in reversed(hidden_layers):
+        x = keras.layers.Dense(units, activation='relu')(x)
+    decoder_outputs = keras.layers.Dense(input_dims, activation='sigmoid')(x)
 
-    lat = keras.layers.Dense(latent_dims, activation='relu',
-                             activity_regularizer=la)(xhat)
+    decoder = keras.models.Model(latent_inputs, decoder_outputs, name='decoder')
 
-    encoder = keras.models.Model(x, lat)
-
-    decin = keras.Input(shape=(lat,))
-    decout = decin
-
-    for i in reversed(hidden_layers):
-        decout = keras.layers.Dense(i,
-                                    activation='relu')(decout)
-
-    output = keras.layers.Dense(input_dims, activation='sigmoid')(decout)
-    decoder = keras.models.Model(decin, output)
-
-    # encoder
+    # Autoencoder
     autoencoder_inputs = keras.Input(shape=(input_dims,))
     encoded = encoder(autoencoder_inputs)
     decoded = decoder(encoded)
-    autoencoder = keras.models.Model(autoencoder_inputs,
-                                     decoded, name='autoencoder')
+    autoencoder = keras.models.Model(autoencoder_inputs, decoded, name='autoencoder')
 
-    # Compile
     autoencoder.compile(optimizer='adam', loss='binary_crossentropy')
 
     return encoder, decoder, autoencoder
