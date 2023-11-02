@@ -104,7 +104,7 @@ class Generator(nn.Module):
 generator =Generator().to(device)
 
 #setting hyper perameters for model
-lr=0.01
+lr=0.000001c
 epochs=50
 loss_function =nn.BCELoss()
 
