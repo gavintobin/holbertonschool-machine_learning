@@ -4,6 +4,7 @@ import numpy as np
 
 
 class RNNCell:
+    '''cell class'''
     def __init__(self, i, h, o):
         self.Wh = np.random.normal(size=(h + i, h))
         self.Wy = np.random.normal(size=(h, o))
@@ -11,6 +12,7 @@ class RNNCell:
         self.by = np.zeros((1, o))
 
     def forward(self, h_prev, x_t):
+        '''forward func'''
         # Concatenate previous hidden state and input data
         hx_concat = np.concatenate((h_prev, x_t), axis=1)
 
