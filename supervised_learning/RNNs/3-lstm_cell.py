@@ -27,6 +27,7 @@ class LSTMCell:
         self.by = np.zeros((1, o))
 
     def forward(self, h_prev, c_prev, x_t):
+        '''forward func'''
         # concatenate previous hidden state and cell state with input data
         fc_concat = np.concatenate((h_prev, x_t), axis=1)
 
