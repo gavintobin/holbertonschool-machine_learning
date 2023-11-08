@@ -3,6 +3,7 @@
 
 import numpy as np
 
+
 def deep_rnn(rnn_cells, X, h_0):
     ''' forward prop for deep rnn'''
     t, m, i = X.shape
@@ -17,9 +18,8 @@ def deep_rnn(rnn_cells, X, h_0):
         x_t = X[step]
         for layer in range(l):
             c = rnn_cells[layer]
-            h_prev = H[step , layer]
+            h_prev = H[step, layer]
             h_next, y = c.forward(h_prev, x_t)
             H[step + 1][layer] = h_next
             x_t = h_next
     return H, Y
-
