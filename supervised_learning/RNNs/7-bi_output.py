@@ -33,7 +33,7 @@ class BidirectionalCell:
         h_prev = np.tanh(np.dot(hb_concat, self.Whb) + self.bhb)
         return h_prev
 
-     def output(self, H):
+    def output(self, H):
         ''' calcs all outputs for rnn'''
         # Calc the outputs
         Y = np.dot(H, self.Wy) + self.by
