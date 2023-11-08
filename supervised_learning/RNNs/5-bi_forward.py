@@ -25,3 +25,9 @@ class BidirectionalCell:
         hf_concat = np.concatenate((h_prev, x_t), axis=1)
         h_next = np.tanh(np.dot(hf_concat, self.Whf) + self.bhf)
         return h_next
+
+    def backward(self, h_next, x_t):
+        # Calc the hidden state in the backward direction
+        hb_concat = np.concatenate((h_next, x_t), axis=1)
+        h_prev = np.tanh(np.dot(hb_concat, self.Whb) + self.bhb)
+        return h_prev
