@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/./forecast_btc.py", line 15, in <module>
+    X = np.load('X.npy')
+  File "/home/gavintobin/.local/lib/python3.10/site-packages/numpy/lib/npyio.py", line 435, in load
+    raise ValueError("Cannot load file containing pickled data "
+ValueError: Cannot load file containing pickled data when allow_pickle=False
+Traceback (most recent call last):
+  File "/mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/./forecast_btc.py", line 15, in <module>
+    X = np.load('X.npy')
+  File "/home/gavintobin/.local/lib/python3.10/site-packages/numpy/lib/npyio.py", line 435, in load
+    raise ValueError("Cannot load file containing pickled data "
+ValueError: Cannot load file containing pickled data when allow_pickle=False

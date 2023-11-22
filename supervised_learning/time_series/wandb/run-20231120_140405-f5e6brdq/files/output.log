@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "/mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/./forecast_btc.py", line 14, in <module>
+    X = np.loadtxt('/mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/data/X.csv')
+  File "/home/gavintobin/.local/lib/python3.10/site-packages/numpy/lib/npyio.py", line 1042, in loadtxt
+    fh = np.lib._datasource.open(fname, 'rt', encoding=encoding)
+  File "/home/gavintobin/.local/lib/python3.10/site-packages/numpy/lib/_datasource.py", line 193, in open
+    return ds.open(path, mode, encoding=encoding, newline=newline)
+  File "/home/gavintobin/.local/lib/python3.10/site-packages/numpy/lib/_datasource.py", line 532, in open
+    raise FileNotFoundError(f"{path} not found.")
+FileNotFoundError: /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/data/X.csv not found.
+Traceback (most recent call last):
+  File "/mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/./forecast_btc.py", line 14, in <module>
+    X = np.loadtxt('/mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/data/X.csv')
+  File "/home/gavintobin/.local/lib/python3.10/site-packages/numpy/lib/npyio.py", line 1042, in loadtxt
+    fh = np.lib._datasource.open(fname, 'rt', encoding=encoding)
+  File "/home/gavintobin/.local/lib/python3.10/site-packages/numpy/lib/_datasource.py", line 193, in open
+    return ds.open(path, mode, encoding=encoding, newline=newline)
+  File "/home/gavintobin/.local/lib/python3.10/site-packages/numpy/lib/_datasource.py", line 532, in open
+    raise FileNotFoundError(f"{path} not found.")
+FileNotFoundError: /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/data/X.csv not found.

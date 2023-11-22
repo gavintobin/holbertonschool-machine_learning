@@ -1,0 +1,26 @@
+2023-11-21 09:32:54,396 INFO    MainThread:33901 [wandb_setup.py:_flush():76] Current SDK version is 0.16.0
+2023-11-21 09:32:54,398 INFO    MainThread:33901 [wandb_setup.py:_flush():76] Configure stats pid to 33901
+2023-11-21 09:32:54,399 INFO    MainThread:33901 [wandb_setup.py:_flush():76] Loading settings from /home/gavintobin/.config/wandb/settings
+2023-11-21 09:32:54,400 INFO    MainThread:33901 [wandb_setup.py:_flush():76] Loading settings from /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/settings
+2023-11-21 09:32:54,401 INFO    MainThread:33901 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2023-11-21 09:32:54,402 INFO    MainThread:33901 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2023-11-21 09:32:54,409 INFO    MainThread:33901 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'supervised_learning/time_series/forecast_btc.py', 'program_abspath': '/mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/forecast_btc.py', 'program': '/mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/./forecast_btc.py'}
+2023-11-21 09:32:54,411 INFO    MainThread:33901 [wandb_init.py:_log_setup():524] Logging user logs to /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231121_093254-mhmj5o5b/logs/debug.log
+2023-11-21 09:32:54,414 INFO    MainThread:33901 [wandb_init.py:_log_setup():525] Logging internal logs to /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231121_093254-mhmj5o5b/logs/debug-internal.log
+2023-11-21 09:32:54,415 INFO    MainThread:33901 [wandb_init.py:init():564] calling init triggers
+2023-11-21 09:32:54,417 INFO    MainThread:33901 [wandb_init.py:init():571] wandb.init called with sweep_config: {}
+config: {}
+2023-11-21 09:32:54,418 INFO    MainThread:33901 [wandb_init.py:init():614] starting backend
+2023-11-21 09:32:54,419 INFO    MainThread:33901 [wandb_init.py:init():618] setting up manager
+2023-11-21 09:32:54,440 INFO    MainThread:33901 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2023-11-21 09:32:54,444 INFO    MainThread:33901 [wandb_init.py:init():624] backend started and connected
+2023-11-21 09:32:54,481 INFO    MainThread:33901 [wandb_init.py:init():716] updated telemetry
+2023-11-21 09:32:55,074 INFO    MainThread:33901 [wandb_init.py:init():749] communicating run to backend with 90.0 second timeout
+2023-11-21 09:32:55,668 INFO    MainThread:33901 [wandb_run.py:_on_init():2254] communicating current version
+2023-11-21 09:32:56,002 INFO    MainThread:33901 [wandb_run.py:_on_init():2263] got version response 
+2023-11-21 09:32:56,003 INFO    MainThread:33901 [wandb_init.py:init():800] starting run threads in backend
+2023-11-21 09:32:56,922 INFO    MainThread:33901 [wandb_run.py:_console_start():2233] atexit reg
+2023-11-21 09:32:56,923 INFO    MainThread:33901 [wandb_run.py:_redirect():2088] redirect: wrap_raw
+2023-11-21 09:32:56,925 INFO    MainThread:33901 [wandb_run.py:_redirect():2153] Wrapping output streams.
+2023-11-21 09:32:56,927 INFO    MainThread:33901 [wandb_run.py:_redirect():2178] Redirects installed.
+2023-11-21 09:32:56,931 INFO    MainThread:33901 [wandb_init.py:init():841] run started, returning control to user process

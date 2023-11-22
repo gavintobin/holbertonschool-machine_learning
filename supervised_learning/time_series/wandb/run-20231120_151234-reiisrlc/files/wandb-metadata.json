@@ -1,0 +1,100 @@
+{
+    "os": "Linux-5.15.90.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "python": "3.10.12",
+    "heartbeatAt": "2023-11-20T21:12:36.410247",
+    "startedAt": "2023-11-20T21:12:34.843291",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/./forecast_btc.py",
+    "codePathLocal": "forecast_btc.py",
+    "codePath": "supervised_learning/time_series/forecast_btc.py",
+    "git": {
+        "remote": "https://gavintobin:@github.com/gavintobin/holbertonschool-machine_learning.git",
+        "commit": "1e29f10e7a329b23eb18fdda815fdfab465a4056"
+    },
+    "email": "gavintobin714@gmail.com",
+    "root": "/mnt/c/Users/gavin/holbertonschool-machine_learning",
+    "host": "gavin",
+    "username": "gavintobin",
+    "executable": "/usr/bin/python3",
+    "cpu_count": 6,
+    "cpu_count_logical": 12,
+    "cpu_freq": {
+        "current": 2611.2099999999996,
+        "min": 0.0,
+        "max": 0.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2611.21,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2611.21,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2611.21,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2611.21,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2611.21,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2611.21,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2611.21,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2611.21,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2611.21,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2611.21,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2611.21,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2611.21,
+            "min": 0.0,
+            "max": 0.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 1006.853931427002,
+            "used": 6.893714904785156
+        }
+    },
+    "memory": {
+        "total": 7.618267059326172
+    }
+}

@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/./forecast_btc.py", line 15, in <module>
+    X = np.load('X.npy')
+  File "/home/gavintobin/.local/lib/python3.10/site-packages/numpy/lib/npyio.py", line 407, in load
+    fid = stack.enter_context(open(os_fspath(file), "rb"))
+FileNotFoundError: [Errno 2] No such file or directory: 'X.npy'
+Traceback (most recent call last):
+  File "/mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/./forecast_btc.py", line 15, in <module>
+    X = np.load('X.npy')
+  File "/home/gavintobin/.local/lib/python3.10/site-packages/numpy/lib/npyio.py", line 407, in load
+    fid = stack.enter_context(open(os_fspath(file), "rb"))
+FileNotFoundError: [Errno 2] No such file or directory: 'X.npy'

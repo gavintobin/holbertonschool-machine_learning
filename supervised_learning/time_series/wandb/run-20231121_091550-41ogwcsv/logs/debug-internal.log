@@ -1,0 +1,66 @@
+2023-11-21 09:15:50,758 INFO    StreamThr :33463 [internal.py:wandb_internal():86] W&B internal server running at pid: 33463, started at: 2023-11-21 09:15:50.748804
+2023-11-21 09:15:50,761 DEBUG   HandlerThread:33463 [handler.py:handle_request():146] handle_request: status
+2023-11-21 09:15:50,791 INFO    WriterThread:33463 [datastore.py:open_for_write():85] open: /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231121_091550-41ogwcsv/run-41ogwcsv.wandb
+2023-11-21 09:15:50,800 DEBUG   SenderThread:33463 [sender.py:send():380] send: header
+2023-11-21 09:15:51,414 DEBUG   SenderThread:33463 [sender.py:send():380] send: run
+2023-11-21 09:15:52,007 INFO    SenderThread:33463 [dir_watcher.py:__init__():211] watching files in: /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231121_091550-41ogwcsv/files
+2023-11-21 09:15:52,008 INFO    SenderThread:33463 [sender.py:_start_run_threads():1124] run started: 41ogwcsv with start time 1700579750.753963
+2023-11-21 09:15:52,060 DEBUG   HandlerThread:33463 [handler.py:handle_request():146] handle_request: check_version
+2023-11-21 09:15:52,062 DEBUG   SenderThread:33463 [sender.py:send_request():407] send_request: check_version
+2023-11-21 09:15:52,372 DEBUG   HandlerThread:33463 [handler.py:handle_request():146] handle_request: run_start
+2023-11-21 09:15:52,374 DEBUG   HandlerThread:33463 [system_info.py:__init__():32] System info init
+2023-11-21 09:15:52,376 DEBUG   HandlerThread:33463 [system_info.py:__init__():47] System info init done
+2023-11-21 09:15:52,377 INFO    HandlerThread:33463 [system_monitor.py:start():194] Starting system monitor
+2023-11-21 09:15:52,379 INFO    SystemMonitor:33463 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2023-11-21 09:15:52,379 INFO    HandlerThread:33463 [system_monitor.py:probe():214] Collecting system info
+2023-11-21 09:15:52,382 INFO    SystemMonitor:33463 [interfaces.py:start():190] Started cpu monitoring
+2023-11-21 09:15:52,386 INFO    SystemMonitor:33463 [interfaces.py:start():190] Started disk monitoring
+2023-11-21 09:15:52,389 INFO    SystemMonitor:33463 [interfaces.py:start():190] Started memory monitoring
+2023-11-21 09:15:52,393 INFO    SystemMonitor:33463 [interfaces.py:start():190] Started network monitoring
+2023-11-21 09:15:52,403 DEBUG   HandlerThread:33463 [system_info.py:probe():196] Probing system
+2023-11-21 09:15:52,589 DEBUG   HandlerThread:33463 [system_info.py:_probe_git():181] Probing git
+2023-11-21 09:15:53,211 DEBUG   HandlerThread:33463 [system_info.py:_probe_git():189] Probing git done
+2023-11-21 09:15:53,212 DEBUG   HandlerThread:33463 [system_info.py:probe():244] Probing system done
+2023-11-21 09:15:53,213 DEBUG   HandlerThread:33463 [system_monitor.py:probe():223] {'os': 'Linux-5.15.90.1-microsoft-standard-WSL2-x86_64-with-glibc2.35', 'python': '3.10.12', 'heartbeatAt': '2023-11-21T15:15:52.403995', 'startedAt': '2023-11-21T15:15:50.513753', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '/mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/./forecast_btc.py', 'codePathLocal': 'forecast_btc.py', 'codePath': 'supervised_learning/time_series/forecast_btc.py', 'git': {'remote': 'https://gavintobin:@github.com/gavintobin/holbertonschool-machine_learning.git', 'commit': '1e29f10e7a329b23eb18fdda815fdfab465a4056'}, 'email': 'gavintobin714@gmail.com', 'root': '/mnt/c/Users/gavin/holbertonschool-machine_learning', 'host': 'gavin', 'username': 'gavintobin', 'executable': '/usr/bin/python3', 'cpu_count': 6, 'cpu_count_logical': 12, 'cpu_freq': {'current': 2611.2099999999996, 'min': 0.0, 'max': 0.0}, 'cpu_freq_per_core': [{'current': 2611.21, 'min': 0.0, 'max': 0.0}, {'current': 2611.21, 'min': 0.0, 'max': 0.0}, {'current': 2611.21, 'min': 0.0, 'max': 0.0}, {'current': 2611.21, 'min': 0.0, 'max': 0.0}, {'current': 2611.21, 'min': 0.0, 'max': 0.0}, {'current': 2611.21, 'min': 0.0, 'max': 0.0}, {'current': 2611.21, 'min': 0.0, 'max': 0.0}, {'current': 2611.21, 'min': 0.0, 'max': 0.0}, {'current': 2611.21, 'min': 0.0, 'max': 0.0}, {'current': 2611.21, 'min': 0.0, 'max': 0.0}, {'current': 2611.21, 'min': 0.0, 'max': 0.0}, {'current': 2611.21, 'min': 0.0, 'max': 0.0}], 'disk': {'/': {'total': 1006.853931427002, 'used': 6.8962554931640625}}, 'memory': {'total': 7.618267059326172}}
+2023-11-21 09:15:53,214 INFO    HandlerThread:33463 [system_monitor.py:probe():224] Finished collecting system info
+2023-11-21 09:15:53,214 INFO    HandlerThread:33463 [system_monitor.py:probe():227] Publishing system info
+2023-11-21 09:15:53,215 DEBUG   HandlerThread:33463 [system_info.py:_save_pip():52] Saving list of pip packages installed into the current environment
+2023-11-21 09:15:53,228 DEBUG   HandlerThread:33463 [system_info.py:_save_pip():68] Saving pip packages done
+2023-11-21 09:15:53,243 INFO    HandlerThread:33463 [system_monitor.py:probe():229] Finished publishing system info
+2023-11-21 09:15:53,256 DEBUG   SenderThread:33463 [sender.py:send():380] send: files
+2023-11-21 09:15:53,257 INFO    SenderThread:33463 [sender.py:_save_file():1380] saving file wandb-metadata.json with policy now
+2023-11-21 09:15:53,297 DEBUG   HandlerThread:33463 [handler.py:handle_request():146] handle_request: internal_messages
+2023-11-21 09:15:53,303 DEBUG   HandlerThread:33463 [handler.py:handle_request():146] handle_request: stop_status
+2023-11-21 09:15:53,310 DEBUG   SenderThread:33463 [sender.py:send_request():407] send_request: stop_status
+2023-11-21 09:15:53,478 DEBUG   SenderThread:33463 [sender.py:send():380] send: telemetry
+2023-11-21 09:15:54,033 INFO    wandb-upload_0:33463 [upload_job.py:push():131] Uploaded file /tmp/tmpn3q482q6wandb/3ogwktq3-wandb-metadata.json
+2023-11-21 09:15:54,072 INFO    Thread-12 :33463 [dir_watcher.py:_on_file_created():271] file/dir created: /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231121_091550-41ogwcsv/files/requirements.txt
+2023-11-21 09:15:54,081 INFO    Thread-12 :33463 [dir_watcher.py:_on_file_created():271] file/dir created: /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231121_091550-41ogwcsv/files/wandb-metadata.json
+2023-11-21 09:15:56,480 DEBUG   HandlerThread:33463 [handler.py:handle_request():146] handle_request: status_report
+2023-11-21 09:16:01,481 DEBUG   HandlerThread:33463 [handler.py:handle_request():146] handle_request: status_report
+2023-11-21 09:16:06,483 DEBUG   HandlerThread:33463 [handler.py:handle_request():146] handle_request: status_report
+2023-11-21 09:16:08,293 DEBUG   HandlerThread:33463 [handler.py:handle_request():146] handle_request: stop_status
+2023-11-21 09:16:08,296 DEBUG   SenderThread:33463 [sender.py:send_request():407] send_request: stop_status
+2023-11-21 09:16:08,338 DEBUG   HandlerThread:33463 [handler.py:handle_request():146] handle_request: internal_messages
+2023-11-21 09:16:12,423 DEBUG   HandlerThread:33463 [handler.py:handle_request():146] handle_request: status_report
+2023-11-21 09:16:17,424 DEBUG   HandlerThread:33463 [handler.py:handle_request():146] handle_request: status_report
+2023-11-21 09:16:20,056 DEBUG   SenderThread:33463 [sender.py:send():380] send: telemetry
+2023-11-21 09:16:20,097 DEBUG   HandlerThread:33463 [handler.py:handle_request():146] handle_request: get_summary
+2023-11-21 09:16:20,098 DEBUG   SenderThread:33463 [sender.py:send():380] send: telemetry
+2023-11-21 09:16:20,101 DEBUG   SenderThread:33463 [sender.py:send():380] send: files
+2023-11-21 09:16:20,103 INFO    SenderThread:33463 [sender.py:_save_file():1380] saving file model-best.h5 with policy live
+2023-11-21 09:16:20,110 DEBUG   SenderThread:33463 [sender.py:send():380] send: telemetry
+2023-11-21 09:16:21,081 INFO    Thread-12 :33463 [dir_watcher.py:_on_file_created():271] file/dir created: /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231121_091550-41ogwcsv/files/output.log
+2023-11-21 09:16:23,127 INFO    Thread-12 :33463 [dir_watcher.py:_on_file_modified():288] file/dir modified: /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231121_091550-41ogwcsv/files/output.log
+2023-11-21 09:16:23,134 DEBUG   HandlerThread:33463 [handler.py:handle_request():146] handle_request: status_report
+2023-11-21 09:16:23,319 DEBUG   HandlerThread:33463 [handler.py:handle_request():146] handle_request: stop_status
+2023-11-21 09:16:23,322 DEBUG   SenderThread:33463 [sender.py:send_request():407] send_request: stop_status
+2023-11-21 09:16:23,367 DEBUG   HandlerThread:33463 [handler.py:handle_request():146] handle_request: internal_messages
+2023-11-21 09:16:24,167 INFO    Thread-12 :33463 [dir_watcher.py:_on_file_modified():288] file/dir modified: /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231121_091550-41ogwcsv/files/config.yaml
+2023-11-21 09:16:28,407 INFO    cpu       :33463 [interfaces.py:monitor():140] Process cpu has exited.
+2023-11-21 09:16:28,417 DEBUG   SystemMonitor:33463 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2023-11-21 09:16:28,419 DEBUG   SystemMonitor:33463 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2023-11-21 09:16:28,420 DEBUG   SystemMonitor:33463 [system_monitor.py:_start():183] Publishing last batch of metrics
+2023-11-21 09:16:28,472 DEBUG   SenderThread:33463 [sender.py:send():380] send: stats
+2023-11-21 09:16:28,480 DEBUG   HandlerThread:33463 [handler.py:handle_request():146] handle_request: status_report
+2023-11-21 09:16:29,437 INFO    MainThread:33463 [internal.py:handle_exit():76] Internal process exited

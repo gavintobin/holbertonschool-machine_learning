@@ -1,0 +1,175 @@
+2023-11-20 14:45:20,147 INFO    StreamThr :30579 [internal.py:wandb_internal():86] W&B internal server running at pid: 30579, started at: 2023-11-20 14:45:20.141216
+2023-11-20 14:45:20,151 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: status
+2023-11-20 14:45:20,166 INFO    WriterThread:30579 [datastore.py:open_for_write():85] open: /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231120_144519-vsw246no/run-vsw246no.wandb
+2023-11-20 14:45:20,172 DEBUG   SenderThread:30579 [sender.py:send():380] send: header
+2023-11-20 14:45:20,615 DEBUG   SenderThread:30579 [sender.py:send():380] send: run
+2023-11-20 14:45:21,113 INFO    SenderThread:30579 [dir_watcher.py:__init__():211] watching files in: /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231120_144519-vsw246no/files
+2023-11-20 14:45:21,115 INFO    SenderThread:30579 [sender.py:_start_run_threads():1122] run started: vsw246no with start time 1700513120.142809
+2023-11-20 14:45:21,162 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: check_version
+2023-11-20 14:45:21,163 DEBUG   SenderThread:30579 [sender.py:send_request():407] send_request: check_version
+2023-11-20 14:45:21,506 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: run_start
+2023-11-20 14:45:21,510 DEBUG   HandlerThread:30579 [system_info.py:__init__():32] System info init
+2023-11-20 14:45:21,511 DEBUG   HandlerThread:30579 [system_info.py:__init__():47] System info init done
+2023-11-20 14:45:21,511 INFO    HandlerThread:30579 [system_monitor.py:start():194] Starting system monitor
+2023-11-20 14:45:21,512 INFO    SystemMonitor:30579 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2023-11-20 14:45:21,513 INFO    HandlerThread:30579 [system_monitor.py:probe():214] Collecting system info
+2023-11-20 14:45:21,514 INFO    SystemMonitor:30579 [interfaces.py:start():190] Started cpu monitoring
+2023-11-20 14:45:21,518 INFO    SystemMonitor:30579 [interfaces.py:start():190] Started disk monitoring
+2023-11-20 14:45:21,520 INFO    SystemMonitor:30579 [interfaces.py:start():190] Started memory monitoring
+2023-11-20 14:45:21,523 INFO    SystemMonitor:30579 [interfaces.py:start():190] Started network monitoring
+2023-11-20 14:45:21,530 DEBUG   HandlerThread:30579 [system_info.py:probe():196] Probing system
+2023-11-20 14:45:21,680 DEBUG   HandlerThread:30579 [system_info.py:_probe_git():181] Probing git
+2023-11-20 14:45:22,192 DEBUG   HandlerThread:30579 [system_info.py:_probe_git():189] Probing git done
+2023-11-20 14:45:22,193 DEBUG   HandlerThread:30579 [system_info.py:probe():244] Probing system done
+2023-11-20 14:45:22,194 DEBUG   HandlerThread:30579 [system_monitor.py:probe():223] {'os': 'Linux-5.15.90.1-microsoft-standard-WSL2-x86_64-with-glibc2.35', 'python': '3.10.12', 'heartbeatAt': '2023-11-20T20:45:21.531963', 'startedAt': '2023-11-20T20:45:19.980696', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '/mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/./forecast_btc.py', 'codePathLocal': 'forecast_btc.py', 'codePath': 'supervised_learning/time_series/forecast_btc.py', 'git': {'remote': 'https://gavintobin:@github.com/gavintobin/holbertonschool-machine_learning.git', 'commit': '1e29f10e7a329b23eb18fdda815fdfab465a4056'}, 'email': 'gavintobin714@gmail.com', 'root': '/mnt/c/Users/gavin/holbertonschool-machine_learning', 'host': 'gavin', 'username': 'gavintobin', 'executable': '/usr/bin/python3', 'cpu_count': 6, 'cpu_count_logical': 12, 'cpu_freq': {'current': 2611.2099999999996, 'min': 0.0, 'max': 0.0}, 'cpu_freq_per_core': [{'current': 2611.21, 'min': 0.0, 'max': 0.0}, {'current': 2611.21, 'min': 0.0, 'max': 0.0}, {'current': 2611.21, 'min': 0.0, 'max': 0.0}, {'current': 2611.21, 'min': 0.0, 'max': 0.0}, {'current': 2611.21, 'min': 0.0, 'max': 0.0}, {'current': 2611.21, 'min': 0.0, 'max': 0.0}, {'current': 2611.21, 'min': 0.0, 'max': 0.0}, {'current': 2611.21, 'min': 0.0, 'max': 0.0}, {'current': 2611.21, 'min': 0.0, 'max': 0.0}, {'current': 2611.21, 'min': 0.0, 'max': 0.0}, {'current': 2611.21, 'min': 0.0, 'max': 0.0}, {'current': 2611.21, 'min': 0.0, 'max': 0.0}], 'disk': {'/': {'total': 1006.853931427002, 'used': 6.8936767578125}}, 'memory': {'total': 7.618267059326172}}
+2023-11-20 14:45:22,195 INFO    HandlerThread:30579 [system_monitor.py:probe():224] Finished collecting system info
+2023-11-20 14:45:22,196 INFO    HandlerThread:30579 [system_monitor.py:probe():227] Publishing system info
+2023-11-20 14:45:22,197 DEBUG   HandlerThread:30579 [system_info.py:_save_pip():52] Saving list of pip packages installed into the current environment
+2023-11-20 14:45:22,210 DEBUG   HandlerThread:30579 [system_info.py:_save_pip():68] Saving pip packages done
+2023-11-20 14:45:22,223 INFO    HandlerThread:30579 [system_monitor.py:probe():229] Finished publishing system info
+2023-11-20 14:45:22,233 DEBUG   SenderThread:30579 [sender.py:send():380] send: files
+2023-11-20 14:45:22,234 INFO    SenderThread:30579 [sender.py:_save_file():1378] saving file wandb-metadata.json with policy now
+2023-11-20 14:45:22,265 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: stop_status
+2023-11-20 14:45:22,269 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: internal_messages
+2023-11-20 14:45:22,269 DEBUG   SenderThread:30579 [sender.py:send_request():407] send_request: stop_status
+2023-11-20 14:45:22,421 DEBUG   SenderThread:30579 [sender.py:send():380] send: telemetry
+2023-11-20 14:45:22,447 DEBUG   SenderThread:30579 [sender.py:send():380] send: exit
+2023-11-20 14:45:22,448 INFO    SenderThread:30579 [sender.py:send_exit():585] handling exit code: 1
+2023-11-20 14:45:22,450 INFO    SenderThread:30579 [sender.py:send_exit():587] handling runtime: 0
+2023-11-20 14:45:22,464 INFO    SenderThread:30579 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-11-20 14:45:22,470 INFO    SenderThread:30579 [sender.py:send_exit():593] send defer
+2023-11-20 14:45:22,472 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: defer
+2023-11-20 14:45:22,474 INFO    HandlerThread:30579 [handler.py:handle_request_defer():172] handle defer: 0
+2023-11-20 14:45:22,476 DEBUG   SenderThread:30579 [sender.py:send_request():407] send_request: defer
+2023-11-20 14:45:22,477 INFO    SenderThread:30579 [sender.py:send_request_defer():609] handle sender defer: 0
+2023-11-20 14:45:22,478 INFO    SenderThread:30579 [sender.py:transition_state():613] send defer: 1
+2023-11-20 14:45:22,480 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: defer
+2023-11-20 14:45:22,481 INFO    HandlerThread:30579 [handler.py:handle_request_defer():172] handle defer: 1
+2023-11-20 14:45:22,483 DEBUG   SenderThread:30579 [sender.py:send_request():407] send_request: defer
+2023-11-20 14:45:22,484 INFO    SenderThread:30579 [sender.py:send_request_defer():609] handle sender defer: 1
+2023-11-20 14:45:22,485 INFO    SenderThread:30579 [sender.py:transition_state():613] send defer: 2
+2023-11-20 14:45:22,486 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: defer
+2023-11-20 14:45:22,487 INFO    HandlerThread:30579 [handler.py:handle_request_defer():172] handle defer: 2
+2023-11-20 14:45:22,489 INFO    HandlerThread:30579 [system_monitor.py:finish():203] Stopping system monitor
+2023-11-20 14:45:22,491 DEBUG   SystemMonitor:30579 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2023-11-20 14:45:22,492 DEBUG   SystemMonitor:30579 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2023-11-20 14:45:22,492 INFO    HandlerThread:30579 [interfaces.py:finish():202] Joined cpu monitor
+2023-11-20 14:45:22,493 DEBUG   SystemMonitor:30579 [system_monitor.py:_start():183] Publishing last batch of metrics
+2023-11-20 14:45:22,494 INFO    HandlerThread:30579 [interfaces.py:finish():202] Joined disk monitor
+2023-11-20 14:45:22,497 INFO    HandlerThread:30579 [interfaces.py:finish():202] Joined memory monitor
+2023-11-20 14:45:22,499 INFO    HandlerThread:30579 [interfaces.py:finish():202] Joined network monitor
+2023-11-20 14:45:22,500 DEBUG   SenderThread:30579 [sender.py:send_request():407] send_request: defer
+2023-11-20 14:45:22,502 INFO    SenderThread:30579 [sender.py:send_request_defer():609] handle sender defer: 2
+2023-11-20 14:45:22,503 INFO    SenderThread:30579 [sender.py:transition_state():613] send defer: 3
+2023-11-20 14:45:22,505 DEBUG   SenderThread:30579 [sender.py:send():380] send: stats
+2023-11-20 14:45:22,505 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: defer
+2023-11-20 14:45:22,508 INFO    HandlerThread:30579 [handler.py:handle_request_defer():172] handle defer: 3
+2023-11-20 14:45:22,510 DEBUG   SenderThread:30579 [sender.py:send_request():407] send_request: defer
+2023-11-20 14:45:22,511 INFO    SenderThread:30579 [sender.py:send_request_defer():609] handle sender defer: 3
+2023-11-20 14:45:22,512 INFO    SenderThread:30579 [sender.py:transition_state():613] send defer: 4
+2023-11-20 14:45:22,513 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: defer
+2023-11-20 14:45:22,514 INFO    HandlerThread:30579 [handler.py:handle_request_defer():172] handle defer: 4
+2023-11-20 14:45:22,516 DEBUG   SenderThread:30579 [sender.py:send_request():407] send_request: defer
+2023-11-20 14:45:22,517 INFO    SenderThread:30579 [sender.py:send_request_defer():609] handle sender defer: 4
+2023-11-20 14:45:22,518 INFO    SenderThread:30579 [sender.py:transition_state():613] send defer: 5
+2023-11-20 14:45:22,520 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: defer
+2023-11-20 14:45:22,521 INFO    HandlerThread:30579 [handler.py:handle_request_defer():172] handle defer: 5
+2023-11-20 14:45:22,523 DEBUG   SenderThread:30579 [sender.py:send():380] send: summary
+2023-11-20 14:45:22,535 INFO    SenderThread:30579 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-11-20 14:45:22,541 DEBUG   SenderThread:30579 [sender.py:send_request():407] send_request: defer
+2023-11-20 14:45:22,543 INFO    SenderThread:30579 [sender.py:send_request_defer():609] handle sender defer: 5
+2023-11-20 14:45:22,546 INFO    SenderThread:30579 [sender.py:transition_state():613] send defer: 6
+2023-11-20 14:45:22,547 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: defer
+2023-11-20 14:45:22,548 INFO    HandlerThread:30579 [handler.py:handle_request_defer():172] handle defer: 6
+2023-11-20 14:45:22,549 DEBUG   SenderThread:30579 [sender.py:send_request():407] send_request: defer
+2023-11-20 14:45:22,550 INFO    SenderThread:30579 [sender.py:send_request_defer():609] handle sender defer: 6
+2023-11-20 14:45:22,557 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: status_report
+2023-11-20 14:45:22,666 INFO    SenderThread:30579 [sender.py:transition_state():613] send defer: 7
+2023-11-20 14:45:22,667 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: defer
+2023-11-20 14:45:22,669 INFO    HandlerThread:30579 [handler.py:handle_request_defer():172] handle defer: 7
+2023-11-20 14:45:22,671 DEBUG   SenderThread:30579 [sender.py:send_request():407] send_request: defer
+2023-11-20 14:45:22,672 INFO    SenderThread:30579 [sender.py:send_request_defer():609] handle sender defer: 7
+2023-11-20 14:45:23,017 INFO    wandb-upload_0:30579 [upload_job.py:push():131] Uploaded file /tmp/tmphgq9farowandb/ccjt5kda-wandb-metadata.json
+2023-11-20 14:45:23,164 INFO    Thread-12 :30579 [dir_watcher.py:_on_file_modified():288] file/dir modified: /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231120_144519-vsw246no/files/config.yaml
+2023-11-20 14:45:23,170 INFO    Thread-12 :30579 [dir_watcher.py:_on_file_created():271] file/dir created: /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231120_144519-vsw246no/files/output.log
+2023-11-20 14:45:23,172 INFO    Thread-12 :30579 [dir_watcher.py:_on_file_created():271] file/dir created: /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231120_144519-vsw246no/files/requirements.txt
+2023-11-20 14:45:23,178 INFO    Thread-12 :30579 [dir_watcher.py:_on_file_created():271] file/dir created: /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231120_144519-vsw246no/files/wandb-summary.json
+2023-11-20 14:45:23,183 INFO    Thread-12 :30579 [dir_watcher.py:_on_file_created():271] file/dir created: /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231120_144519-vsw246no/files/wandb-metadata.json
+2023-11-20 14:45:23,445 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-20 14:45:24,451 INFO    SenderThread:30579 [sender.py:transition_state():613] send defer: 8
+2023-11-20 14:45:24,453 DEBUG   SenderThread:30579 [sender.py:send_request():407] send_request: poll_exit
+2023-11-20 14:45:24,453 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: defer
+2023-11-20 14:45:24,455 INFO    HandlerThread:30579 [handler.py:handle_request_defer():172] handle defer: 8
+2023-11-20 14:45:24,457 DEBUG   SenderThread:30579 [sender.py:send_request():407] send_request: defer
+2023-11-20 14:45:24,457 INFO    SenderThread:30579 [sender.py:send_request_defer():609] handle sender defer: 8
+2023-11-20 14:45:24,459 INFO    SenderThread:30579 [job_builder.py:build():281] Attempting to build job artifact
+2023-11-20 14:45:24,481 INFO    SenderThread:30579 [job_builder.py:_get_source_type():393] is repo sourced job
+2023-11-20 14:45:24,485 INFO    SenderThread:30579 [job_builder.py:build():369] adding wandb-job metadata file
+2023-11-20 14:45:24,547 INFO    SenderThread:30579 [sender.py:transition_state():613] send defer: 9
+2023-11-20 14:45:24,548 DEBUG   SenderThread:30579 [sender.py:send():380] send: artifact
+2023-11-20 14:45:24,549 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: defer
+2023-11-20 14:45:24,553 INFO    HandlerThread:30579 [handler.py:handle_request_defer():172] handle defer: 9
+2023-11-20 14:45:24,930 INFO    SenderThread:30579 [sender.py:send_artifact():1456] sent artifact job-https___gavintobin__github.com_gavintobin_holbertonschool-m..ne_learning.git_supervised_learning_time_series_forecast_btc.py - {'id': 'QXJ0aWZhY3Q6NjQzOTU1Mjg1', 'state': 'COMMITTED', 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjExNzMwNzIxMA==', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6NjQzOTU1Mjg1', 'versionIndex': 0}}}
+2023-11-20 14:45:24,931 DEBUG   SenderThread:30579 [sender.py:send_request():407] send_request: defer
+2023-11-20 14:45:24,933 INFO    SenderThread:30579 [sender.py:send_request_defer():609] handle sender defer: 9
+2023-11-20 14:45:24,934 INFO    SenderThread:30579 [dir_watcher.py:finish():358] shutting down directory watcher
+2023-11-20 14:45:25,276 INFO    SenderThread:30579 [dir_watcher.py:_on_file_modified():288] file/dir modified: /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231120_144519-vsw246no/files/output.log
+2023-11-20 14:45:25,286 INFO    SenderThread:30579 [dir_watcher.py:finish():388] scan: /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231120_144519-vsw246no/files
+2023-11-20 14:45:25,300 INFO    SenderThread:30579 [dir_watcher.py:finish():402] scan save: /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231120_144519-vsw246no/files/config.yaml config.yaml
+2023-11-20 14:45:25,338 INFO    SenderThread:30579 [dir_watcher.py:finish():402] scan save: /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231120_144519-vsw246no/files/output.log output.log
+2023-11-20 14:45:25,373 INFO    SenderThread:30579 [dir_watcher.py:finish():402] scan save: /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231120_144519-vsw246no/files/requirements.txt requirements.txt
+2023-11-20 14:45:25,406 INFO    SenderThread:30579 [dir_watcher.py:finish():402] scan save: /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231120_144519-vsw246no/files/wandb-metadata.json wandb-metadata.json
+2023-11-20 14:45:25,407 INFO    SenderThread:30579 [dir_watcher.py:finish():402] scan save: /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231120_144519-vsw246no/files/wandb-summary.json wandb-summary.json
+2023-11-20 14:45:25,435 INFO    SenderThread:30579 [sender.py:transition_state():613] send defer: 10
+2023-11-20 14:45:25,438 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: defer
+2023-11-20 14:45:25,439 INFO    HandlerThread:30579 [handler.py:handle_request_defer():172] handle defer: 10
+2023-11-20 14:45:25,443 DEBUG   SenderThread:30579 [sender.py:send_request():407] send_request: defer
+2023-11-20 14:45:25,447 INFO    SenderThread:30579 [sender.py:send_request_defer():609] handle sender defer: 10
+2023-11-20 14:45:25,449 INFO    SenderThread:30579 [file_pusher.py:finish():175] shutting down file pusher
+2023-11-20 14:45:25,573 INFO    wandb-upload_0:30579 [upload_job.py:push():131] Uploaded file /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231120_144519-vsw246no/files/config.yaml
+2023-11-20 14:45:26,115 INFO    wandb-upload_1:30579 [upload_job.py:push():131] Uploaded file /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231120_144519-vsw246no/files/output.log
+2023-11-20 14:45:26,239 INFO    wandb-upload_2:30579 [upload_job.py:push():131] Uploaded file /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231120_144519-vsw246no/files/requirements.txt
+2023-11-20 14:45:26,242 INFO    wandb-upload_3:30579 [upload_job.py:push():131] Uploaded file /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231120_144519-vsw246no/files/wandb-summary.json
+2023-11-20 14:45:26,444 INFO    Thread-11 (_thread_body):30579 [sender.py:transition_state():613] send defer: 11
+2023-11-20 14:45:26,445 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: defer
+2023-11-20 14:45:26,447 INFO    HandlerThread:30579 [handler.py:handle_request_defer():172] handle defer: 11
+2023-11-20 14:45:26,448 DEBUG   SenderThread:30579 [sender.py:send_request():407] send_request: defer
+2023-11-20 14:45:26,450 INFO    SenderThread:30579 [sender.py:send_request_defer():609] handle sender defer: 11
+2023-11-20 14:45:26,451 INFO    SenderThread:30579 [file_pusher.py:join():181] waiting for file pusher
+2023-11-20 14:45:26,452 INFO    SenderThread:30579 [sender.py:transition_state():613] send defer: 12
+2023-11-20 14:45:26,454 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: defer
+2023-11-20 14:45:26,455 INFO    HandlerThread:30579 [handler.py:handle_request_defer():172] handle defer: 12
+2023-11-20 14:45:26,457 DEBUG   SenderThread:30579 [sender.py:send_request():407] send_request: defer
+2023-11-20 14:45:26,458 INFO    SenderThread:30579 [sender.py:send_request_defer():609] handle sender defer: 12
+2023-11-20 14:45:26,459 INFO    SenderThread:30579 [file_stream.py:finish():595] file stream finish called
+2023-11-20 14:45:26,537 INFO    SenderThread:30579 [file_stream.py:finish():599] file stream finish is done
+2023-11-20 14:45:26,538 INFO    SenderThread:30579 [sender.py:transition_state():613] send defer: 13
+2023-11-20 14:45:26,539 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: defer
+2023-11-20 14:45:26,540 INFO    HandlerThread:30579 [handler.py:handle_request_defer():172] handle defer: 13
+2023-11-20 14:45:26,542 DEBUG   SenderThread:30579 [sender.py:send_request():407] send_request: defer
+2023-11-20 14:45:26,542 INFO    SenderThread:30579 [sender.py:send_request_defer():609] handle sender defer: 13
+2023-11-20 14:45:26,544 INFO    SenderThread:30579 [sender.py:transition_state():613] send defer: 14
+2023-11-20 14:45:26,545 DEBUG   SenderThread:30579 [sender.py:send():380] send: final
+2023-11-20 14:45:26,545 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: defer
+2023-11-20 14:45:26,547 INFO    HandlerThread:30579 [handler.py:handle_request_defer():172] handle defer: 14
+2023-11-20 14:45:26,545 DEBUG   SenderThread:30579 [sender.py:send():380] send: footer
+2023-11-20 14:45:26,549 DEBUG   SenderThread:30579 [sender.py:send_request():407] send_request: defer
+2023-11-20 14:45:26,550 INFO    SenderThread:30579 [sender.py:send_request_defer():609] handle sender defer: 14
+2023-11-20 14:45:26,551 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: poll_exit
+2023-11-20 14:45:26,552 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: server_info
+2023-11-20 14:45:26,552 DEBUG   SenderThread:30579 [sender.py:send_request():407] send_request: poll_exit
+2023-11-20 14:45:26,553 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: get_summary
+2023-11-20 14:45:26,554 DEBUG   SenderThread:30579 [sender.py:send_request():407] send_request: server_info
+2023-11-20 14:45:26,555 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: sampled_history
+2023-11-20 14:45:26,559 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: internal_messages
+2023-11-20 14:45:26,561 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: job_info
+2023-11-20 14:45:26,608 DEBUG   SenderThread:30579 [sender.py:send_request():407] send_request: job_info
+2023-11-20 14:45:26,609 INFO    MainThread:30579 [wandb_run.py:_footer_history_summary_info():3599] rendering history
+2023-11-20 14:45:26,611 INFO    MainThread:30579 [wandb_run.py:_footer_history_summary_info():3631] rendering summary
+2023-11-20 14:45:26,612 INFO    MainThread:30579 [wandb_run.py:_footer_sync_info():3558] logging synced files
+2023-11-20 14:45:26,614 DEBUG   HandlerThread:30579 [handler.py:handle_request():146] handle_request: shutdown
+2023-11-20 14:45:26,615 INFO    HandlerThread:30579 [handler.py:finish():866] shutting down handler
+2023-11-20 14:45:27,562 INFO    WriterThread:30579 [datastore.py:close():294] close: /mnt/c/Users/gavin/holbertonschool-machine_learning/supervised_learning/time_series/wandb/run-20231120_144519-vsw246no/run-vsw246no.wandb
+2023-11-20 14:45:27,610 INFO    SenderThread:30579 [sender.py:finish():1534] shutting down sender
+2023-11-20 14:45:27,611 INFO    SenderThread:30579 [file_pusher.py:finish():175] shutting down file pusher
+2023-11-20 14:45:27,612 INFO    SenderThread:30579 [file_pusher.py:join():181] waiting for file pusher
