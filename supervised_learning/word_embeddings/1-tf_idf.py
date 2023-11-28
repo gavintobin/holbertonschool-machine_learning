@@ -8,10 +8,6 @@ import numpy as np
 
 def tf_idf(sentences, vocab=None):
     '''tf idf'''
-
-    if vocab is None:
-        vocab = []
-
         # make vocab
         for sentence in sentences:
             words = sentence.split()
