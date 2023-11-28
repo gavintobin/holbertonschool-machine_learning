@@ -1,9 +1,10 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 '''task 2'''
 
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
+
 
 def tf_idf(sentences, vocab=None):
     '''tf idf'''
