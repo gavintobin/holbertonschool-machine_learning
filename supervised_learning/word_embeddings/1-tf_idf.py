@@ -18,7 +18,7 @@ def tf_idf(sentences, vocab=None):
             vocab.extend(words)
 
     #  makeTF-IDF vect
-    vectorizer = TfidfVectorizer(vocabulary=vocab)
+    vectorizer = TfidfVectorizer(vocabulary=vocab, token_pattern=r'\b\w+\b')
 
     #  put them into embeddings
     embeddings = vectorizer.fit_transform(sentences).toarray()
