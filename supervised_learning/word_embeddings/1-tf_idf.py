@@ -23,7 +23,10 @@ def tf_idf(sentences, vocab=None):
     #  put them into embeddings
     embeddings = vectorizer.fit_transform(sentences).toarray()
 
-    # get features
-    features = vectorizer.get_feature_names()
+    if vocab is None:
+        # get features
+        features = vectorizer.get_feature_names()
+    else:
+        features = vocab
 
     return embeddings, features
