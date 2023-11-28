@@ -8,7 +8,7 @@ import numpy as np
 
 def tf_idf(sentences, vocab=None):
     '''tf idf'''
-        # make vocab
+    # make vocab
     for sentence in sentences:
         words = sentence.split()
         vocab.extend(words)
@@ -21,7 +21,7 @@ def tf_idf(sentences, vocab=None):
 
     if vocab is None:
         # get features
-        features = vectorizer.get_feature_names()
+        features = set(vectorizer.get_feature_names())
     else:
         features = vocab
 
