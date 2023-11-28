@@ -14,6 +14,6 @@ def bag_of_words(sentences, vocab=None):
     embeddings = vectorizer.fit_transform(sentences).toarray()
 
     # get features
-    features = vectorizer.get_feature_names_out()
+    features = vectorizer.get_feature_names()
 
     return embeddings, features
