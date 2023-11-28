@@ -15,7 +15,7 @@ def bag_of_words(sentences, vocab=None):
 
     # get features
     if vocab is None:
-    features = set(vectorizer.get_feature_names())
+        features = set(vectorizer.get_feature_names())
 
     else:
         features = vocab
