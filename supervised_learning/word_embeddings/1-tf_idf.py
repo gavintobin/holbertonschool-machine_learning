@@ -9,9 +9,9 @@ import numpy as np
 def tf_idf(sentences, vocab=None):
     '''tf idf'''
         # make vocab
-        for sentence in sentences:
-            words = sentence.split()
-            vocab.extend(words)
+    for sentence in sentences:
+        words = sentence.split()
+        vocab.extend(words)
 
     #  makeTF-IDF vect
     vectorizer = TfidfVectorizer(vocabulary=vocab, token_pattern=r'\b\w+\b')
