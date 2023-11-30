@@ -25,4 +25,3 @@ def uni_bleu(references, sentence):
     bleu_score = brevity_penalty * (precision_sum / len(references))
 
     return bleu_score
-
