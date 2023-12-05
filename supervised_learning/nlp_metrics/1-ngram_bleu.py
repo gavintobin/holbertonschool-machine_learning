@@ -1,4 +1,4 @@
-#!/usr/bin/bleuenv python3
+#!/usr/bin/env python3
 '''task2'''
 
 from collections import Counter
