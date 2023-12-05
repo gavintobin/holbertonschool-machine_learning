@@ -1,38 +1,29 @@
-#!/usr/bin/env python3
+#!/usr/bin/bleuenv python3
 '''task2'''
 
 from collections import Counter
 import math
+import numpy as np
+
 
 def ngram_bleu(references, sentence, n):
-    # Calculate precision for each n-gram
-    precisions = []
-    for i in range(1, n + 1):
-        reference_ngrams = Counter()
-        sentence_ngrams = Counter()
+    '''ngram blue'''
+    cngrams = Counter(zip(*[sentence[i:] for i in range(n)]))
+    ngrams = Counter()
 
-        # Count n-grams in references
-        for reference in references:
-            reference_ngrams.update(zip(*[reference[j:] for j in range(i)]))
+    for ref in references:
+        reference_ngrams = Counter(zip(*[ref[i:] for i in range(n)]))
+        ngrams += reference_ngrams
 
-        # Count n-grams in the proposed sentence
-        sentence_ngrams.update(zip(*[sentence[j:] for j in range(i)]))
+    clipped = {ngram: min(cngrams[ngram],
+                     ngrams[ngram]) for ngram in cngrams}
 
-        # Calculate intersection between reference and sentence n-grams
-        common_ngrams = sum((reference_ngrams & sentence_ngrams).values())
+    precision = sum(clipped.values()) / max(1, sum(cngrams.values()))
 
-        # Calculate precision for the current n-gram order
-        precision = common_ngrams / max(1, sum(sentence_ngrams.values()))
-        precisions.append(precision)
+    pf = min(len(ref) for ref in references)
 
-    # Calculate the geometric mean of precisions
-    geometric_mean = math.exp(sum(map(math.log, precisions)) / n)
+    brev = np.exp(1 - (pf / len(sentence))) if len(sentence) < pf else 1
 
-    # Calculate brevity penalty
-    closest_reference_length = min(references, key=lambda ref: abs(len(ref) - len(sentence)))
-    brevity_penalty = min(1, len(sentence) / len(closest_reference_length))
+    bs = brev * precision
 
-    # Calculate BLEU score
-    bleu_score = brevity_penalty * geometric_mean
-
-    return bleu_score
+    return bs
