@@ -4,6 +4,7 @@
 from collections import Counter
 import numpy as np
 
+
 def cumulative_bleu(references, sentence, n):
     bleu_scores = []
 
@@ -23,7 +24,9 @@ def cumulative_bleu(references, sentence, n):
     geometric_mean = np.exp(np.mean(np.log(bleu_scores)))
 
     # Calculate brevity penalty
-    closest_reference_length = min(references, key=lambda ref: abs(len(ref) - len(sentence)))
+    closest_reference_length = min(references,
+                                   key=lambda ref:
+                                   abs(len(ref) - len(sentence)))
     brevity_penalty = min(1, len(sentence) / len(closest_reference_length))
 
     # Calculate cumulative BLEU score
