@@ -16,7 +16,7 @@ def ngram_bleu(references, sentence, n):
         ngrams += reference_ngrams
 
     clipped = {ngram: min(cngrams[ngram],
-                     ngrams[ngram]) for ngram in cngrams}
+               ngrams[ngram]) for ngram in cngrams}
 
     precision = sum(clipped.values()) / max(1, sum(cngrams.values()))
 
