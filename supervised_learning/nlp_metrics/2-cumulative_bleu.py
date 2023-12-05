@@ -6,6 +6,7 @@ import numpy as np
 
 
 def cumulative_bleu(references, sentence, n):
+    '''cumi bleu score'''
     bleu_scores = []
 
     for i in range(1, n + 1):
