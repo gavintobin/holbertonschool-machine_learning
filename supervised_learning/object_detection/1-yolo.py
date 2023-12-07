@@ -36,12 +36,12 @@ class Yolo:
                         class_probs = box_class_prob[cy, cx, b, :]
 
                         if confidence > self.class_t:
-                            pw, ph = self.anchors[b]
+                            pw, ph = self.anchors[b][:2]
                             tx, ty, tw, th = output_boxes[cy, cx, b]
                             bx = (self.sigmoid(tx) + cx) / grid_width
                             by = (self.sigmoid(ty) + cy) / grid_height
-                            bw = pw * np.exp(tw) / self.model.input.shape[1].value
-                            bh = ph * np.exp(th) / self.model.input.shape[2].value
+                            bw = pw * np.exp(tw) / self.model.input.shape[1]
+                            bh = ph * np.exp(th) / self.model.input.shape[2]
 
                             x1 = max(int((bx - (bw / 2)) * image_width), 0)
                             y1 = max(int((by - (bh / 2)) * image_height), 0)
