@@ -34,23 +34,21 @@ class Yolo:
             for cy in range(grid_height):
                 for cx in range(grid_width):
                     for b in range(anchors):
-                        pw, ph = self.anchors[b][:2]
+                        pw, ph = self.anchors[output][b]
                         tx, ty, tw, th = boxes[output][cy, cx, b]
-                        bx = (self.sigmoid(tx) + cx) / grid_width
-                        by = (self.sigmoid(ty) + cy) / grid_height
-                        bw = pw * np.exp(tw) / self.model.input.shape[1].value
-                        bh = ph * np.exp(th) / self.model.input.shape[2].value
+                        bx = (self.sigmoid(tx)) + cx
+                        by = (self.sigmoid(ty)) + cy
+                        bw = pw * np.exp(tw) / self.model.input.shape[1]
+                        bh = ph * np.exp(th) / self.model.input.shape[2]
 
-                        x1 = max(int((bx - (bw / 2)).any() * image_width), 0)
-                        x2 = min(int((bx + (bw / 2)).any() * image_width),
-                                 image_width)
-                        y2 = min(int((by + (bh / 2)).any() * image_height),
-                                 image_height)
-                        y1 = max(int((by - (bh / 2)).any() * image_height), 0)
+                        x1 = (bx - (bw / 2)).any() * image_width
+                        x2 = (bx + (bw / 2)).any() * image_width
+                        y2 = (by + (bh / 2)).any() * image_height
+                        y1 = (by - (bh / 2)).any() * image_height
 
-                        all_boxes.append([x1, y1, x2, y2])
+                        boxes.append([x1, y1, x2, y2])
 
-        return np.array(all_boxes), box_confidences, box_class_probs
+        return np.array(boxes), box_confidences, box_class_probs
 
     def sigmoid(self, x):
         '''helper func'''
