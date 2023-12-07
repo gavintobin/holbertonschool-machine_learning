@@ -40,8 +40,8 @@ class Yolo:
                             tx, ty, tw, th = output_boxes[cy, cx, b]
                             bx = (self.sigmoid(tx) + cx) / grid_width
                             by = (self.sigmoid(ty) + cy) / grid_height
-                            bw = pw * np.exp(tw) / self.model.input.shape[1]
-                            bh = ph * np.exp(th) / self.model.input.shape[2]
+                            bw = pw * np.exp(tw) / self.model.input.shape[1].value
+                            bh = ph * np.exp(th) / self.model.input.shape[2].value
 
                             x1 = max(int((bx - (bw / 2)).any() * image_width), 0)
                             y1 = max(int((by - (bh / 2)).any() * image_height), 0)
