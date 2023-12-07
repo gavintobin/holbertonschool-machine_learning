@@ -25,25 +25,32 @@ class Yolo:
             box_confidences.append(self.sigmoid(output[..., 4:5]))
             box_class_probs.append(self.sigmoid(output[..., 5:]))
 
-        for output, output_boxes in enumerate(boxes):
+        all_boxes = []
+        for output_boxes, box_confidence, box_class_prob in zip(boxes, box_confidences, box_class_probs):
             grid_height, grid_width, anchors = output_boxes.shape[:3]
 
-        for cy in range(grid_height):
-            for cx in range(grid_width):
-                for b in range(anchors):
-                    tx, ty, tw, th = output_boxes[cy, cx, b]
-                    pw, ph = self.anchors[output][b]
-                    bx = (self.sigmoid(tx) + cx) / grid_width
-                    by = (self.sigmoid(ty) + cy) / grid_height
-                    bw = pw * np.exp(tw) / self.model.input.shape[1].value
-                    bh = ph * np.exp(th) / self.model.input.shape[2].value
-                    x1 = (bx - (bw / 2)) * image_width
-                    y1 = (by - (bh / 2)) * image_height
-                    x2 = (bx + (bw / 2)) * image_width
-                    y2 = (by + (bh / 2)) * image_height
-                    output_boxes[cy, cx, b] = [x1, y1, x2, y2]
+            for cy in range(grid_height):
+                for cx in range(grid_width):
+                    for b in range(anchors):
+                        confidence = float(box_confidence[cy, cx, b])
+                        class_probs = box_class_prob[cy, cx, b, :]
 
-        return boxes, box_confidences, box_class_probs
+                        if confidence > self.class_t:
+                            pw, ph = self.anchors[b]
+                            tx, ty, tw, th = output_boxes[cy, cx, b]
+                            bx = (self.sigmoid(tx) + cx) / grid_width
+                            by = (self.sigmoid(ty) + cy) / grid_height
+                            bw = pw * np.exp(tw) / self.model.input.shape[1].value
+                            bh = ph * np.exp(th) / self.model.input.shape[2].value
+
+                            x1 = max(int((bx - (bw / 2)) * image_width), 0)
+                            y1 = max(int((by - (bh / 2)) * image_height), 0)
+                            x2 = min(int((bx + (bw / 2)) * image_width), image_width)
+                            y2 = min(int((by + (bh / 2)) * image_height), image_height)
+
+                            all_boxes.append([x1, y1, x2, y2])
+
+        return np.array(all_boxes)
 
     def sigmoid(self, x):
         '''helper func'''
