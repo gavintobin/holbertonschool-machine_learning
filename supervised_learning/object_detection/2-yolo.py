@@ -35,8 +35,8 @@ class Yolo:
                     pw, ph = self.anchors[output][b]
                     bx = (self.sigmoid(tx) + cx) / grid_width
                     by = (self.sigmoid(ty) + cy) / grid_height
-                    bw = pw * np.exp(tw) / self.model.input.shape[1].value
-                    bh = ph * np.exp(th) / self.model.input.shape[2].value
+                    bw = pw * np.exp(tw) / self.model.input.shape[1]
+                    bh = ph * np.exp(th) / self.model.input.shape[2]
                     x1 = (bx - (bw / 2)) * image_width
                     y1 = (by - (bh / 2)) * image_height
                     x2 = (bx + (bw / 2)) * image_width
@@ -65,7 +65,7 @@ class Yolo:
             class_probs_reshaped = box_class_probs[i].reshape((grid_height * grid_width * anchor_boxes, len(self.class_names)))
 
             # Filter out boxes with low object confidence
-            mask_conf = confidences_reshaped >= self.class_threshold
+            mask_conf = confidences_reshaped >= self.class_t
             boxes_filtered = boxes_reshaped[mask_conf]
             confidences_filtered = confidences_reshaped[mask_conf]
             class_probs_filtered = class_probs_reshaped[mask_conf]
