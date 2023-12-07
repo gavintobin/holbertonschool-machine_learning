@@ -38,8 +38,8 @@ class Yolo:
                         tx, ty, tw, th = boxes[output][cy, cx, b]
                         bx = (self.sigmoid(tx)) + cx
                         by = (self.sigmoid(ty)) + cy
-                        bw = pw * np.exp(tw) / self.model.input.shape[1]
-                        bh = ph * np.exp(th) / self.model.input.shape[2]
+                        bw = pw * np.exp(tw) / self.model.input.shape[1].value
+                        bh = ph * np.exp(th) / self.model.input.shape[2].value
 
                         x1 = (bx - (bw / 2)).any() * image_width
                         x2 = (bx + (bw / 2)).any() * image_width
