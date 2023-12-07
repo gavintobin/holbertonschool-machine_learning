@@ -25,71 +25,57 @@ class Yolo:
             box_confidences.append(self.sigmoid(output[..., 4:5]))
             box_class_probs.append(self.sigmoid(output[..., 5:]))
 
-        for output, output_boxes in enumerate(boxes):
-            grid_height, grid_width, anchors = output_boxes.shape[:3]
+        all_boxes = []
+        for output in range(len(boxes)):
+            grid_height = outputs[output].shape[0]
+            grid_width = outputs[output].shape[1]
+            anchors = outputs[output].shape[2]
 
-        for cy in range(grid_height):
-            for cx in range(grid_width):
-                for b in range(anchors):
-                    tx, ty, tw, th = output_boxes[cy, cx, b]
-                    pw, ph = self.anchors[output][b]
-                    bx = (self.sigmoid(tx) + cx) / grid_width
-                    by = (self.sigmoid(ty) + cy) / grid_height
-                    bw = pw * np.exp(tw) / self.model.input.shape[1].value
-                    bh = ph * np.exp(th) / self.model.input.shape[2].value
-                    x1 = (bx - (bw / 2)) * image_width
-                    y1 = (by - (bh / 2)) * image_height
-                    x2 = (bx + (bw / 2)) * image_width
-                    y2 = (by + (bh / 2)) * image_height
-                    output_boxes[cy, cx, b] = [x1, y1, x2, y2]
+            for cy in range(grid_height):
+                for cx in range(grid_width):
+                    for b in range(anchors):
+                        pw, ph = self.anchors[output][b]
+                        tx, ty, tw, th = boxes[output][cy, cx, b]
+                        bx = (self.sigmoid(tx)) + cx
+                        by = (self.sigmoid(ty)) + cy
+                        bw = pw * np.exp(tw) / self.model.input.shape[1]
+                        bh = ph * np.exp(th) / self.model.input.shape[2]
 
-        return boxes, box_confidences, box_class_probs
+                        x1 = (bx - (bw / 2)).any() * image_width
+                        x2 = (bx + (bw / 2)).any() * image_width
+                        y2 = (by + (bh / 2)).any() * image_height
+                        y1 = (by - (bh / 2)).any() * image_height
+
+                        boxes.append([x1, y1, x2, y2])
+
+        return np.array(boxes), box_confidences, box_class_probs
+
+        def filter_boxes(self, boxes, box_confidences, box_class_probs):
+            '''filter boxes'''
+            filtered_boxes, box_classes, box_scores = [], [], []
+
+            for i in range(len(boxes)):
+                box = boxes[i]
+                box_confidence = box_confidences[i]
+                box_class_prob = box_class_probs[i]
+
+                box_scores.extend(np.max(box_class_prob, axis=-1)
+                                  * box_confidence)
+                box_classes.extend(np.argmax(box_class_prob, axis=-1))
+                filtered_boxes.extend(box)
+
+            filtered_boxes = np.array(filtered_boxes)
+            box_classes = np.array(box_classes)
+            box_scores = np.array(box_scores)
+
+            # Filter boxes based on box scores
+            mask = box_scores >= self.class_t
+            filtered_boxes = filtered_boxes[mask]
+            box_classes = box_classes[mask]
+            box_scores = box_scores[mask]
+
+            return filtered_boxes, box_classes, box_scores
 
     def sigmoid(self, x):
         '''helper func'''
         return 1 / (1 + np.exp(-x))
-
-    def filter_boxes(self, boxes, box_confidences, box_class_probs):
-        '''filter boxes'''
-        all_boxes = []
-        all_classes = []
-        all_scores = []
-
-        # Iterate through each output scale
-        for i in range(len(boxes)):
-            grid_height, grid_width, anchor_boxes, _ = boxes[i].shape
-
-            # Reshape boxes, box_confidences, and box_class_probs
-            boxes_reshaped = boxes[i].reshape((grid_height * grid_width * anchor_boxes, 4))
-            confidences_reshaped = box_confidences[i].reshape((grid_height * grid_width * anchor_boxes,))
-            class_probs_reshaped = box_class_probs[i].reshape((grid_height * grid_width * anchor_boxes, len(self.class_names)))
-
-            # Filter out boxes with low object confidence
-            mask_conf = confidences_reshaped >= self.class_t
-            boxes_filtered = boxes_reshaped[mask_conf]
-            confidences_filtered = confidences_reshaped[mask_conf]
-            class_probs_filtered = class_probs_reshaped[mask_conf]
-
-            # Calculate box scores
-            box_scores = confidences_filtered * class_probs_filtered.max(axis=1)
-
-            mask_scores = box_scores > 0
-            boxes_filtered = boxes_filtered[mask_scores]
-            box_scores = box_scores[mask_scores]
-            classes_filtered = class_probs_filtered.argmax(axis=1)[mask_scores]
-
-            all_boxes.append(boxes_filtered)
-            all_classes.append(classes_filtered)
-            all_scores.append(box_scores)
-
-        # Concatenate results from all scales
-        if all_boxes:
-            filtered_boxes = np.concatenate(all_boxes, axis=0)
-            box_classes = np.concatenate(all_classes, axis=0)
-            box_scores = np.concatenate(all_scores, axis=0)
-        else:
-            filtered_boxes = np.array([])
-            box_classes = np.array([])
-            box_scores = np.array([])
-
-        return filtered_boxes, box_classes, box_scores
