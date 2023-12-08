@@ -50,31 +50,35 @@ class Yolo:
 
         return np.array(boxes), box_confidences, box_class_probs
 
-        def filter_boxes(self, boxes, box_confidences, box_class_probs):
-            '''filter boxes'''
-            filtered_boxes, box_classes, box_scores = [], [], []
+    def filter_boxes(self, boxes, box_confidences, box_class_probs):
+        '''filter boxes'''
+        filtered_boxes, box_classes, box_scores = [], [], []
+        min_length = min(len(boxes), len(box_confidences), len(box_class_probs))
 
-            for i in range(len(boxes)):
-                box = boxes[i]
-                box_confidence = box_confidences[i]
-                box_class_prob = box_class_probs[i]
 
-                box_scores.extend(np.max(box_class_prob, axis=-1)
-                                  * box_confidence)
-                box_classes.extend(np.argmax(box_class_prob, axis=-1))
-                filtered_boxes.extend(box)
+        for i in range(min_length):
+            box = boxes[i]
+            box_confidence = box_confidences[i]
+            box_class_prob = box_class_probs[i]
 
-            filtered_boxes = np.array(filtered_boxes)
-            box_classes = np.array(box_classes)
-            box_scores = np.array(box_scores)
+            if box_class_prob.shape[-1] == 1:
+                box_class_prob = np.squeeze(box_class_prob, axis=-1)
 
-            # Filter boxes based on box scores
-            mask = box_scores >= self.class_t
-            filtered_boxes = filtered_boxes[mask]
-            box_classes = box_classes[mask]
-            box_scores = box_scores[mask]
+            box_scores.extend(np.max(box_class_prob, axis=-1) * box_confidence)
+            box_classes.extend(np.argmax(box_class_prob, axis=-1))
+            filtered_boxes.extend(box)
 
-            return filtered_boxes, box_classes, box_scores
+        filtered_boxes = np.array(filtered_boxes)
+        box_classes = np.array(box_classes)
+        box_scores = np.array(box_scores)
+
+        # Filter boxes based on box scores
+        mask = box_scores >= self.class_t
+        filtered_boxes = filtered_boxes[mask]
+        box_classes = box_classes[mask]
+        box_scores = box_scores[mask]
+
+        return filtered_boxes, box_classes, box_scores
 
     def sigmoid(self, x):
         '''helper func'''
