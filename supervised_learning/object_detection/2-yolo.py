@@ -83,3 +83,27 @@ class Yolo:
     def sigmoid(self, x):
         '''helper func'''
         return 1 / (1 + np.exp(-x))
+
+    def filter_boxes(self, boxes, box_confidences, box_class_probs):
+        '''filter boxes based on class confidence and threshold'''
+        filtered_boxes, box_classes, box_scores = [], [], []
+
+        for i in range(len(boxes)):
+            box_conf = box_confidences[i]
+            box_prob = box_class_probs[i]
+
+            box_score = box_conf * box_prob
+            box_class = np.argmax(box_score, axis=-1)
+            box_score = np.max(box_score, axis=-1)
+
+            mask = box_score >= self.class_t
+
+            filtered_boxes += boxes[i][mask].tolist()
+            box_classes += box_class[mask].tolist()
+            box_scores += box_score[mask].tolist()
+
+        filtered_boxes = np.array(filtered_boxes)
+        box_classes = np.array(box_classes)
+        box_scores = np.array(box_scores)
+
+        return filtered_boxes, box_classes, box_scores
