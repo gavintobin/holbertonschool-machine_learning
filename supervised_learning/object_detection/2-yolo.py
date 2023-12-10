@@ -75,4 +75,3 @@ class Yolo:
     def sigmoid(self, x):
         '''helper func'''
         return 1 / (1 + np.exp(-x))
-
