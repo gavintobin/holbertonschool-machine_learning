@@ -38,8 +38,8 @@ class Yolo:
                         tx, ty, tw, th = boxes[output][cy, cx, b]
                         bx = (self.sigmoid(tx)) + cx
                         by = (self.sigmoid(ty)) + cy
-                        bw = pw * np.exp(tw) / self.model.input.shape[1].value
-                        bh = ph * np.exp(th) / self.model.input.shape[2].value
+                        bw = pw * np.exp(tw) / self.model.input.shape[1]
+                        bh = ph * np.exp(th) / self.model.input.shape[2]
 
                         x1 = (bx - (bw / 2)).any() * image_width
                         x2 = (bx + (bw / 2)).any() * image_width
@@ -54,18 +54,15 @@ class Yolo:
         '''filter boxes based on class confidence and threshold'''
         filtered_boxes, box_classes, box_scores = [], [], []
 
-        min_length = min(len(boxes), len(box_confidences), len(box_class_probs))
-
-        for i in range(min_length):
-            box_conf = box_confidences[i]
-            box_prob = box_class_probs[i]
-
-            box_score = box_conf * np.max(box_prob, axis=-1)
-            box_class = np.argmax(box_prob, axis=-1)
+        for box, box_conf, box_class_prob in (zip(
+                boxes, box_confidences, box_class_probs)):
+            box_scores_per_class = box_conf * box_class_prob
+            box_class = np.argmax(box_scores_per_class, axis=-1)
+            box_score = np.max(box_scores_per_class, axis=-1)
 
             mask = box_score >= self.class_t
 
-            filtered_boxes.extend(boxes[mask])
+            filtered_boxes.extend(box[mask])
             box_classes.extend(box_class[mask])
             box_scores.extend(box_score[mask])
 
