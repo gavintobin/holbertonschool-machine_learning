@@ -50,7 +50,6 @@ class Yolo:
 
         return np.array(boxes), box_confidences, box_class_probs
 
-
     def filter_boxes(self, boxes, box_confidences, box_class_probs):
         '''filter boxes based on class confidence and threshold'''
         filtered_boxes, box_classes, box_scores = [], [], []
@@ -89,7 +88,8 @@ class Yolo:
             i = indices[0]
             selected_indices.append(i)
 
-            iou = self.calculate_iou(filtered_boxes[i], filtered_boxes[indices[1:]])
+            iou = self.calculate_iou(filtered_boxes[i],
+                                     filtered_boxes[indices[1:]])
             mask = iou < self.nms_t
             indices = indices[1:][mask]
 
@@ -108,7 +108,8 @@ class Yolo:
 
         intersection = np.maximum(0, x2 - x1) * np.maximum(0, y2 - y1)
         area_box1 = (box1[2] - box1[0]) * (box1[3] - box1[1])
-        area_boxes2 = (boxes2[:, 2] - boxes2[:, 0]) * (boxes2[:, 3] - boxes2[:, 1])
+        denom = (boxes2[:, 3] - boxes2[:, 1])
+        area_boxes2 = (boxes2[:, 2] - boxes2[:, 0]) * denom
         union = area_box1 + area_boxes2 - intersection
 
         iou = intersection / union
