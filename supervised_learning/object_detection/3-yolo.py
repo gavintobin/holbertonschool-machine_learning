@@ -27,27 +27,28 @@ class Yolo:
 
         all_boxes = []
         for output in range(len(boxes)):
-            grid_height, grid_width, anchors = outputs[output].shape[1:4]
+            grid_height = outputs[output].shape[0]
+            grid_width = outputs[output].shape[1]
+            anchors = outputs[output].shape[2]
 
             for cy in range(grid_height):
                 for cx in range(grid_width):
                     for b in range(anchors):
                         pw, ph = self.anchors[output][b]
                         tx, ty, tw, th = boxes[output][cy, cx, b]
-
-                        bx = (self.sigmoid(tx) + cx) / grid_width
-                        by = (self.sigmoid(ty) + cy) / grid_height
+                        bx = (self.sigmoid(tx)) + cx
+                        by = (self.sigmoid(ty)) + cy
                         bw = pw * np.exp(tw) / self.model.input.shape[1]
                         bh = ph * np.exp(th) / self.model.input.shape[2]
 
-                        x1 = (bx - (bw / 2)) * image_width
-                        x2 = (bx + (bw / 2)) * image_width
-                        y2 = (by + (bh / 2)) * image_height
-                        y1 = (by - (bh / 2)) * image_height
+                        x1 = (bx - (bw / 2)).any() * image_width
+                        x2 = (bx + (bw / 2)).any() * image_width
+                        y2 = (by + (bh / 2)).any() * image_height
+                        y1 = (by - (bh / 2)).any() * image_height
 
-                        all_boxes.append([x1, y1, x2, y2])
+                        boxes.append([x1, y1, x2, y2])
 
-        return np.array(all_boxes), np.concatenate(box_confidences), np.concatenate(box_class_probs)
+        return np.array(boxes), box_confidences, box_class_probs
 
 
     def filter_boxes(self, boxes, box_confidences, box_class_probs):
