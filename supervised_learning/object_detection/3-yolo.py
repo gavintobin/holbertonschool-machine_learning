@@ -38,8 +38,8 @@ class Yolo:
                         tx, ty, tw, th = boxes[output][cy, cx, b]
                         bx = (self.sigmoid(tx)) + cx
                         by = (self.sigmoid(ty)) + cy
-                        bw = pw * np.exp(tw) / self.model.input.shape[1]
-                        bh = ph * np.exp(th) / self.model.input.shape[2]
+                        bw = pw * np.exp(tw) / self.model.input.shape[1].value
+                        bh = ph * np.exp(th) / self.model.input.shape[2].value
 
                         x1 = (bx - (bw / 2)).any() * image_width
                         x2 = (bx + (bw / 2)).any() * image_width
@@ -78,39 +78,46 @@ class Yolo:
 
     def non_max_suppression(self, filtered_boxes, box_classes, box_scores):
         '''nonmax suppression'''
-        indices = np.argsort(-box_scores)
-        filtered_boxes = filtered_boxes[indices]
-        box_classes = box_classes[indices]
-        box_scores = box_scores[indices]
+        classes = np.unique(box_classes)
+        box_predictions = []
+        predicted_box_classes = []
+        predicted_box_scores = []
 
-        selected_indices = []
-        while len(indices) > 0:
-            i = indices[0]
-            selected_indices.append(i)
+        for cls in classes:
+            ids = np.where(box_classes == cls)
+            keep = filtered_boxes[ids]
+            cls_box_scores = box_scores[ids]
 
-            iou = self.calculate_iou(filtered_boxes[i],
-                                     filtered_boxes[indices[1:]])
-            mask = iou < self.nms_t
-            indices = indices[1:][mask]
+            while len(keep) > 0:
+                max_score_idx = np.argmax(cls_box_scores)
+                box_predictions.append(keep[max_score_idx])
+                predicted_box_classes.append(cls)
+                predicted_box_scores.append(cls_box_scores[max_score_idx])
 
-        selected_boxes = filtered_boxes[selected_indices]
-        selected_classes = box_classes[selected_indices]
-        selected_scores = box_scores[selected_indices]
+                iou_scores = [self.calculate_iou(keep[max_score_idx],
+                                        box) for box in keep]
+                gone = np.where(np.array(iou_scores) > self.nms_t)
+                keep = np.delete(keep, gone, axis=0)
+                cls_box_scores = np.delete(cls_box_scores, gone, axis=0)
 
-        return selected_boxes, selected_classes, selected_scores
+        return (np.array(box_predictions),
+                np.array(predicted_box_classes),
+                np.array(predicted_box_scores))
 
     def calculate_iou(self, box1, boxes2):
         '''intersect over union'''
-        x1 = np.maximum(box1[0], boxes2[:, 0])
-        y1 = np.maximum(box1[1], boxes2[:, 1])
-        x2 = np.minimum(box1[2], boxes2[:, 2])
-        y2 = np.minimum(box1[3], boxes2[:, 3])
+        x1 = np.maximum(box1[0], boxes2[0])
+        y1 = np.maximum(box1[1], boxes2[1])
+        x2 = np.minimum(box1[2], boxes2[2])
+        y2 = np.minimum(box1[3], boxes2[3])
 
         intersection = np.maximum(0, x2 - x1) * np.maximum(0, y2 - y1)
-        area_box1 = (box1[2] - box1[0]) * (box1[3] - box1[1])
-        denom = (boxes2[:, 3] - boxes2[:, 1])
-        area_boxes2 = (boxes2[:, 2] - boxes2[:, 0]) * denom
-        union = area_box1 + area_boxes2 - intersection
 
-        iou = intersection / union
+        box1_area = (box1[2] - box1[0]) * (box1[3] - box1[1])
+        boxes2_area = (boxes2[2] - boxes2[0]) * (boxes2[3] - boxes2[1])
+
+        union = box1_area + boxes2_area - intersection
+
+        iou = intersection / np.maximum(union, np.finfo(float).eps)
+
         return iou
