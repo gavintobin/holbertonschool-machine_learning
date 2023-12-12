@@ -95,7 +95,7 @@ class Yolo:
                 predicted_box_scores.append(cls_box_scores[max_score_idx])
 
                 iou_scores = [self.calculate_iou(keep[max_score_idx],
-                                        box) for box in keep]
+                              box) for box in keep]
                 gone = np.where(np.array(iou_scores) > self.nms_t)
                 keep = np.delete(keep, gone, axis=0)
                 cls_box_scores = np.delete(cls_box_scores, gone, axis=0)
