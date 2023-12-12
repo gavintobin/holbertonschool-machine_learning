@@ -20,13 +20,16 @@ class Yolo:
     def preprocess_images(self, images):
         '''Preprocess images'''
         ni = len(images)
-        input_h, input_w = self.model.input.shape[1].value, self.model.input.shape[2].value
+        val1 = self.model.input.shape[1].value
+        val2 = self.model.input.shape[2].value
+        input_h, input_w = val1, val2
         pimages = np.zeros((ni, input_h, input_w, 3), dtype=np.float32)
         image_shapes = np.zeros((ni, 2), dtype=np.int32)
 
         for i, image in enumerate(images):
             # Resize with inter-cubic interpolation
-            resized_image = cv2.resize(image, (input_w, input_h), interpolation=cv2.INTER_CUBIC)
+            resized_image = cv2.resize(image, (input_w, input_h),
+                                       interpolation=cv2.INTER_CUBIC)
 
             # Rescale to have pixel values in the range [0, 1]
             pimages[i] = resized_image / 255.0
