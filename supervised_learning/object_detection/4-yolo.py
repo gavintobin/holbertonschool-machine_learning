@@ -5,6 +5,7 @@ from tensorflow.keras.models import load_model
 import os
 import cv2
 
+
 class Yolo:
     '''yolo class'''
     def __init__(self, model_path, classes_path, class_t, nms_t, anchors):
@@ -16,7 +17,7 @@ class Yolo:
         self.nms_t = nms_t
         self.anchors = anchors
 
-     @staticmethod
+    @staticmethod
     def load_images(folder_path):
         '''Load images '''
         images = []
